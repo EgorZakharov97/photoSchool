@@ -9,12 +9,11 @@ const UserSchema = new mongoose.Schema({
 		required: true,
 		dropDups: true
 	},
-	firstName: String,
-	lastName: String,
-	displayName: String,
-	dateBorn: Date,
+	username: String,
 	picture: String,
 	sex: String,
+	phoneNumber: Number,
+	experience: String,
 	password: {
 		salt: String,
 		hash: String,
@@ -23,14 +22,20 @@ const UserSchema = new mongoose.Schema({
 			hash: String,
 		}
 	},
-	locale: {
-		type: String,
-		default: 'ru'
+	verification: {
+		verified: {
+			type: Boolean,
+			default: false
+		},
+		verificationLink: String
 	},
-	verified: Boolean,
 	origin: {
 		type: String,
 		default: 'local'
+	},
+	complete: {
+		type: Boolean,
+		default: false
 	},
 	admin: {
 		type: Boolean,
