@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Local</title>
+</head>
+<body>
+    <form action="/auth/local/register" method="post">
+        <label for="firseName">First Name</label>
+        <input type="text" name="firstName" id="firseName">
+        <br/><br/>
+
+        <label for="lastName">Last Name</label>
+        <input type="text" name="lastName" id="lastName">
+        <br/><br/>
+
+        <label for="displayName">Display Name</label>
+        <input type="text" name="displayName" id="displayName">
+        <br/><br/>
+
+        <label for="dateBorn">Date Born</label>
+        <input type="date" name="dateBorn" id="dateBorn">
+        <br/><br/>
+
+        <label for="email">Email</label>
+        <input type="email" name="username" id="email">
+        <br/><br/>
+
+        <label for="sex">Sex</label>
+        <select id="sex">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        <br/><br/>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+        <br/><br/>
+
+        <label for="rePassword">Re-enter password</label>
+        <input type="password" name="rePassword" id="rePassword">
+        <br/><br/>
+
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>
