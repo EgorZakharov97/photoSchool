@@ -68,6 +68,15 @@ if(process.env.NODE_ENV === 'development'){
 		logger.info(`App ${process.pid} has started at port ${process.env.PORT}`)
 	});
 } else {
+	const pricateKey = fs.readFileSync('/etc/letsencrypt/live/photolite.academy/privkey.pem', 'utf8');
+	const cs = fs.readFileSync('etc/letsencrypt/live/photolite.academy/chain.pem', 'utf8');
+	const certificate = fs.readFileSync('etc/letsencrypt/live/photolite.academy/cert.pem', 'utf8');
+	const credentials = {
+		key: pricateKey,
+		cert: certificate,
+		ca: ca
+	};
+
 	https.createServer(credentials, app).listen(80, () => {
 		console.log('App is listening on port 80')
 	});
