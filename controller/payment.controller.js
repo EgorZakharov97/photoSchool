@@ -14,24 +14,25 @@ module.exports.preparePayment = (req, res, next) => {
 				throw err;
 			} else {
 				if(course){
+
 					const session = await stripe.checkout.sessions.create({
 						payment_method_types: ['card'],
 						line_items: [{
 							price_data: {
-								currency: 'cad',
+								currency: 'usd',
 								product_data: {
-									name: course.name,
-									// images: [process.env.HOST + '/' + course.image]
+									name: 'T-shirt',
 								},
-								unit_amount: course.pricing.discountPrice,
+								unit_amount: 2000,
 							},
 							quantity: 1,
 						}],
 						mode: 'payment',
-						success_url: 'http://localhost:3000/portal',
+						success_url: 'http://localhost:3000/success',
 						cancel_url: 'http://localhost:3000/',
 					});
-					res.render('buy', {session: session.id, PK: process.env.STRIPE_PUBLIC})
+
+					res.render('buy', {session_id: session.id, PK: process.env.STRIPE_PUBLIC})
 				} else {
 					throw new Error('Payment failure: could not search for course ' + req.params.id)
 				}
@@ -53,13 +54,15 @@ module.exports.success = (req, res, next) => {
 		event = stripe.webhook.constructEvent(req.body, sig, process.env.STRIPE_WH);
 	}
 	catch(err) {
-		res.status(400).send(`Webhook Error: ${err.message}`);
+		console.log(err)
 	}
 
 	if(event.type === 'checkout.session.completed'){
 		const session = event.data.object;
 
 		console.log(session);
+	} else {
+		console.log(event.type)
 	}
 
 	res.json({received: true});
