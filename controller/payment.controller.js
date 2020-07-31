@@ -28,7 +28,7 @@ module.exports.preparePayment = (req, res, next) => {
 							quantity: 1,
 						}],
 						mode: 'payment',
-						success_url: 'http://localhost:3000/success',
+						success_url: 'http://localhost:3000/portal',
 						cancel_url: 'http://localhost:3000/',
 					});
 
