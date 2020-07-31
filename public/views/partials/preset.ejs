@@ -1,0 +1,18 @@
+<div>
+    <a href="#" class="preset w-inline-block" style='background-image: url("<%= preset.image %>")'>
+        <h3 class="preset-heading"><%= preset.name%></h3>
+    </a>
+    <% if(user.admin) {%>
+        <a id="delete-preset" href="/admin/preset/<%= preset._id %>">Delete</a>
+    <% } %>
+</div>
+
+<style>
+    #delete-preset {
+        background-color: orangered;
+        text-decoration: none;
+        font-size: 16px;
+        padding: 10px 15px 10px 15px;
+        color: white;
+    }
+</style>

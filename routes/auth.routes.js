@@ -57,6 +57,7 @@ router.route('/local/reset')
 
 router.route('/local/reset/:code')
 	.get(controller.getNewPwrdPage)
+	.post(controller.doPwdReset);
 
 // logout a user
 router.route('/logout')

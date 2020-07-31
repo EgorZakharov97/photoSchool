@@ -1,0 +1,37 @@
+<% const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June",
+"July", "Aug", "Sept", "Oct", "Nov", "Dec"
+]; %>
+
+<div class="dropdown">
+    <div data-w-id="96f267f8-825f-e856-30b6-9a5b1e1bca4a" class="dropdown-trigger" style='background-image: url("<%= course.image %>")'>
+        <div class="text-block"><%= course.name %></div>
+        <div class="date"><%= monthNames[course.importantDates.courseStarts.getUTCMonth()] %> <%= course.importantDates.courseStarts.getUTCDay()%></div>
+    </div>
+    <div style="height:0PX;display:block" class="dropdown-content">
+        <div class="cladd-desc-wrapper">
+            <div class="w-layout-grid grid-5">
+                <div id="w-node-9a5b1e1bca52-5ff02e3c" class="course-card">
+                    <div class="rich-text-block-7 w-richtext">
+                        <%- course.richText.description -%>
+                    </div>
+                </div>
+                <div id="w-node-9a5b1e1bca60-5ff02e3c" class="course-card">
+                    <div class="w-richtext">
+                        <%- course.richText.willLearn -%>
+                    </div>
+                </div>
+                <div id="w-node-9a5b1e1bca75-5ff02e3c" class="course-card">
+                    <div class="w-richtext">
+                        <%- course.richText.timeline -%>
+                    </div>
+                </div>
+                <% if(course.chatLink) { %>
+                    <a id="w-node-5dabce7edb67-5ff02e3c" href="<%= course.chatLink %>" class="cors-register-now-2 courses">Join workshop chat</a>
+                <% } %>
+                <% if(user.admin) { %>
+                    <a id="w-node-5dabce7edb67-5ff02e3c" href="/admin/course/<%= course._id %>" class="cors-register-now-2 courses">Edit this course</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>

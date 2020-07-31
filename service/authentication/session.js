@@ -1,7 +1,7 @@
 const session = require('express-session'),
-	redis = require('redis'),
-	redisClient = redis.createClient(),
-	redisStore = require('connect-redis')(session);
+	redis = require('redis');
+	// redisClient = redis.createClient(),
+	// redisStore = require('connect-redis')(session);
 
 module.exports = (app) => {
 	// Set up the session so that it is saved in redis

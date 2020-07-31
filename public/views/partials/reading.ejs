@@ -1,0 +1,18 @@
+<div class="reading-container">
+    <div class="reading-pic" style='background-image: url("<%= material.image %>")'></div>
+    <h1 class="heading-14"><%= material.name%></h1>
+    <a href=""><h3 class="heading-15">Read</h3></a>
+    <% if(user.admin) {%>
+    <a id="delete-material" href="/admin/material/<%= material._id %>">Delete</a>
+    <% } %>
+</div>
+
+<style>
+    #delete-material {
+        background-color: orangered;
+        text-decoration: none;
+        font-size: 16px;
+        padding: 10px 15px 10px 15px;
+        color: white;
+    }
+</style>

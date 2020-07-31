@@ -1,0 +1,25 @@
+@font-face {
+	font-family: 'Prestige';
+	src: url('fonts/Prestige.eot');
+	src: url('fonts/Prestige.woff') format('woff'), url('fonts/Prestige.ttf') format('truetype'), url('fonts/Prestige.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/*  @font-face {
+	font-family: 'Compact';
+	src: url('fonts/ofont.ru_Compact.eot');
+	src: url('fonts/ofont.ru_Compact.woff') format('woff'), url('fonts/ofont.ru_Compact.ttf') format('truetype'), url('fonts/ofont.ru_Compact.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}  */
+@font-face {
+	font-family: 'Compact';
+	src: url('fonts/Compact Regular.eot');
+	src: local('☺'), url('fonts/Compact Regular.woff') format('woff'), url('fonts/Compact Regular.ttf') format('truetype'), url('fonts/Compact Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+

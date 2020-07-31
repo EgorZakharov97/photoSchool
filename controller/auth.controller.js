@@ -7,7 +7,6 @@ const express = 	require('express'),
 	mailTransporter = require('../service/email/mailTransporter')(),
 	encrypt = 		require('../service/tools/encrypter').encrypt,
 	decrypt = 		require('../service/tools/encrypter').decrypt;
-let router = 		express.Router();
 
 let authOptions = {
 	successRedirect: '/portal',
@@ -98,17 +97,20 @@ module.exports.registerNewUser = (req, res, next) => {
 // update user info
 module.exports.updateUserInfo = (req, res, next) => {
 	let profile = req.body;
+	console.log(profile);
 	if(profile.email){
 		User.findOne({email: profile.email}, (err, user) => {
 			user.username = profile.username;
 			user.phoneNumber = profile.phoneNumber;
-			user.experience = profile.experiance;
+			user.experience = profile.experience;
 			user.sex = profile.sex;
 			user.complete = true;
 			user.save();
+			logger.info(`User ${user.username} gust updated profile`);
 			res.redirect('/portal')
 		})
 	} else {
+		logger.error('Failed to update profile');
 		res.redirect('/auth')
 	}
 };
