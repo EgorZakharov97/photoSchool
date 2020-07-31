@@ -10,7 +10,7 @@ let router = express.Router();
 router.route('/course/:id')
 	.get(isAuthenticated, controller.preparePayment);
 
-router.route('/course/stripe')
+router.route('/webhook')
 	.post(controller.success);
 
 module.exports = router;

@@ -35,7 +35,11 @@ app.use('*/css',express.static('public/css'));
 app.use('*/js',express.static('public/js'));
 app.use('*/images',express.static('public/images'));
 app.use(express.urlencoded({extended: true}));
-app.use(express.json());
+app.use(bodyParser.json({
+	verify: (req, res, buf) => {
+		req.rawBody = buf
+	}
+}));
 app.use(methodOverride("_method"));
 
 // DATABASE

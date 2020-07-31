@@ -51,10 +51,10 @@ module.exports.success = (req, res, next) => {
 	let event;
 
 	try {
-		event = stripe.webhook.constructEvent(req.body, sig, process.env.STRIPE_WH);
+		event = stripe.webhook.constructEvent(req.rawBody, sig, process.env.STRIPE_WH);
 	}
 	catch(err) {
-		console.log(err)
+		res.status(400).send(`Webhook Error: ${err.message}`);
 	}
 
 	if(event.type === 'checkout.session.completed'){
