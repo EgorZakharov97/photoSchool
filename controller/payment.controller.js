@@ -39,7 +39,7 @@ module.exports.preparePayment = (req, res, next) => {
 						received: false,
 						session: session
 					});
-
+					console.log(session.id);
 					res.render('buy', {session_id: session.id, PK: process.env.STRIPE_PUBLIC})
 				} else {
 					throw new Error('Payment failure: could not search for course ' + req.params.id)
@@ -55,19 +55,20 @@ module.exports.preparePayment = (req, res, next) => {
 
 module.exports.success = (req, res, next) => {
 	let event = req.body;
+	console.log(event);
 
-	switch(event.type) {
-		case 'payment_intent.succeeded':
-			logger.info("New payment received");
-			console.log(event);
-			break;
-		case 'payment_method.attached':
-			console.log(event);
-			break;
-		default:
-			console.log(event);
-			return res.status(400).end()
-	}
+	// switch(event.type) {
+	// 	case 'payment_intent.succeeded':
+	// 		logger.info("New payment received");
+	// 		console.log(event);
+	// 		break;
+	// 	case 'payment_method.attached':
+	// 		console.log(event);
+	// 		break;
+	// 	default:
+	// 		console.log(event);
+	// 		return res.status(400).end()
+	// }
 
 	res.json({received: true});
 };
