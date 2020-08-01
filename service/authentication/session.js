@@ -7,7 +7,7 @@ module.exports = (app) => {
 	// Set up the session so that it is saved in redis
 	app.use(session ({
 		secret: process.env.SESSION_SECRET,
-		name: '_TuttiFashion',
+		name: '_photolite.academy',
 		resave: false,
 		saveUninitialized: true,
 		cookie: {secure: false}

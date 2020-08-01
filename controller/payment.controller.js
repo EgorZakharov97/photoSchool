@@ -21,15 +21,15 @@ module.exports.preparePayment = (req, res, next) => {
 							price_data: {
 								currency: 'usd',
 								product_data: {
-									name: 'T-shirt',
+									name: course.name,
 								},
-								unit_amount: 2000,
+								unit_amount: course.pricing.finalPrice,
 							},
 							quantity: 1,
 						}],
 						mode: 'payment',
-						success_url: 'http://localhost:3000/portal',
-						cancel_url: 'http://localhost:3000/',
+						success_url: process.env.HOST + '/portal',
+						cancel_url: process.env.HOST,
 					});
 
 					Payment.create({
@@ -70,6 +70,23 @@ module.exports.success = (req, res, next) => {
 					let user = await User.findById(payment.user);
 					user.courses.push(payment.course);
 					user.save();
+
+					let course = await Course.findById(payment.course);
+
+					let emailOptions = {
+						from: process.env.EMAIL,
+						to: user.email,
+						subject: 'PhotoLight Purchase Confirmation',
+						html: `Thank you for buying ${course.name}. You have payed $${payment.session.amount_total / 100}CAD`
+					};
+
+					mailTransporter.sendMail(emailOptions, (err, info) => {
+						if (err) {
+							logger.error(err)
+						} else {
+							logger.info(`Course purchase confirmation was sent to ${user.email}`);
+						}
+					});
 
 				} else {
 					logger.error(`Could not find payment with intent ${payment_intent}`);

@@ -42,8 +42,34 @@ async function renderPortalForAdmin(req, res, next) {
 	})
 }
 
-function renderPortalForUser(req, res, next) {
-	res.send("Only admin can view this page");
+async function renderPortalForUser(req, res, next) {
+	let user = req.user;
+	let courses = await Course.find({_id: user.courses});
+	let materials = await Material.find({});
+	let presets = await Preset.find({});
+	let allVideos = await Video.find({
+		$or: [ {accessBySubscription: false}, {$and: [ {accessBySubscription: true}, {courses: []} ]}, {courses: {$in: user.courses}} ]
+	});
+	let categories = await Video.distinct('category');
+
+	let videos = {};
+
+	categories.filter(cat => {
+		videos[cat] = []
+	});
+
+	allVideos.filter(video => {
+		videos[video.category].push(video);
+	});
+
+	res.render('portal', {
+		user: req.user,
+		courses: courses,
+		materials: materials,
+		presets: presets,
+		videos: videos,
+		categories: categories
+	})
 }
 
 module.exports.getPortal = (req, res, next) => {

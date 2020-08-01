@@ -1,7 +1,8 @@
 <div>
-    <a href="#" class="preset w-inline-block" style='background-image: url("<%= preset.image %>")'>
-        <h3 class="preset-heading"><%= preset.name%></h3>
-    </a>
+    <form method="post" action="/file/get" class="preset w-inline-block" style='background-image: url("<%= preset.image %>")'>
+        <input type="text" name="file" value="<%= preset.file %>" style="display: none;">
+        <button style="background-color: transparent;"><h3 class="preset-heading"><%= preset.name%></h3></button>
+    </form>
     <% if(user.admin) {%>
         <a id="delete-preset" href="/admin/preset/<%= preset._id %>">Delete</a>
     <% } %>

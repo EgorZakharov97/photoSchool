@@ -84,7 +84,7 @@ module.exports.registerNewUser = (req, res, next) => {
 					if(err){
 						logger.error(err)
 					} else {
-						logger.info(`Confirmation email was sent to ${newUser.email}`);
+						logger.info(`New user confirmation was sent to ${newUser.email}`);
 					}
 				});
 				res.redirect('/auth/local/confirm');
@@ -155,7 +155,6 @@ module.exports.sendPwrdMsg = (req, res, next) => {
 
 // Confirm user
 module.exports.confirmUser = (req, res, next) => {
-	console.log("Hi there");
 	if (req.params.code) {
 		let email = decrypt(req.params.code);
 		if(email){
