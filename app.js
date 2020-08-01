@@ -47,7 +47,6 @@ app.use(sanitize.middleware);
 
 // DATABASE
 mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.set('useFindAndModify', false);
 
 // AUTHENTICATION
 require('./service/authentication/session')(app);
