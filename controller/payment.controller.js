@@ -3,6 +3,7 @@ const isAuthenticated = require('../service/middleware/authCheck').isAuthenticat
 	User = require('../models/User'),
 	Course = require('../models/Course'),
 	logger = require('../service/logger/logger'),
+	Payment = require('../models/Payment'),
 	mailTransporter = require('../service/email/mailTransporter')(),
 	controller = require('../controller/payment.controller'),
 	stripe = require('stripe')(process.env.STRIPE_SECRET);
@@ -14,7 +15,6 @@ module.exports.preparePayment = (req, res, next) => {
 				throw err;
 			} else {
 				if(course){
-
 					const session = await stripe.checkout.sessions.create({
 						payment_method_types: ['card'],
 						line_items: [{
@@ -32,6 +32,14 @@ module.exports.preparePayment = (req, res, next) => {
 						cancel_url: 'http://localhost:3000/',
 					});
 
+					Payment.create({
+						user: req.user._id,
+						course: course._id,
+						timeCreated: new Date(),
+						received: false,
+						session: session
+					});
+
 					res.render('buy', {session_id: session.id, PK: process.env.STRIPE_PUBLIC})
 				} else {
 					throw new Error('Payment failure: could not search for course ' + req.params.id)
@@ -46,23 +54,18 @@ module.exports.preparePayment = (req, res, next) => {
 };
 
 module.exports.success = (req, res, next) => {
-	const sig = req.headers['stripe-signature'];
+	let event = req.body;
 
-	let event;
-
-	try {
-		event = stripe.webhook.constructEvent(req.rawBody, sig, process.env.STRIPE_WH);
-	}
-	catch(err) {
-		res.status(400).send(`Webhook Error: ${err.message}`);
-	}
-
-	if(event.type === 'checkout.session.completed'){
-		const session = event.data.object;
-
-		console.log(session);
-	} else {
-		console.log(event.type)
+	switch(event.type) {
+		case 'payment_intent.succeeded':
+			logger.info("New payment received");
+			console.log(event);
+			break;
+		case 'payment_method.attached':
+			console.log(event);
+			break;
+		default:
+			return res.status(400).end()
 	}
 
 	res.json({received: true});
