@@ -65,6 +65,7 @@ module.exports.success = (req, res, next) => {
 			console.log(event);
 			break;
 		default:
+			console.log(event);
 			return res.status(400).end()
 	}
 
