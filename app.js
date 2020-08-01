@@ -74,12 +74,12 @@ if(process.env.NODE_ENV === 'development'){
 	});
 } else {
 	const pricateKey = fs.readFileSync('/etc/letsencrypt/live/photolite.academy/privkey.pem', 'utf8');
-	const cs = fs.readFileSync('/etc/letsencrypt/live/photolite.academy/chain.pem', 'utf8');
+	const ca = fs.readFileSync('/etc/letsencrypt/live/photolite.academy/chain.pem', 'utf8');
 	const certificate = fs.readFileSync('/etc/letsencrypt/live/photolite.academy/cert.pem', 'utf8');
 	const credentials = {
 		key: pricateKey,
 		cert: certificate,
-		cs: cs
+		ca: ca
 	};
 
 	https.createServer(credentials, app).listen(443, () => {
