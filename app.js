@@ -11,7 +11,8 @@ const express = require('express'),
 	ejs = require('ejs'),
 	http = require('http'),
 	https = require('https'),
-	fs = require('fs');
+	fs = require('fs'),
+	sanitize = require('sanitize');
 
 const { Certificate } = require('crypto');
 
@@ -42,6 +43,7 @@ app.use(express.urlencoded({extended: true}));
 // }));
 app.use(bodyParser.json());
 app.use(methodOverride("_method"));
+app.use(sanitize.middleware);
 
 // DATABASE
 mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true});

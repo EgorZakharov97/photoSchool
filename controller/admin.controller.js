@@ -205,9 +205,13 @@ module.exports.deletePreset = (req, res, next) => {
 			let imagePath = toRemove.image;
 			let filePath = toRemove.file;
 
-			fs.unlinkSync(imagePath);
-			fs.unlinkSync(filePath);
-
+			try {
+				fs.unlinkSync(imagePath);
+				fs.unlinkSync(filePath);
+			}
+			catch(e){
+				logger.error('Couldnot find files to delete');
+			}
 			toRemove.remove();
 
 			logger.info(`Preset ${toRemove.name} was removed`);
@@ -256,8 +260,13 @@ module.exports.deleteMaterial = (req, res, next) => {
 			let imagePath = toRemove.image;
 			let filePath = toRemove.file;
 
-			fs.unlinkSync(imagePath);
-			fs.unlinkSync(filePath);
+			try{
+				fs.unlinkSync(imagePath);
+				fs.unlinkSync(filePath);
+			}
+			catch(e){
+				logger.error('Could not find file to delete');
+			}
 
 			toRemove.remove();
 

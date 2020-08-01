@@ -1,5 +1,5 @@
 <div class="reading-container">
-    <div class="reading-pic" style='background-image: url("<%= material.image %>")'></div>
+    <div class="reading-pic"></div>
     <h1 class="heading-14"><%= material.name%></h1>
 
     <form action="/file/get" method="post" name="read">
@@ -25,5 +25,10 @@
 
     #invis-btn {
         background-color: transparent;
+    }
+
+    .reading-pic {
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url('<%= material.image %>');
+        background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('<%= material.image %>');
     }
 </style>

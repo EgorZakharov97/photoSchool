@@ -15,6 +15,9 @@ module.exports.preparePayment = (req, res, next) => {
 				throw err;
 			} else {
 				if(course){
+					let today = new Date();
+					let price;
+					today > course.importantDates.discountDeadline ? price = course.pricing.finalPrice : price = course.pricing.discountPrice;
 					const session = await stripe.checkout.sessions.create({
 						payment_method_types: ['card'],
 						line_items: [{
@@ -23,7 +26,7 @@ module.exports.preparePayment = (req, res, next) => {
 								product_data: {
 									name: course.name,
 								},
-								unit_amount: course.pricing.finalPrice,
+								unit_amount: price,
 							},
 							quantity: 1,
 						}],
@@ -64,14 +67,17 @@ module.exports.success = (req, res, next) => {
 				return res.status(500).end();
 			} else {
 				if(payment){
+					let today = new Date();
 					payment.received = true;
 					payment.save();
 
 					let user = await User.findById(payment.user);
 					user.courses.push(payment.course);
+					user.subscriptionEnds = new Date(today.setMonth(today.getMonth()+1));
 					user.save();
 
 					let course = await Course.findById(payment.course);
+					course.seats.occupied++;
 
 					let emailOptions = {
 						from: process.env.EMAIL,

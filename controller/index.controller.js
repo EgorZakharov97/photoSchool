@@ -6,7 +6,7 @@ const express = require('express'),
 let router = express.Router();
 
 module.exports.getIndexPage = (req, res, next) => {
-	Course.find({}, (err, courses) => {
+	Course.find({"importantDates.courseStarts": {$gt: new Date()}}, (err, courses) => {
 		if(err){
 			logger.error(err);
 			res.render('500').status(500);

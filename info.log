@@ -983,3 +983,32 @@ info: App 14716 has started at port 3000 {"timestamp":"2020-08-01T03:00:51.706Z"
 info: User logged in: Egor Zakharov, id: 5f14b20d9db244399cdad61a {"timestamp":"2020-08-01T03:00:53.808Z"}
 info: App 22108 has started at port 3000 {"timestamp":"2020-08-01T03:04:08.331Z"}
 info: User logged in: Egor Zakharov, id: 5f14b20d9db244399cdad61a {"timestamp":"2020-08-01T03:04:09.961Z"}
+info: App 24072 has started at port 3000 {"timestamp":"2020-08-01T03:08:09.550Z"}
+info: User logged in: Egor Zakharov, id: 5f14b20d9db244399cdad61a {"timestamp":"2020-08-01T03:08:17.087Z"}
+info: Preset Test Preset was removed {"timestamp":"2020-08-01T03:08:37.310Z"}
+info: Material Test Material was removed {"timestamp":"2020-08-01T03:08:39.547Z"}
+info: Video Test Course was deleted {"timestamp":"2020-08-01T03:08:43.003Z"}
+info: Video Test Course was deleted {"timestamp":"2020-08-01T03:08:44.729Z"}
+info: Video Test Course Edited was deleted {"timestamp":"2020-08-01T03:08:46.233Z"}
+info: Video Test Course was deleted {"timestamp":"2020-08-01T03:08:47.796Z"}
+info: Course Test course has been successfully created (id=5f24f2321857775e0867e593). {"timestamp":"2020-08-01T04:40:18.491Z"}
+info: App 26340 has started at port 3000 {"timestamp":"2020-08-01T04:43:45.502Z"}
+info: App 22536 has started at port 3000 {"timestamp":"2020-08-01T04:47:56.585Z"}
+info: App 14476 has started at port 3000 {"timestamp":"2020-08-01T04:50:35.803Z"}
+info: App 28420 has started at port 3000 {"timestamp":"2020-08-01T04:50:56.715Z"}
+info: User logged in: Egor Zakharov, id: 5f14b20d9db244399cdad61a {"timestamp":"2020-08-01T04:51:18.124Z"}
+info: Course Test 2 has been successfully created (id=5f24f4df79de0b6f040ae8cb). {"timestamp":"2020-08-01T04:51:43.732Z"}
+info: App 28492 has started at port 3000 {"timestamp":"2020-08-01T04:53:43.432Z"}
+info: User logged in: Egor Zakharov, id: 5f14b20d9db244399cdad61a {"timestamp":"2020-08-01T04:53:59.568Z"}
+info: App 15960 has started at port 3000 {"timestamp":"2020-08-01T05:10:06.009Z"}
+info: App 22572 has started at port 3000 {"timestamp":"2020-08-01T05:10:09.966Z"}
+info: App 26088 has started at port 3000 {"timestamp":"2020-08-01T05:10:47.813Z"}
+info: App 22980 has started at port 3000 {"timestamp":"2020-08-01T05:10:54.736Z"}
+info: App 25780 has started at port 3000 {"timestamp":"2020-08-01T05:14:27.524Z"}
+info: User logged in: Peter Ivanov, id: 5f24c51c720a76c9359ef22f {"timestamp":"2020-08-01T05:16:33.006Z"}
+info: App 16236 has started at port 3000 {"timestamp":"2020-08-01T05:18:01.854Z"}
+info: User logged in: Egor Zakharov, id: 5f14b20d9db244399cdad61a {"timestamp":"2020-08-01T05:18:04.384Z"}
+info: App 10148 has started at port 3000 {"timestamp":"2020-08-01T05:22:13.264Z"}
+info: User logged in: Egor Zakharov, id: 5f14b20d9db244399cdad61a {"timestamp":"2020-08-01T05:26:58.548Z"}
+info: Preset Test Course was created {"timestamp":"2020-08-01T05:28:34.016Z"}
+info: Preset Test Course was removed {"timestamp":"2020-08-01T05:28:37.988Z"}
