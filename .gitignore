@@ -5,8 +5,9 @@
 /.pnp
 .pnp.js
 
-/userFiles
+userFiles/
 
+**.log
 *.log
 
 # misc
