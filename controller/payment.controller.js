@@ -39,7 +39,6 @@ module.exports.preparePayment = (req, res, next) => {
 						received: false,
 						session: session
 					});
-					console.log(session.id);
 					res.render('buy', {session_id: session.id, PK: process.env.STRIPE_PUBLIC})
 				} else {
 					throw new Error('Payment failure: could not search for course ' + req.params.id)
@@ -55,7 +54,7 @@ module.exports.preparePayment = (req, res, next) => {
 
 module.exports.success = (req, res, next) => {
 	let event = req.body;
-	console.log(event);
+	console.log(event.data.object.charges.data[0].payment_intent);
 
 	// switch(event.type) {
 	// 	case 'payment_intent.succeeded':
