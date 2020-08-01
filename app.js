@@ -46,7 +46,7 @@ app.use(methodOverride("_method"));
 app.use(sanitize.middleware);
 
 // DATABASE
-mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 
 // AUTHENTICATION
 require('./service/authentication/session')(app);
