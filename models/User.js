@@ -40,7 +40,13 @@ const UserSchema = new mongoose.Schema({
 	admin: {
 		type: Boolean,
 		default: false
-	}
+	},
+	courses: [
+		{
+			type: mongoose.Schema.Types.ObjectID,
+			ref: "Course"
+		}
+	]
 });
 
 UserSchema.methods.setPassword = function(password) {

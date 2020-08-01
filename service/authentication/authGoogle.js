@@ -30,6 +30,7 @@ module.exports = (passport) => {
 						verification: {verified: true},
 						admin: false,
 						complete: false,
+						courses: [],
 					}, (err2, newUser) => {
 						if(err2) {
 							logger.error(err2);

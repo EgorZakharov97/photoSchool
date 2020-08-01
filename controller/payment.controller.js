@@ -37,7 +37,8 @@ module.exports.preparePayment = (req, res, next) => {
 						course: course._id,
 						timeCreated: new Date(),
 						received: false,
-						session: session
+						session: session,
+						intent: session.payment_intent
 					});
 					res.render('buy', {session_id: session.id, PK: process.env.STRIPE_PUBLIC})
 				} else {
@@ -54,20 +55,30 @@ module.exports.preparePayment = (req, res, next) => {
 
 module.exports.success = (req, res, next) => {
 	let event = req.body;
-	console.log(event.data.object.charges.data[0].payment_intent);
+	let payment_intent = event.data.object.charges.data[0].payment_intent;
 
-	// switch(event.type) {
-	// 	case 'payment_intent.succeeded':
-	// 		logger.info("New payment received");
-	// 		console.log(event);
-	// 		break;
-	// 	case 'payment_method.attached':
-	// 		console.log(event);
-	// 		break;
-	// 	default:
-	// 		console.log(event);
-	// 		return res.status(400).end()
-	// }
+	if(event.type === 'payment_intent.succeeded'){
+		Payment.findOne({intent: payment_intent}, async (err, payment) => {
+			if(err){
+				logger.error(err);
+				return res.status(500).end();
+			} else {
+				if(payment){
+					payment.received = true;
+					payment.save();
 
+					let user = await User.findById(payment.user);
+					user.courses.push(payment.course);
+					user.save();
+
+				} else {
+					logger.error(`Could not find payment with intent ${payment_intent}`);
+					return res.status(500).end();
+				}
+			}
+		})
+	} else {
+		return res.status(400).end();
+	}
 	res.json({received: true});
 };

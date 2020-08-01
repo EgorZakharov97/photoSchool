@@ -15,7 +15,11 @@ PaymentSchema = mongoose.Schema({
 	},
 	timeReceived: Date,
 	received: Boolean,
-	session: Object
+	session: Object,
+	intent: {
+		type: String,
+		required: true
+	}
 });
 
 module.exports = mongoose.model("Payment", PaymentSchema);

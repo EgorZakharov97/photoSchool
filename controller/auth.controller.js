@@ -63,6 +63,7 @@ module.exports.registerNewUser = (req, res, next) => {
 			phoneNumber: profile.phoneNumber,
 			comingFrom: 'local',
 			admin: false,
+			courses: []
 		}, (err, newUser) => {
 			if(err){
 				logger.error(err);
