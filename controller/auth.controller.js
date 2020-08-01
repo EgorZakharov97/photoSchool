@@ -78,7 +78,7 @@ module.exports.registerNewUser = (req, res, next) => {
 					from: process.env.EMAIL,
 					to: newUser.email,
 					subject: 'TuttiFashion password reset',
-					html: `<p>Here is your verification link</p><p>${newUser.verification.verificationLink}</p>`
+					html: `<h1>Hello from Photolite Academy!</h1><p>Here is the <a href=\"${newUser.verification.verificationLink}\">link</a> to verify your email</p><p>${newUser.verification.verificationLink}</p>`
 				};
 				mailTransporter.sendMail(emailOptions, (err, info) => {
 					if(err){
@@ -131,7 +131,7 @@ module.exports.sendPwrdMsg = (req, res, next) => {
 						from: process.env.EMAIL,
 						to: user.email,
 						subject: 'TuttiFashion password reset',
-						html: `<p>Here is a link to reset your password. Do not share this link to anyone.</p><p>${process.env.HOST + '/auth/local/reset/' + user.password.reset.hash}</p>`
+						html: `<h1>Hello from Photolite Academy</h1></h1><p>Here is a <a href=/"${process.env.HOST + '/auth/local/reset/' + user.password.reset.hash}</">link</a> to reset your password. Do not share this link to anyone.</p><p>${process.env.HOST + '/auth/local/reset/' + user.password.reset.hash}</p>`
 					};
 
 					mailTransporter.sendMail(emailOptions, (err, info) => {
