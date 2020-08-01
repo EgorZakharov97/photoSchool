@@ -47,3 +47,5 @@ error: session is not defined {"timestamp":"2020-07-31T08:56:45.763Z"}
 error: session is not defined {"timestamp":"2020-07-31T08:56:50.796Z"}
 error: session is not defined {"timestamp":"2020-07-31T08:57:20.828Z"}
 error: session is not defined {"timestamp":"2020-07-31T08:58:20.857Z"}
+error: Couldnot find files to delete {"timestamp":"2020-08-01T05:34:42.753Z"}
+error: Couldnot find files to delete {"timestamp":"2020-08-01T05:34:45.652Z"}

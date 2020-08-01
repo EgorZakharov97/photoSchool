@@ -11,8 +11,8 @@
 # production
 /build
 
-error.log
-info.log
+./error.log
+./info.log
 
 # misc
 .DS_Store

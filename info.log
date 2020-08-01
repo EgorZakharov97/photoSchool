@@ -1012,3 +1012,9 @@ info: App 10148 has started at port 3000 {"timestamp":"2020-08-01T05:22:13.264Z"
 info: User logged in: Egor Zakharov, id: 5f14b20d9db244399cdad61a {"timestamp":"2020-08-01T05:26:58.548Z"}
 info: Preset Test Course was created {"timestamp":"2020-08-01T05:28:34.016Z"}
 info: Preset Test Course was removed {"timestamp":"2020-08-01T05:28:37.988Z"}
+info: Preset Egor Zakharov was created {"timestamp":"2020-08-01T05:34:27.222Z"}
+error: Couldnot find files to delete {"timestamp":"2020-08-01T05:34:42.753Z"}
+info: Preset Egor Zakharov was removed {"timestamp":"2020-08-01T05:34:42.757Z"}
+error: Couldnot find files to delete {"timestamp":"2020-08-01T05:34:45.652Z"}
+info: Preset Egor Zakharov was removed {"timestamp":"2020-08-01T05:34:45.653Z"}
+info: Password reset email was sent to skymailsenter@gmail.com {"timestamp":"2020-08-01T05:35:37.663Z"}
