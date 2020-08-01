@@ -5,14 +5,9 @@
 /.pnp
 .pnp.js
 
-# testing
-/coverage
+/userFiles
 
-# production
-/build
-
-./error.log
-./info.log
+*.log
 
 # misc
 .DS_Store
