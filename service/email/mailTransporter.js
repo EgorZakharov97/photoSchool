@@ -39,6 +39,6 @@ module.exports.sendMail = (contents) => {
 	}
 
 	transport.sendMail(email, (err, info) => {
-		err ?
+		err ? logger.error(err) : logger.info(`Email was sent to ${email.to}`)
 	})
 }
