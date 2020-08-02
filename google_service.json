@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "photolite-academy-285121",
+  "private_key_id": "ceb4522cc6eb9557116d736a0be0b3f853dbed7c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCeoeVGOjhR3akU\nLGjyZtET41N3N32cxJumU3eUDmDaw2yOGCfoSAF7APxTLMt0Tqx1KSL+MNt0T8+z\nJJ6nMxGOKPuAVm7r6CqP70iIYoGtkLdkneR7YOElCaVClanQH+w7IJNiAnUgHGt3\n9G+0FmAzjGN84ZH4wbON8LJjZKXLXObvToCfWw5NFpcGqBK6fUiXZSg5p9cLxMEs\nYX2e7Jge4zOalJa15Do83mKL4uWauuv9vdunbn9vRA3XgluRGzPnNL7b3to2LYZ9\n45Td2LAwipwDGfLkMCqudNQ+vE/pGAd7+uG1ARx5i2gplt2/Cwta078yNx6JJwox\n1uEUuUmTAgMBAAECggEAMx1ssPfinPKFYFQ9Dtq1hSiLhQ8y4RhzJSGhFuqZJ/Sv\nnovHFDBblcSICc8V0ejl5iy2s1yP4kczYICsxKiOgBXRkJWJUWeyi0WpxBSlv4Ux\nqvC7pkvd0F7uyulJ2h/nMVg6VWsATbQKpxDzC37oScPzbNKMhDD6SALmoGNWjxPi\nq65Os/ZQteygtXYBnhvv8auOdpwzLNu++qmvpQQC7Qf1ZsEAqZDo0l+vq78Yrqv3\nKPZ30aLQVZaIHlvcCk5eBqYzsvvWSEDMDp93vs8WhMA28LaP6a98v6WVNLpNIs0C\nGRdBY3F0xlqZkRYzRgaaRYR/kkNj3lgn1Nqu/w9+QQKBgQDZ5tPiO5vQTCDFgyIs\n24YACowpf6gLPdfZ9uCb6OBBB77cqjTv7rwUxjKkg0xeBfsKS0oyiA7P39Zufml/\nl++KNBiujXzzbq0VbpgGV0sLH8Sk8wjQ/a5cJUFJyqMYdjlDme4/qtW8nzNqbKg9\nQb+bXyimEv4Nv+BFN1zhKJUowQKBgQC6XjRdAklri65/z+Yv6ikZzELd1fbT9MeJ\nfWtGgJ8uuj9cnzUmhoxdmaBdWzNa5+Wgpde6y84AkjAPp1AMgRvmQIeX6fbLb4Iu\n/Hl0Zd9m6ideRREt7E8XrSKI1+85s8kDJl/WRhfziIX/YN0Lcd7elSTTnRSo38aZ\nwtVbl0bTUwKBgE2EEgg/EFTvYBEjbzrp9Sd6mRYCNbOaEnmVm52bIHvB16IEYsSf\n9wSk5Usk8jvYgM/OrNyBDlPg2xV/nuQnFq3hjo46AyNOUgB30VkgILAaYwgS9SXz\nuN1K24j2r0J6fDCSR/EaQuLQ96d6c/cmtpT9Kya5Rut5QL0ezsnCeB2BAoGBAI8R\nHlWAGeirVAveBzElKuQZAAPX6yGPOVZ8p0t6FbkDVPy/Y0ft5fc8pfTEvEm+13JZ\nnaBSMBQUJTz/Dd5rhoVdaDnga4qEUYXMX1hRlAwnGI2vq557V8QvLuGqEoVTVK5M\nWSneqShU17jSHR5aDeMEzz57yY5SKt2CydMD8GTtAoGAZ6iTdpeEognFHoCwzawY\noEQFWw2ggPV8wpV5wSoRbNj6tV5jNea4suVpZB2UFxqELkpgErRzC43uJ14oVUP/\ntOd/i29xV0aTclzePhWaqbx8LxJ7mjhfa6qcsoaXnI3J/c2nqDTlPXDVffieImKg\nBMXv2EnofnpIpSsTb2wn4yk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "mailer@photolite-academy-285121.iam.gserviceaccount.com",
+  "client_id": "116701359285871442495",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mailer%40photolite-academy-285121.iam.gserviceaccount.com"
+}

@@ -13,4 +13,20 @@ router.route('/')
 // 	res.send("This is a protected page for admin");
 // });
 
+router.get('/privacyPolicy', (req, res) => {
+	res.render('privacy-policy')
+});
+
+router.get('/termsAndConditions', (req, res) => {
+	res.render('terms-and-conditions')
+});
+
+router.get('/returnPolicy', (req, res) => {
+	res.render('return-policy')
+});
+
+router.get('/disclaimer', (req, res) => {
+	res.render('disclaimer')
+});
+
 module.exports = router;

@@ -8,6 +8,8 @@
 **.log
 *.log
 
+google_credentials.json
+
 # misc
 .DS_Store
 .env

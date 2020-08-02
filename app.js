@@ -45,6 +45,9 @@ app.use(bodyParser.json());
 app.use(methodOverride("_method"));
 app.use(sanitize.middleware);
 
+// Mail transporter
+require('./service/email/mailTransporter').setUp();
+
 // DATABASE
 mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 
