@@ -7,7 +7,6 @@ const transport = nodemailer.createTransport({
 	secure: true,          // Not SSL
 	auth: {
 		type : process.env.GOG_TYPE,
-		scope: 'https://mail.google.com',
 		user : process.env.GOG_CLIENT_EMAIL,
 		serviceClient: process.env.GOG_CLIENT_ID,
 		privateKey: process.env.GOG_PRIVATE_KEY
