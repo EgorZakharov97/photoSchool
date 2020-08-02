@@ -3,13 +3,13 @@
 ]; %>
 
 <div class="dropdown">
-    <div data-w-id="d2c59415-2b8b-dce1-55d6-037fa139d585" class="dropdown-trigger" style='background-image: url("<%= course.image %>")'>
+    <div data-w-id="d2c59415-2b8b-dce1-55d6-037fa139d585" class="dropdown-trigger">
         <div class="text-block"><%= course.name %></div>
-        <div class="date"><%= monthNames[course.importantDates.courseStarts.getUTCMonth()] %> <%= course.importantDates.courseStarts.getUTCDay()%></div>
+        <div class="date"><%= monthNames[course.importantDates.courseStarts.getUTCMonth()] %> <%= course.importantDates.courseStarts.getUTCDate()%></div>
     </div>
     <div style="height:0PX;display:block" class="dropdown-content">
         <div class="cladd-desc-wrapper">
-            <div class="w-layout-grid grid-5">
+            <div class="w-layout-grid grid_course_home">
                 <div id="w-node-037fa139d58d-5b0e6e15" class="course-card">
                     <div class="rich-text-block-7 w-richtext">
                         <%- course.richText.description -%>
@@ -25,10 +25,25 @@
                         <%- course.richText.timeline -%>
                     </div>
                 </div>
-                <a id="w-node-5dabce7edb67-5ff02e3c" href="/buy/course/<%= course._id %>" class="cors-register-now-2 courses">Register now!</a>
-                <% if(user.admin) { %>
-                    <a id="w-node-5dabce7edb67-5ff02e3c" href="/admin/course/<%= course._id %>" class="cors-register-now-2 courses">Edit this course</a>
-                <% } %>
+                <div id="w-node-9ac068139c83-5b0e6e15" class="course-card dates">
+                    <div class="dateblock">
+                        <div class="date-phrase">Duration</div>
+                        <div class="date-duration red"><%= new Date(course.importantDates.courseStarts - course.importantDates.courseEnds).getUTCDay() %> Days</div>
+                    </div>
+                    <div class="dateblock">
+                        <div class="date-phrase">Price before Aug 10</div>
+                        <div class="date-duration red">$<%= course.pricing.discountPrice %> CAD</div>
+                    </div>
+                    <div class="dateblock">
+                        <div class="date-phrase">Price after Aug 10</div>
+                        <div class="date-duration">$<%= course.pricing.finalPrice %> CAD</div>
+                    </div>
+                    <div class="dateblock">
+                        <div class="date-phrase">Registration deadline</div>
+                        <div class="date-duration"><%= monthNames[course.importantDates.registrationDeadline.getUTCMonth()] %> <%= course.importantDates.registrationDeadline.getUTCDate()%></div>
+                    </div>
+                </div>
+                <a id="w-node-037fa139d5be-5b0e6e15" href="#" class="cors-register-now-2 courses">Register now</a>
             </div>
         </div>
     </div>

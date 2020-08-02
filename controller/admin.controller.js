@@ -9,10 +9,10 @@ function constructCourseObject(req) {
 	let course =  {
 		name: req.body.name,
 		importantDates: {
-			courseStarts: req.body.courseStarts,
-			courseEnds: req.body.courseEnds,
-			discountDeadline: req.body.registrationDeadline1,
-			registrationDeadline: req.body.registrationDeadline2
+			courseStarts: new Date(req.body.courseStarts).toUTCString(),
+			courseEnds: new Date(req.body.courseEnds).toUTCString(),
+			discountDeadline: new Date(req.body.registrationDeadline1).toUTCString(),
+			registrationDeadline: new Date(req.body.registrationDeadline2).toUTCString()
 		},
 		pricing: {
 			discountPrice: req.body.priceBefore,

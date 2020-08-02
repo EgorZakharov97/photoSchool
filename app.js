@@ -82,12 +82,11 @@ if(process.env.NODE_ENV === 'development'){
 		ca: ca
 	};
 
-	https.createServer(credentials, app).listen(443, () => {
-		console.log('App is listening on port 80')
+	https.createServer(credentials, app).listen(process.env.SSL_PORT, () => {
+		console.log(`App is listening on port ${process.env.SSL_PORT}`)
 	});
 	http.createServer((req, res) => {
 		res.writeHead(301, {"Location": "https://" + req.headers['host'] + req.url});
 		res.end();
-	}).listen(80)
+	}).listen(process.env.PORT)
 }
-

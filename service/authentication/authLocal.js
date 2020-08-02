@@ -15,16 +15,16 @@ module.exports = (passport) => {
 					logger.error(err);
 					return done(err)
 				} else if(!user) {
-					logger.info(`User is not registered`);
+					logger.info(`User ${username} is not registered`);
 					return done(null, false, {msg: "You are not registered"})
 				} else if(user.origin !== 'local') {
-					logger.info(`User is not local`);
+					logger.info(`User ${username} is not local but truing to authenticate locally`);
 					return done(null, false, {msg: `Please, use ${user.origin} to authenticate or use 'Reset Password'`})
 				} else if(!user.validatePassword(password)){
-					logger.info(`${user.username} has enterred the wrong password`);
+					logger.info(`${user.username} has entered the wrong password`);
 					return done(null, false, {msg: "Wrong password"})
 				} else {
-					logger.info(`User logged in: ${user.username}, id: ${user._id}`);
+					logger.info(`${user.username} (${user._id}) logged in`);
 					return done(null, user);
 				}
 			})

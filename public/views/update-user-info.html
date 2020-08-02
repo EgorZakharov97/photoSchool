@@ -43,20 +43,22 @@
                 <input type="tel" class="login-input w-input" maxlength="256" value="<%= user.phoneNumber %>" name="phoneNumber" data-name="Phone Number" placeholder="Phone Number" id="phoneNumber" required="">
                 <input type="email" style="display: none;" value="<%= user.email %>" name="email" required="">
                 <select id="Level" name="experience" required="" data-name="Level" class="login-input w-select">
-                  <option <%if(user.experience === 'Beginner'){ %> selected <%}%> value="beginner">Beginner</option>
-                  <option <%if(user.experience === 'Advanced'){ %> selected <%}%> value="advanced">Advanced</option>
-                  <option <%if(user.experience === 'Intermediate'){ %> selected <%}%> value="intermediate">Intermediate</option>
-                  <option <%if(user.experience === 'Professional'){ %> selected <%}%> value="professional">Professional</option>
+                  <option <%if(user.experience === 'Beginner'){ %> selected <%}%> value="not_stateed">Your experience</option>
+                  <option <%if(user.experience === 'Beginner'){ %> selected <%}%> value="0-2">0-2 years</option>
+                  <option <%if(user.experience === 'Advanced'){ %> selected <%}%> value="2-4">2-4 yeard</option>
+                  <option <%if(user.experience === 'Intermediate'){ %> selected <%}%> value="5+">5+ years</option>
                 </select>
                 <select id="sex" name="sex" required="" data-name="Sex" class="login-input w-select">
                   <option <%if(user.sex === 'Prefer not to say'){ %> selected <%}%> value="Prefer not to say">Sex</option>
                   <option <%if(user.sex === 'Male'){ %> selected <%}%> value="Male">Male</option>
                   <option <%if(user.sex === 'Female'){ %> selected <%}%> value="Female">Female</option>
-                  <option <%if(user.sex === 'Hybrid'){ %> selected <%}%> value="Hybrid">Hybrid</option>
+                  <option <%if(user.sex === 'Prefer not to say'){ %> selected <%}%> value="Prefer not to say">Prefer not to say</option>
                 </select>
                 <input type="submit" value="Update" data-wait="Please wait..." class="login-submit w-button">
               </form>
-              <a href="/portal" value="Update" data-wait="Please wait..." class="login-submit w-button" style="text-align: center;">Cancel</a>
+              <% if(user.complete) { %>
+                <a href="/portal" value="Update" data-wait="Please wait..." class="login-submit w-button" style="text-align: center;">Cancel</a>
+              <% } %>
               <div class="w-form-done">
                 <div>Thank you! Your submission has been received!</div>
               </div>

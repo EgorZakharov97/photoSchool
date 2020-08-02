@@ -101,7 +101,8 @@ module.exports.updateUserInfo = (req, res, next) => {
 			user.sex = profile.sex;
 			user.complete = true;
 			user.save();
-			logger.info(`User ${user.username} gust updated profile`);
+			req.session.passport.user = user;
+			logger.info(`${user.username} (${user._id}) updated profile`);
 			res.redirect('/portal')
 		})
 	} else {
@@ -124,7 +125,7 @@ module.exports.sendPwrdMsg = (req, res, next) => {
 					let emailOptions = {
 						to: user.email,
 						subject: 'Photolite password reset',
-						html: `<h1>Hello from Photolite Academy</h1><p>Here is a <a href=/"${process.env.HOST + '/auth/local/reset/' + user.password.reset.hash}</">link</a> to reset your password. Do not share this link to anyone.</p><p>${process.env.HOST + '/auth/local/reset/' + user.password.reset.hash}</p>`
+						html: `<h1>Hello from Photolite Academy</h1><p>Here is a <a href=/"${process.env.HOST + '/auth/local/reset/' + user.password.reset.hash}/">link</a> to reset your password. Do not share this link to anyone.</p><p>${process.env.HOST + '/auth/local/reset/' + user.password.reset.hash}</p>`
 					};
 
 					sendMail(emailOptions, (err, info) => {
@@ -199,7 +200,10 @@ module.exports.doPwdReset = (req, res, next) => {
 };
 
 module.exports.logout = (req, res, next) => {
-	logger.info(`User ${req.user.username} logged out`);
+	try {
+		logger.info(`User ${req.user.username} logged out`);
+	}
+	catch(e){}
 	req.logout();
 	res.redirect('/');
 };
