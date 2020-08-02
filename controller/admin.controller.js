@@ -1,16 +1,8 @@
-const express = 	require('express'),
-	passport = 		require('passport'),
-	path = 			require('path'),
-	User = 			require('../models/User'),
-	Course = 		require('../models/Course'),
+const Course = 		require('../models/Course'),
 	Material = 		require('../models/Material'),
 	Video =			require('../models/Video'),
 	logger = 		require('../service/logger/logger'),
-	crypto = 		require('crypto'),
 	Preset = 		require('../models/Preset'),
-	mailTransporter = require('../service/email/mailTransporter')(),
-	encrypt = 		require('../service/tools/encrypter').encrypt,
-	decrypt = 		require('../service/tools/encrypter').decrypt,
 	fs = 			require('fs');
 
 function constructCourseObject(req) {

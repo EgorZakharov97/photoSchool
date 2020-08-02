@@ -1,11 +1,8 @@
-const isAuthenticated = require('../service/middleware/authCheck').isAuthenticated,
-	isAdmin = require('../service/middleware/authCheck').isAdmin,
-	User = require('../models/User'),
+const User = require('../models/User'),
 	Course = require('../models/Course'),
 	logger = require('../service/logger/logger'),
 	Payment = require('../models/Payment'),
-	mailTransporter = require('../service/email/mailTransporter')(),
-	controller = require('../controller/payment.controller'),
+	sendMail = require('../service/email/mailTransporter').sendMail,
 	stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 module.exports.preparePayment = (req, res, next) => {
@@ -80,13 +77,12 @@ module.exports.success = (req, res, next) => {
 					course.seats.occupied++;
 
 					let emailOptions = {
-						from: process.env.EMAIL,
 						to: user.email,
 						subject: 'PhotoLight Purchase Confirmation',
 						html: `Thank you for buying ${course.name}. You have payed $${payment.session.amount_total / 100}CAD`
 					};
 
-					mailTransporter.sendMail(emailOptions, (err, info) => {
+					sendMail(emailOptions, (err, info) => {
 						if (err) {
 							logger.error(err)
 						} else {

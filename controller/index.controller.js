@@ -1,9 +1,6 @@
 const express = require('express'),
-	isAuthenticated = require('../service/middleware/authCheck').isAuthenticated,
-	isAdmin = require('../service/middleware/authCheck').isAdmin,
 	logger = require('../service/logger/logger'),
 	Course = require('../models/Course');
-let router = express.Router();
 
 module.exports.getIndexPage = (req, res, next) => {
 	Course.find({"importantDates.courseStarts": {$gt: new Date()}}, (err, courses) => {

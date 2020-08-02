@@ -1,7 +1,4 @@
 const express = require('express'),
-	path = require('path'),
-	User = require('../models/User'),
-	logger = require('../service/logger/logger'),
 	controller = require('../controller/admin.controller'),
 	isAdmin = require('../service/middleware/authCheck').isAdmin,
 	upload = require('../service/middleware/multer');
@@ -11,14 +8,6 @@ router.route('/course/:id')
 	.get(isAdmin, controller.getUpdateCourse)
 	.post(isAdmin, controller.updateCourseInfo)
 	.delete(isAdmin, controller.deleteCourse);
-
-// router.route('/course/:id/videos')
-// 	.post(isAdmin, controller.addVideo)
-// 	.get(isAdmin, controller.getVideoManager);
-//
-// router.route('/course/:id/videos/:videoID')
-// 	.delete(isAdmin, controller.deleteVideo)
-// 	.put(isAdmin, controller.updateVideo);
 
 router.route('/course')
 	.get(isAdmin, controller.getCreateCourse)

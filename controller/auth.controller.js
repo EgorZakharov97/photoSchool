@@ -1,10 +1,6 @@
-const express = 	require('express'),
-	passport = 		require('passport'),
-	path = 			require('path'),
-	User = 			require('../models/User'),
+const User = 			require('../models/User'),
 	logger = 		require('../service/logger/logger'),
-	crypto = 		require('crypto'),
-	mailTransporter = require('../service/email/mailTransporter')(),
+	sendMail = 		require('../service/email/mailTransporter').sendMail,
 	encrypt = 		require('../service/tools/encrypter').encrypt,
 	decrypt = 		require('../service/tools/encrypter').decrypt;
 
@@ -75,12 +71,11 @@ module.exports.registerNewUser = (req, res, next) => {
 
 				// Sending verification email
 				let emailOptions = {
-					from: process.env.EMAIL,
 					to: newUser.email,
 					subject: 'TuttiFashion password reset',
 					html: `<h1>Hello from Photolite Academy!</h1><p>Here is the <a href=\"${newUser.verification.verificationLink}\">link</a> to verify your email</p><p>${newUser.verification.verificationLink}</p>`
 				};
-				mailTransporter.sendMail(emailOptions, (err, info) => {
+				sendMail(emailOptions, (err, info) => {
 					if(err){
 						logger.error(err)
 					} else {
@@ -128,13 +123,12 @@ module.exports.sendPwrdMsg = (req, res, next) => {
 					user.password.reset.hash = encrypt(secret);
 
 					let emailOptions = {
-						from: process.env.EMAIL,
 						to: user.email,
 						subject: 'TuttiFashion password reset',
 						html: `<h1>Hello from Photolite Academy</h1></h1><p>Here is a <a href=/"${process.env.HOST + '/auth/local/reset/' + user.password.reset.hash}</">link</a> to reset your password. Do not share this link to anyone.</p><p>${process.env.HOST + '/auth/local/reset/' + user.password.reset.hash}</p>`
 					};
 
-					mailTransporter.sendMail(emailOptions, (err, info) => {
+					sendMail(emailOptions, (err, info) => {
 						if(err){
 							logger.error(err)
 						} else {

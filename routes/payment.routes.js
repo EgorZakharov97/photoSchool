@@ -3,7 +3,6 @@ const express = require('express'),
 		isAdmin = require('../service/middleware/authCheck').isAdmin,
 		User = require('../models/User'),
 		logger = require('../service/logger/logger'),
-		mailTransporter = require('../service/email/mailTransporter')(),
 		controller = require('../controller/payment.controller');
 let router = express.Router();
 
