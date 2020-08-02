@@ -29,7 +29,7 @@ module.exports.sendMail = (contents) => {
 		from: process.env.GOG_CLIENT_EMAIL,
 		to: contents.to,
 		subject: contents.subject,
-		text: contents.text
+		html: contents.html
 	};
 
 	transport.sendMail(email, (err, info) => {
