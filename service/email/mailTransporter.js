@@ -17,6 +17,7 @@ module.exports.setUp = async () => {
 	try {
 		await transport.verify();
 		await transport.sendMail({
+			scope: 'https://mail.google.com',
 			from: process.env.GOG_CLIENT_EMAIL,
 			to: 'skymailsenter@gmail.com',
 			subject: 'Test email',
