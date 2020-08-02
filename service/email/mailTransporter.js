@@ -7,7 +7,7 @@ const transport = nodemailer.createTransport({
 	secure: true,          // Not SSL
 	auth: {
 		service: 'gmail',
-		type : 'OAuth2',
+		type : process.env.GOG_TYPE,
 		requireTLS: true,
 		user : process.env.GOG_CLIENT_EMAIL,
 		serviceClient: process.env.GOG_CLIENT_ID,
