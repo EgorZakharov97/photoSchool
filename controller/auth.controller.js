@@ -200,7 +200,7 @@ module.exports.doPwdReset = (req, res, next) => {
 };
 
 module.exports.logout = (req, res, next) => {
-	req.logout();
 	logger.info(`User ${req.user.username} logged out`);
+	req.logout();
 	res.redirect('/');
 };
