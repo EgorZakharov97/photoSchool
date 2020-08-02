@@ -36,7 +36,8 @@
     "stripe": "^8.77.0",
     "util": "^0.12.3",
     "winston": "^3.2.1",
-    "winston-transport": "^4.3.0"
+    "winston-transport": "^4.3.0",
+    "xoauth2": "^1.2.0"
   },
   "scripts": {
     "start": "node cluster.js",
