@@ -6,7 +6,7 @@ const winston = require('winston'),
 class MailTransport extends Transport {
 	constructor(opts) {
 		super(opts);
-		this.transporter = require('../email/mailTransporter')();
+		this.sendMail = require('../email/mailTransporter').sendMail;
 	}
 
 	log(info, callback) {
@@ -15,11 +15,10 @@ class MailTransport extends Transport {
 		});
 		let mailOptions = {
 			to: process.env.EMAIL,
-			from: process.env.EMAIL,
 			subject: 'TuttiFashion internal server error!',
 			html: `<p>${info.timestamp}</p><p>${info.message}</p>`
 		};
-		this.transporter.sendMail(mailOptions);
+		this.sendMail(mailOptions);
 		// Perform the writing to the remote service
 		callback();
 	}
