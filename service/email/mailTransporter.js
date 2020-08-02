@@ -1,18 +1,18 @@
 const nodemailer = require('nodemailer');
-const logger = require('../logger/logger');
+const logger = require('/service/logger/logger');
 
 const transport = nodemailer.createTransport({
-	host: 'smtp.gmail.com',
-	port: 465,              // TLS (google requires this port for TLS)
-	secure: true,          // Not SSL
-	auth: {
-		service: 'gmail',
-		type : process.env.GOG_TYPE,
+		host: 'smtp.gmail.com',
+		port: 587,
+		secure: false,
 		requireTLS: true,
-		user : process.env.GOG_CLIENT_EMAIL,
-		serviceClient: process.env.GOG_CLIENT_ID,
-		privateKey: process.env.GOG_PRIVATE_KEY
-	}
+		auth: {
+			user: process.env.EMAIL,
+			pass: process.env.EMAIL_PASS
+		},
+		tls: {
+			rejectUnauthorized: false
+		}
 });
 
 module.exports.setUp = async () => {
@@ -36,9 +36,9 @@ module.exports.sendMail = (contents) => {
 		to: contents.to,
 		subject: contents.subject,
 		text: contents.text
-	};
+	}
 
 	transport.sendMail(email, (err, info) => {
-		err ? logger.error(err) : logger.info(`Email has been sent to ${email.to}`)
-	});
-};
+		err ?
+	})
+}
