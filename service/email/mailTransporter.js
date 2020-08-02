@@ -6,7 +6,8 @@ const transport = nodemailer.createTransport({
 	port: 465,              // TLS (google requires this port for TLS)
 	secure: true,          // Not SSL
 	auth: {
-		type : 'OAuth2',
+		type : process.env.GOG_TYPE,
+		scope: 'https://mail.google.com',
 		user : process.env.GOG_CLIENT_EMAIL,
 		serviceClient: process.env.GOG_CLIENT_ID,
 		privateKey: process.env.GOG_PRIVATE_KEY
@@ -17,7 +18,6 @@ module.exports.setUp = async () => {
 	try {
 		await transport.verify();
 		await transport.sendMail({
-			scope: 'https://mail.google.com',
 			from: process.env.GOG_CLIENT_EMAIL,
 			to: 'skymailsenter@gmail.com',
 			subject: 'Test email',
