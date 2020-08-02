@@ -93,7 +93,6 @@ module.exports.registerNewUser = (req, res, next) => {
 // update user info
 module.exports.updateUserInfo = (req, res, next) => {
 	let profile = req.body;
-	console.log(profile);
 	if(profile.email){
 		User.findOne({email: profile.email}, (err, user) => {
 			user.username = profile.username;

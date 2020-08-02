@@ -8,7 +8,7 @@
 **.log
 *.log
 
-google_credentials.json
+mongo.pem
 
 # misc
 .DS_Store

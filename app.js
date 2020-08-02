@@ -2,9 +2,9 @@ require('dotenv').config();
 
 const express = require('express'),
 	partials = require('express-partials'),
-	mongoose = require('mongoose'),
 	bodyParser = require('body-parser'),
 	methodOverride = require('method-override'),
+	mongoose = require('mongoose'),
 	path = require('path'),
 	passport = require('passport'),
 	cookieParser = require('cookie-parser'),
