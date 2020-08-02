@@ -72,7 +72,7 @@ module.exports.registerNewUser = (req, res, next) => {
 				// Sending verification email
 				let emailOptions = {
 					to: newUser.email,
-					subject: 'TuttiFashion password reset',
+					subject: 'Photolite password reset',
 					html: `<h1>Hello from Photolite Academy!</h1><p>Here is the <a href=\"${newUser.verification.verificationLink}\">link</a> to verify your email</p><p>${newUser.verification.verificationLink}</p>`
 				};
 				sendMail(emailOptions, (err, info) => {
@@ -124,8 +124,8 @@ module.exports.sendPwrdMsg = (req, res, next) => {
 
 					let emailOptions = {
 						to: user.email,
-						subject: 'TuttiFashion password reset',
-						html: `<h1>Hello from Photolite Academy</h1></h1><p>Here is a <a href=/"${process.env.HOST + '/auth/local/reset/' + user.password.reset.hash}</">link</a> to reset your password. Do not share this link to anyone.</p><p>${process.env.HOST + '/auth/local/reset/' + user.password.reset.hash}</p>`
+						subject: 'Photolite password reset',
+						html: `<h1>Hello from Photolite Academy</h1><p>Here is a <a href=/"${process.env.HOST + '/auth/local/reset/' + user.password.reset.hash}</">link</a> to reset your password. Do not share this link to anyone.</p><p>${process.env.HOST + '/auth/local/reset/' + user.password.reset.hash}</p>`
 					};
 
 					sendMail(emailOptions, (err, info) => {
@@ -201,5 +201,6 @@ module.exports.doPwdReset = (req, res, next) => {
 
 module.exports.logout = (req, res, next) => {
 	req.logout();
+	logger.info(`User ${req.user.username} logged out`);
 	res.redirect('/');
 };
