@@ -58,6 +58,9 @@ router.route('/local/reset/:code')
 	.get(controller.getNewPwrdPage)
 	.post(controller.doPwdReset);
 
+router.route('/local/fastRegister')
+	.post(controller.fastRegistrationCheck);
+
 // logout a user
 router.route('/logout')
 	.get(controller.logout);

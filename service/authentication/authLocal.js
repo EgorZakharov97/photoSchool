@@ -24,7 +24,7 @@ module.exports = (passport) => {
 					logger.info(`${user.username} has entered the wrong password`);
 					return done(null, false, {msg: "Wrong password"})
 				} else {
-					logger.info(`${user.username} (${user._id}) logged in`);
+					logger.info(`${user.email} (${user._id}) logged in`);
 					return done(null, user);
 				}
 			})

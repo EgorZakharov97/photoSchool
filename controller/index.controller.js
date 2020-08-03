@@ -10,7 +10,7 @@ module.exports.getIndexPage = (req, res, next) => {
 		} else {
 			res.render('index', {
 				courses: courses,
-				user: req.user || {}
+				user: req.user || 'NONE'
 			});
 		}
 	})

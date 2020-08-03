@@ -2,10 +2,12 @@
     "July", "Aug", "Sept", "Oct", "Nov", "Dec"
 ]; %>
 
+<% let dateStarts = monthNames[course.importantDates.courseStarts.getUTCMonth()] + ' ' + course.importantDates.courseStarts.getUTCDate() %>
+
 <div class="dropdown">
     <div data-w-id="d2c59415-2b8b-dce1-55d6-037fa139d585" class="dropdown-trigger">
         <div class="text-block"><%= course.name %></div>
-        <div class="date"><%= monthNames[course.importantDates.courseStarts.getUTCMonth()] %> <%= course.importantDates.courseStarts.getUTCDate()%></div>
+        <div class="date"><%= dateStarts %></div>
     </div>
     <div style="height:0PX;display:block" class="dropdown-content">
         <div class="cladd-desc-wrapper">
@@ -43,7 +45,7 @@
                         <div class="date-duration"><%= monthNames[course.importantDates.registrationDeadline.getUTCMonth()] %> <%= course.importantDates.registrationDeadline.getUTCDate()%></div>
                     </div>
                 </div>
-                <a id="w-node-037fa139d5be-5b0e6e15" href="#" class="cors-register-now-2 courses">Register now</a>
+                <a id="w-node-037fa139d5be-5b0e6e15" cPic="<%= course.image %>" uEmail="<%= user.email %>" cID="<%= course._id %>" cPrice="<%= course.calculateCurrentPrice() %>" cName="<%= course.name%>" cStart="<%= dateStarts %>" href="#" class="cors-register-now-2 courses course-buy-button">Register now</a>
             </div>
         </div>
     </div>

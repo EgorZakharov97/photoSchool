@@ -12,9 +12,6 @@ module.exports.preparePayment = (req, res, next) => {
 				throw err;
 			} else {
 				if(course){
-					let today = new Date();
-					let price;
-					today > course.importantDates.discountDeadline ? price = course.pricing.finalPrice : price = course.pricing.discountPrice;
 					const session = await stripe.checkout.sessions.create({
 						payment_method_types: ['card'],
 						line_items: [{
@@ -23,7 +20,7 @@ module.exports.preparePayment = (req, res, next) => {
 								product_data: {
 									name: course.name,
 								},
-								unit_amount: price,
+								unit_amount: course.calculateCurrentPrice() * 100,
 							},
 							quantity: 1,
 						}],

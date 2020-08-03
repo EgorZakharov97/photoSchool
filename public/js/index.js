@@ -1,32 +1,41 @@
-let buttons = document.getElementsByClassName("pay-button");
+const section = $('#section-by');
+let courseName = $('#courseName');
+let courseStarts = $('#courseStarts');
+let blockLoggedIn = $('#blockLoggedIn');
+let usrEmail = $('#usrEmail');
+let finalPrice = $('#finPrice');
+let unLogCheckout = $('#unLogCheckout');
+let emailForm = $('#email-form');
 
-for (button of buttons){
-	button.addEventListener('click', async () => {
-		var stripe = Stripe('pk_test_51H7WJ1Fot84IA7k9e0bKXwoFwD8RDitmeJrf43cQmCFsza0L4bFfsVpZr0CfTuz2RYXrGJynkmPggSPtUaDy92Mx004LmvKyH1');
-		var session_id = await getSessionId(button.id);
-		stripe.redirectToCheckout({
-			sessionId: session_id
-		}).then(function (result) {
-			console.log(result)
-		});
-	})
-}
+$('.course-buy-button').click((e) => {
+	let currCourseName = $(e.target).attr('cName');
+	let currCourseStarts = $(e.target).attr('cStart');
+	let currCoursePrice = $(e.target).attr('cPrice');
+	let currCourseID = $(e.target).attr('cID');
+	let currCourseImg = $(e.target).attr('cPic');
+	let email = $(e.target).attr('uEmail');
 
-async function getSessionId(courseID) {
-	return await fetch('/buy/course/'+courseID, {
-		method: "POST",
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	})
-		.then(res => {
-			return res.json()
-		})
-		.then(data => {
-			return data.session
-		})
-		.catch(e => {
-			console.log(e)
-		})
+	$('#courseName').text(currCourseName);
+	$('#courseStarts').text(currCourseStarts);
+	$('#finPrice').text('$' + currCoursePrice + ' CAD');
+	$('#coursePic').css('background-image', currCourseID);
 
-}
+	if(email === ''){
+		$('#blockLoggedIn').css('display', 'none');
+		$('#logCheckout').css('display', 'none');
+		$('#email-form').css('display', 'block');
+		$('#courseID').attr('value', currCourseID);
+	} else {
+		$('#usrEmail').text(email);
+		$('#blockLoggedIn').css('display', 'block');
+		$('#logCheckout').css('display', 'block');
+		$('#email-form').css('display', 'none');
+		$('#logCheckout').attr('href', '/buy/course/' + currCourseID);
+	}
+
+	section.css('display', 'flex');
+});
+
+$('#buy-close').click(() => {
+	section.css('display', 'none')
+});

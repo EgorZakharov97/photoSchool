@@ -1,5 +1,6 @@
 const express = require('express'),
 		isAuthenticated = require('../service/middleware/authCheck').isAuthenticated,
+		doesExist = require('../service/middleware/authCheck').doesExist,
 		isAdmin = require('../service/middleware/authCheck').isAdmin,
 		User = require('../models/User'),
 		logger = require('../service/logger/logger'),
@@ -7,7 +8,7 @@ const express = require('express'),
 let router = express.Router();
 
 router.route('/course/:id')
-	.get(isAuthenticated, controller.preparePayment);
+	.get(doesExist, controller.preparePayment);
 
 router.route('/webhook')
 	.post(controller.success);

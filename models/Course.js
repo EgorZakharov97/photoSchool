@@ -67,4 +67,11 @@ const CourseSchema = new mongoose.Schema({
 	}
 });
 
+CourseSchema.methods.calculateCurrentPrice = function() {
+	let today = new Date();
+	let price;
+	today > this.importantDates.discountDeadline ? price = this.pricing.finalPrice : price = this.pricing.discountPrice;
+	return price;
+};
+
 module.exports = mongoose.model("Course", CourseSchema);

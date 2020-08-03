@@ -2,12 +2,45 @@ const User = 			require('../models/User'),
 	logger = 		require('../service/logger/logger'),
 	sendMail = 		require('../service/email/mailTransporter').sendMail,
 	encrypt = 		require('../service/tools/encrypter').encrypt,
-	decrypt = 		require('../service/tools/encrypter').decrypt;
+	decrypt = 		require('../service/tools/encrypter').decrypt,
+	passport = 		require('passport');
 
 let authOptions = {
 	successRedirect: '/portal',
 	failureRedirect: '/auth',
 	session: true
+};
+
+module.exports.fastRegistrationCheck = (req, res, next) => {
+	let authOptions = {
+		successRedirect: '/buy/course/' + req.body.courseID,
+		failureRedirect: '/',
+		session: true
+	};
+
+	User.findOne({email: req.body.email}, async (err, user) => {
+		if(err) {
+			logger.error(err);
+			res.render('500').status(500);
+		} else if(user){
+			passport.authenticate('local', authOptions)(req, res, next);
+		} else {
+			let newUser = await User.create({
+				email: req.body.email,
+				verification: {
+					verified: true
+				},
+				complete: false,
+				comingFrom: 'local',
+				admin: false,
+				courses: []
+			});
+			await newUser.setPassword(req.body.password);
+			await newUser.save();
+			await logger.info(`${newUser.email} was fast created`);
+			passport.authenticate('local', authOptions)(req, res, next);
+		}
+	})
 };
 
 // Getters
@@ -35,15 +68,16 @@ module.exports.getUpdateUserInfoPage = (req, res, next) => {
 	User.findOne({email: req.user.email}, (err, user) => {
 		if(err){
 			logger.error(err);
-		} else {
+		} else if(user) {
 			res.render('update-user-info', {user: user})
+		} else {
+			res.redirect('/')
 		}
 	});
 };
 
 // Register a new User
 module.exports.registerNewUser = (req, res, next) => {
-	console.log(req.body);
 	let profile = req.body;
 	if(profile.password === profile.password_2){
 		User.create({

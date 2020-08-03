@@ -16,7 +16,6 @@
   <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
-  <script src="store.js" defer=""></script>
 </head>
 <body class="body">
   <div class="section-welcome">
@@ -360,37 +359,41 @@
       <div class="text-block-14">Copyright © 2020 Spark Photography. All rights reserved.</div>
     </div>
   </footer>
-  <div class="section-buy">
+  <div id="section-by" class="section-buy">
     <div class="payment-container w-container">
       <div class="payment-block">
-        <div class="close-btn">
-          <div class="text-block-15">X</div>
+        <div id="buy-close" class="close-btn">
+          <div style="cursor: pointer" class="text-block-15">X</div>
         </div>
-        <div class="course-buy-pic"></div>
+        <div id="coursePic" class="course-buy-pic"></div>
         <div class="but-description">Wokshop + 1 month of portal access</div>
-        <h1 class="buy-course-name">Male Pornography</h1>
-        <div class="but-description low">Aug 14</div>
-        <div class="buy-email">
+        <h1 id="courseName" class="buy-course-name">NAN</h1>
+        <div id="courseStarts" class="but-description low">NAN</div>
+        <div id="blockLoggedIn" class="buy-email">
           <div class="buy-hint">You are logged in as:</div>
-          <div class="buy-user-email">skymailsenter@gmail.com</div>
+          <div id="usrEmail" class="buy-user-email">NAN</div>
         </div>
-        <div class="form-block-3 w-form">
-          <form id="email-form" name="email-form" data-name="Email Form"><label for="name" class="field-label-5">Email</label><input type="text" class="w-input" maxlength="256" name="name" data-name="Name" placeholder="" id="name"><label for="email" class="field-label-6">Create Password</label><input type="email" class="text-field-4 w-input" maxlength="256" name="email" data-name="Email" placeholder="" id="email" required=""><input type="submit" value="Proceed to Checkout" data-wait="Please wait..." class="submit-button-3 w-button"></form>
-          <div class="w-form-done">
-            <div>Thank you! Your submission has been received!</div>
-          </div>
-          <div class="w-form-fail">
-            <div>Oops! Something went wrong while submitting the form.</div>
-          </div>
+        <div id="email-form" class="form-block-3 w-form">
+
+          <form method="post" action="/auth/local/fastRegister">
+            <label for="email" class="field-label-5">Email</label>
+            <input type="email" class="w-input" maxlength="256" name="email" data-name="email" placeholder="" id="email">
+            <label for="pwrd" class="field-label-6">Create Password</label>
+            <input id="courseID" type="text" name="courseID" value="" style="display: none">
+            <input type="password" class="text-field-4 w-input" maxlength="256" name="password" data-name="password" placeholder="" id="pwrd" required="">
+            <input type="submit" value="Proceed to Checkout" data-wait="Please wait..." class="submit-button-3 w-button">
+          </form>
+
         </div>
         <div class="dateblock checkout">
           <div class="date-phrase">Final Price</div>
-          <div class="date-duration">$200</div>
-        </div><a href="#" class="buy-buy">Proceed to Checkout</a></div>
+          <div id="finPrice" class="date-duration">NAN</div>
+        </div><a href="#" id="logCheckout" class="buy-buy">Proceed to Checkout</a></div>
     </div>
   </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js?site=5f1212b6860f150f9f0e6e14" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="js/webflow.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+  <script src="public/js/index.js"></script>
 </body>
 </html>

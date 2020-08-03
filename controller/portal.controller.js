@@ -37,30 +37,27 @@ async function renderPortalForUser(req, res, next) {
 	let user = req.user;
 	let courses = await Course.find({_id: user.courses});
 	let materials = [];
-	let videos = [];
+	let videos;
 	let presets = [];
 	let categories = [];
 
-	if(user.subscriptionEnds > new Date()){
-		materials = await Material.find({});
-		presets = await Preset.find({});
-		let allVideos = await Video.find({
-			$or: [ {accessBySubscription: false}, {$and: [ {accessBySubscription: true}, {courses: []} ]}, {courses: {$in: user.courses}} ]
-		});
-		categories = await Video.distinct('category');
+	materials = await Material.find({});
+	presets = await Preset.find({});
 
-		videos = {};
+	let allVideos = await Video.find({
+		$or: [ {accessBySubscription: false}, {$and: [ {accessBySubscription: true}, {courses: []} ]}, {courses: {$in: user.courses}} ]
+	});
+	categories = await Video.distinct('category');
 
-		categories.filter(cat => {
-			videos[cat] = []
-		});
+	videos = {};
 
-		allVideos.filter(video => {
-			videos[video.category].push(video);
-		});
-	} else {
-		videos = await Video.find({accessBySubscription: false});
-	}
+	categories.filter(cat => {
+		videos[cat] = []
+	});
+
+	allVideos.filter(video => {
+		videos[video.category].push(video);
+	});
 
 	res.render('portal', {
 		user: req.user,
