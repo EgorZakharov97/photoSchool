@@ -16,7 +16,7 @@ module.exports.preparePayment = (req, res, next) => {
 						payment_method_types: ['card'],
 						line_items: [{
 							price_data: {
-								currency: 'usd',
+								currency: 'cad',
 								product_data: {
 									name: course.name,
 								},
