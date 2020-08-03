@@ -8,6 +8,9 @@
 **.log
 *.log
 
+# content files
+/userFiles
+
 mongo.pem
 
 # misc

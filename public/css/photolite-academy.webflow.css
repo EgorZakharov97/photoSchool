@@ -2165,11 +2165,12 @@
 
 .who-block-wrapper {
   width: 400px;
-  height: 100%;
+  /*height: 100%;*/
   margin-right: 10px;
   margin-left: 10px;
   padding: 5px;
   border: 1px solid #000;
+
 }
 
 .who-block {
@@ -5186,7 +5187,8 @@
   .who-block-wrapper {
     margin-right: 10px;
     margin-left: 10px;
-    padding: 5px;
+    padding: 35px;
+    height: 200px;
     border-width: 2px;
     -webkit-transition: all 100ms ease;
     transition: all 100ms ease;
@@ -6074,6 +6076,7 @@
   }
   .who-block-wrapper {
     width: 200px;
+    height: auto;
   }
   .for-whom-heading-block {
     font-size: 1.6rem;
@@ -6396,6 +6399,7 @@
     width: 400px;
     margin-bottom: 20px;
     padding: 10px;
+    height: auto;
   }
   .heading-on-black {
     padding-left: 10px;
