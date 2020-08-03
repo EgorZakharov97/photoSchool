@@ -34,19 +34,25 @@ async function renderPortalForAdmin(req, res, next) {
 }
 
 async function renderPortalForUser(req, res, next) {
-	let user = req.user;
+	let user = await User.findById(req.user._id);
 	let courses = await Course.find({_id: user.courses});
 	let materials = [];
-	let videos;
+	let videos = [];
 	let presets = [];
-	let categories = [];
+	let categories;
+	let allVideos = [];
 
-	materials = await Material.find({});
-	presets = await Preset.find({});
+	if(user.courses.length >= 1){
+		materials = await Material.find({});
+		presets = await Preset.find({});
+		allVideos = await Video.find({
+			$or: [ {accessBySubscription: false}, {$and: [ {accessBySubscription: true}, {courses: []} ]}, {courses: {$in: user.courses}} ]
+		});
 
-	let allVideos = await Video.find({
-		$or: [ {accessBySubscription: false}, {$and: [ {accessBySubscription: true}, {courses: []} ]}, {courses: {$in: user.courses}} ]
-	});
+	} else {
+		allVideos = await Video.find({accessBySubscription: false});
+	}
+
 	categories = await Video.distinct('category');
 
 	videos = {};

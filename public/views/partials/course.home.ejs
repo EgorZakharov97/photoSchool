@@ -5,7 +5,7 @@
 <% let dateStarts = monthNames[course.importantDates.courseStarts.getUTCMonth()] + ' ' + course.importantDates.courseStarts.getUTCDate() %>
 
 <div class="dropdown">
-    <div data-w-id="d2c59415-2b8b-dce1-55d6-037fa139d585" class="dropdown-trigger">
+    <div data-w-id="d2c59415-2b8b-dce1-55d6-037fa139d585" class="dropdown-trigger" style="background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url('<%= course.image %>'); background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('<%= course.image %>');">
         <div class="text-block"><%= course.name %></div>
         <div class="date"><%= dateStarts %></div>
     </div>
@@ -50,10 +50,3 @@
         </div>
     </div>
 </div>
-
-<style>
-    .dropdown-trigger {
-        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url('<%= course.image %>');
-        background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('<%= course.image %>');
-    }
-</style>

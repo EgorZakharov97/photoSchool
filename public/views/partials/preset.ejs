@@ -1,5 +1,5 @@
 <div>
-    <form method="post" action="/file/get" class="preset w-inline-block">
+    <form method="post" action="/file/get" class="preset w-inline-block" style="background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url('<%= preset.image %>');background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('<%= preset.image %>');">
         <input type="text" name="file" value="<%= preset.file %>" style="display: none;">
         <button style="background-color: transparent;"><h3 class="preset-heading"><%= preset.name%></h3></button>
     </form>
@@ -18,7 +18,5 @@
     }
 
     .preset.w-inline-block {
-         background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url('<%= preset.image %>');
-         background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('<%= preset.image %>');
      }
 </style>

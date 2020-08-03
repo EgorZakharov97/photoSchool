@@ -112,10 +112,8 @@
               <% } %>
               <div class="portal-files">
                 <div class="w-layout-grid grid-7">
-                  <% if(user.admin) { for(let i = 0; i < materials.length; i++) { %>
+                  <% for(let i = 0; i < materials.length; i++) { %>
                     <%- include('partials/reading.ejs', {material: materials[i]}) -%>
-                  <% }} else { %>
-
                   <% } %>
                 </div>
               </div>
