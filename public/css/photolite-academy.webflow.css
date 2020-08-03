@@ -4865,7 +4865,7 @@
 }
 
 .grid_course_home {
-  grid-template-areas: "description description willlearn willlearn" "description description willlearn willlearn" "timeline timeline timeline timeline" "date date date date" "button button button button";
+  grid-template-areas: "description description timeline timeline" "description description timeline timeline" "willlearn willlearn willlearn willlearn" "date date date date" "button button button button";
   -ms-grid-columns: 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   -ms-grid-rows: auto auto auto auto auto;
