@@ -4771,7 +4771,7 @@
 
 .grid-5 {
   grid-row-gap: 16px;
-  grid-template-areas: "description description what-learn what-learn" "timing timing timing timing" "button button button button";
+  grid-template-areas: "timing timing what-learn what-learn" "description description description description" "button button button button";
   -ms-grid-columns: 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   -ms-grid-rows: auto 16px auto;
@@ -5962,7 +5962,7 @@
     box-shadow: none;
   }
   .grid-5 {
-    grid-template-areas: "description description what-learn what-learn" "timing timing timing timing" "button button button button";
+    grid-template-areas: "timing timing what-learn what-learn" "description description description description" "button button button button";
     -ms-grid-rows: auto auto auto;
     grid-template-rows: auto auto auto;
   }

@@ -25,7 +25,7 @@ function constructCourseObject(req) {
 		richText: {
 			description: req.body.description,
 			timeline: req.body.timeline,
-			willLearn: req.body.timeline
+			willLearn: req.body.willLearn
 		}
 	};
 
