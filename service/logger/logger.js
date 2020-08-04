@@ -27,7 +27,7 @@ class MailTransport extends Transport {
 class MailTransportWarn extends Transport {
 	constructor(opts) {
 		super(opts);
-		this.sendMail = require('../email/mailTransporter').sendMail;
+		this.sendMail = require('../email/mailTransporter');
 	}
 
 	log(info, callback) {
