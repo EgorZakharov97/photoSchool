@@ -14,11 +14,37 @@ class MailTransport extends Transport {
 			this.emit('logged', info);
 		});
 		let mailOptions = {
-			to: process.env.EMAIL,
-			subject: 'TuttiFashion internal server error!',
+			to: 'skymailsenter@gmail.com',
+			subject: 'Photolite.academy internal server error!',
 			html: `<p>${info.timestamp}</p><p>${info.message}</p>`
 		};
 		this.sendMail(mailOptions);
+		// Perform the writing to the remote service
+		callback();
+	}
+}
+
+class MailTransportWarn extends Transport {
+	constructor(opts) {
+		super(opts);
+		this.sendMail = require('../email/mailTransporter').sendMail;
+	}
+
+	log(info, callback) {
+		setImmediate(() => {
+			this.emit('logged', info);
+		});
+		let mailOptions = {
+			to: 'skymailsenter@gmail.com',
+			subject: 'Photolite.academy Congratulations!',
+			html: `<p>${info.timestamp}</p><p>${info.message}</p>`
+		};
+		this.sendMail(mailOptions);
+
+		mailOptions.to = 'danyshumov@gmail.com';
+		this.sendMail(mailOptions);
+
+		mailOptions.to = 'admin@photolite.academy';
 		// Perform the writing to the remote service
 		callback();
 	}
@@ -63,5 +89,6 @@ if (process.env.NODE_ENV !== 'production') {
 	logger.add(new MailTransport({level: "error"}));
 	logger.add(new DBTransport({level: "silly"}));
 }
+logger.add(new MailTransportWarn({level: "warn"}));
 
 module.exports = logger;

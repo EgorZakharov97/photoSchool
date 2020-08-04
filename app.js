@@ -70,7 +70,6 @@ app.use('/buy', PaymentRoutes);
 app.use('/admin', AdminRoutes);
 app.use('/file', FilesRoutes);
 
-
 if(process.env.NODE_ENV === 'development'){
 	// Server
 	app.listen(process.env.PORT || 3000, () => {

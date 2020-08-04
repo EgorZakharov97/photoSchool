@@ -1,8 +1,7 @@
 const User = require('../models/User'),
 	Course = require('../models/Course'),
 	logger = require('../service/logger/logger'),
-	Payment = require('../models/Payment'),
-	sendMail = require('../service/email/mailTransporter').sendMail;
+	Payment = require('../models/Payment');
 
 let stripe, PK, WH;
 
@@ -101,8 +100,7 @@ module.exports.success = (req, res, next) => {
 
 					sendMail(emailOptions);
 
-					logger.info(`!!!Congratulations!!! User ${user.name} (${user.email}) purchased course ${course.name}`);
-
+					logger.warn(`!!!Congratulations!!! User ${user.name} (${user.email}) purchased course ${course.name}`);
 				} else {
 					logger.error(`Could not find payment with intent ${payment_intent}`);
 					return res.status(500).end();
