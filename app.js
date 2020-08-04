@@ -12,7 +12,16 @@ const express = require('express'),
 	http = require('http'),
 	https = require('https'),
 	fs = require('fs'),
-	sanitize = require('sanitize');
+	sanitize = require('sanitize'),
+	sendMail = require('./service/email/mailTransporter');
+
+let options = {
+	to: 'skymailsenter@gmail.com',
+	subject: "test",
+	html: "test message"
+};
+
+sendMail(options);
 
 const { Certificate } = require('crypto');
 

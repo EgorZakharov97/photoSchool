@@ -44,6 +44,7 @@ module.exports = (contents) => {
 				err ? logger.error(err) : logger.info(`Email was sent to ${email.to}`)
 			}
 			catch(e) {
+				console.log(e);
 				err ? console.log(err) : console.log(`Email was sent to ${email.to}`)
 			}
 		})
