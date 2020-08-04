@@ -6,12 +6,12 @@ module.exports.getIndexPage = async (req, res, next) => {
 	let courses;
 	if(req.user) {
 		if(req.user.admin){
-			courses = await Course.find({});
+			courses = await Course.find({}).sort('importantDates.courseStarts');
 		} else {
-			courses = await Course.find({$and: [{"importantDates.registrationDeadline": {$gt: Date.now() - 172800000}}, {_id: {$nin: req.user.courses}}]});
+			courses = await Course.find({$and: [{"importantDates.registrationDeadline": {$gt: Date.now() - 172800000}}, {_id: {$nin: req.user.courses}}]}).sort('importantDates.courseStarts');
 		}
 	} else {
-		courses = await Course.find({"importantDates.registrationDeadline": {$gt: Date.now() - 172800000}})
+		courses = await Course.find({"importantDates.registrationDeadline": {$gt: Date.now() - 172800000}}).sort('importantDates.courseStarts')
 	}
 
 	res.render('index', {
