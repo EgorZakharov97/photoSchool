@@ -44,7 +44,11 @@ app.use(sanitize.middleware);
 require('./service/email/mailTransporter').setUp();
 
 // DATABASE
-mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+if(process.env.NODE_ENV === 'development'){
+	mongoose.connect(process.env.DB_CONNECT_DEV, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+} else {
+	mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+}
 
 // AUTHENTICATION
 require('./service/authentication/session')(app);

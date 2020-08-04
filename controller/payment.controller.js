@@ -2,16 +2,37 @@ const User = require('../models/User'),
 	Course = require('../models/Course'),
 	logger = require('../service/logger/logger'),
 	Payment = require('../models/Payment'),
-	sendMail = require('../service/email/mailTransporter').sendMail,
+	sendMail = require('../service/email/mailTransporter').sendMail;
+
+let stripe, PK, WH;
+
+if(process.env.NODE_ENV === 'development'){
+	stripe = require('stripe')(process.env.STRIPE_SECRET_DEV);
+	PK = process.env.STRIPE_PUBLIC_DEV;
+	WH = process.env.STRIPE_WH_DEV;
+} else {
 	stripe = require('stripe')(process.env.STRIPE_SECRET);
+	PK = process.env.STRIPE_PUBLIC;
+	WH = process.env.STRIPE_WH;
+}
 
 module.exports.preparePayment = (req, res, next) => {
-	try {
-		Course.findById(req.params.id, async (err, course) => {
-			if(err){
-				throw err;
-			} else {
-				if(course){
+	Course.findById(req.params.id, async (err, course) => {
+		if(err){
+			logger.error(err);
+			res.status(500);
+			res.render('500');
+		} else {
+			if(course){
+				if(course.seats.total <= course.seats.occupied){
+					logger.error(`Purchase denied: ${course.name} has no more spots`);
+					res.status(500);
+					res.render('500');
+				} else if(course.registrationDeadline >= Date.now() - 172800000) {
+					logger.error(`Purchase denied: ${course.name} registration deadline has passed`);
+					res.status(500);
+					res.render('500');
+				} else {
 					const session = await stripe.checkout.sessions.create({
 						payment_method_types: ['card'],
 						line_items: [{
@@ -37,17 +58,15 @@ module.exports.preparePayment = (req, res, next) => {
 						session: session,
 						intent: session.payment_intent
 					});
-					res.render('buy', {session_id: session.id, PK: process.env.STRIPE_PUBLIC})
-				} else {
-					throw new Error('Payment failure: could not search for course ' + req.params.id)
+					res.render('buy', {session_id: session.id, PK: PK})
 				}
+			} else {
+				logger.error('Payment failure: course is unavailable:' + req.params.id);
+				res.status(500);
+				res.render('500');
 			}
-		});
-	}
-	catch(err){
-		logger.error(err);
-		res.render('500').status(500);
-	}
+		}
+	});
 };
 
 module.exports.success = (req, res, next) => {
@@ -72,6 +91,7 @@ module.exports.success = (req, res, next) => {
 
 					let course = await Course.findById(payment.course);
 					course.seats.occupied++;
+					course.save();
 
 					let emailOptions = {
 						to: user.email,
@@ -79,13 +99,9 @@ module.exports.success = (req, res, next) => {
 						html: `Thank you for buying ${course.name}. You have payed $${payment.session.amount_total / 100}CAD`
 					};
 
-					sendMail(emailOptions, (err, info) => {
-						if (err) {
-							logger.error(err)
-						} else {
-							logger.info(`Course purchase confirmation was sent to ${user.email}`);
-						}
-					});
+					sendMail(emailOptions);
+
+					logger.info(`!!!Congratulations!!! User ${user.name} (${user.email}) purchased course ${course.name}`);
 
 				} else {
 					logger.error(`Could not find payment with intent ${payment_intent}`);
@@ -94,6 +110,7 @@ module.exports.success = (req, res, next) => {
 			}
 		})
 	} else {
+		logger.error(`Payment error: got unknown payment intent: ${event.type}`);
 		return res.status(400).end();
 	}
 	res.json({received: true});

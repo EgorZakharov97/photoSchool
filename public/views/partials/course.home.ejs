@@ -44,8 +44,14 @@
                         <div class="date-phrase">Registration deadline</div>
                         <div class="date-duration"><%= monthNames[course.importantDates.registrationDeadline.getUTCMonth()] %> <%= course.importantDates.registrationDeadline.getUTCDate()%></div>
                     </div>
+                    <div class="dateblock">
+                        <div class="date-phrase">Seats left</div>
+                        <div class="date-duration"><%= course.seats.total - course.seats.occupied %></div>
+                    </div>
                 </div>
-                <a id="w-node-037fa139d5be-5b0e6e15" cPic="<%= course.image %>" uEmail="<%= user.email %>" cID="<%= course._id %>" cPrice="<%= course.calculateCurrentPrice() %>" cName="<%= course.name%>" cStart="<%= dateStarts %>" href="#" class="cors-register-now-2 courses course-buy-button">Register now</a>
+                <% if(course.seats.total > course.seats.occupied) { %>
+                    <a id="w-node-037fa139d5be-5b0e6e15" cPic="<%= course.image %>" uEmail="<%= user.email %>" cID="<%= course._id %>" cPrice="<%= course.calculateCurrentPrice() %>" cName="<%= course.name%>" cStart="<%= dateStarts %>" href="#" class="cors-register-now-2 courses course-buy-button">Register now</a>
+                <% } %>
             </div>
         </div>
     </div>
