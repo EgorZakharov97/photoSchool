@@ -33,11 +33,11 @@
                         <div class="date-duration red"><%= new Date(course.importantDates.courseStarts - course.importantDates.courseEnds).getDay() - 1 %> Days</div>
                     </div>
                     <div class="dateblock">
-                        <div class="date-phrase">Price before Aug 10</div>
+                        <div class="date-phrase">Price before <%= monthNames[course.importantDates.discountDeadline.getUTCMonth()] + ' ' + course.importantDates.discountDeadline.getUTCDate() %></div>
                         <div class="date-duration red">$<%= course.pricing.discountPrice %> CAD</div>
                     </div>
                     <div class="dateblock">
-                        <div class="date-phrase">Price after Aug 10</div>
+                        <div class="date-phrase">Price after <%= monthNames[course.importantDates.discountDeadline.getUTCMonth()] + ' ' + course.importantDates.discountDeadline.getUTCDate() %></div>
                         <div class="date-duration">$<%= course.pricing.finalPrice %> CAD</div>
                     </div>
                     <div class="dateblock">

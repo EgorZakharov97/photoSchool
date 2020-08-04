@@ -18,7 +18,7 @@ $('.course-buy-button').click((e) => {
 	$('#courseName').text(currCourseName);
 	$('#courseStarts').text(currCourseStarts);
 	$('#finPrice').text('$' + currCoursePrice + ' CAD');
-	$('#coursePic').css('background-image', currCourseID);
+	$('#coursePic').css('background-image', 'url(' + currCourseID + ')');
 
 	if(email === ''){
 		$('#blockLoggedIn').css('display', 'none');
