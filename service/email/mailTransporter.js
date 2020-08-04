@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const logger = require('..//logger/logger');
+const logger = require('../logger/logger');
 
 const transport = nodemailer.createTransport({
 		host: 'smtp.gmail.com',
@@ -20,7 +20,7 @@ module.exports.setUp = async () => {
 		await transport.verify();
 	}
 	catch(e) {
-		console.log(e)
+		logger.error(e);
 	}
 };
 
