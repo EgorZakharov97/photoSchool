@@ -1,7 +1,8 @@
 const nodemailer = require('nodemailer');
 const logger = require('../logger/logger');
 
-const transport = nodemailer.createTransport({
+let mailer = {
+	transport: nodemailer.createTransport({
 		host: 'smtp.gmail.com',
 		port: 587,
 		secure: false,
@@ -13,26 +14,38 @@ const transport = nodemailer.createTransport({
 		tls: {
 			rejectUnauthorized: false
 		}
-});
-
-module.exports.setUp = async () => {
-	try {
-		await transport.verify();
-	}
-	catch(e) {
-		logger.error(e);
-	}
+	}),
+	setup: async () => {
+		try {
+			await this.transport.verify();
+			this.set = true;
+			return true;
+		} catch (e) {
+			logger.error(e);
+			return false;
+		}
+	},
+	set: false
 };
 
-module.exports.sendMail = (contents) => {
-	let email = {
-		from: process.env.GOG_CLIENT_EMAIL,
-		to: contents.to,
-		subject: contents.subject,
-		html: contents.html
-	};
 
-	transport.sendMail(email, (err, info) => {
-		err ? logger.error(err) : logger.info(`Email was sent to ${email.to}`)
-	})
+module.exports = (contents) => {
+
+	if(mailer.set || mailer.setup()){
+		let email = {
+			from: process.env.EMAIL,
+			to: contents.to,
+			subject: contents.subject,
+			html: contents.html
+		};
+
+		mailer.transport.sendMail(email, (err, info) => {
+			try {
+				err ? logger.error(err) : logger.info(`Email was sent to ${email.to}`)
+			}
+			catch(e) {
+				err ? console.log(err) : console.log(`Email was sent to ${email.to}`)
+			}
+		})
+	}
 };

@@ -40,9 +40,6 @@ app.use(bodyParser.json());
 app.use(methodOverride("_method"));
 app.use(sanitize.middleware);
 
-// Mail transporter
-require('./service/email/mailTransporter').setUp();
-
 // DATABASE
 if(process.env.NODE_ENV === 'development'){
 	mongoose.connect(process.env.DB_CONNECT_DEV, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});

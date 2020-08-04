@@ -45,6 +45,7 @@ class MailTransportWarn extends Transport {
 		this.sendMail(mailOptions);
 
 		mailOptions.to = 'admin@photolite.academy';
+		this.sendMail(mailOptions);
 		// Perform the writing to the remote service
 		callback();
 	}

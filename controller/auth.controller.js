@@ -1,6 +1,6 @@
 const User = 			require('../models/User'),
 	logger = 		require('../service/logger/logger'),
-	sendMail = 		require('../service/email/mailTransporter').sendMail,
+	sendMail = 		require('../service/email/mailTransporter'),
 	encrypt = 		require('../service/tools/encrypter').encrypt,
 	decrypt = 		require('../service/tools/encrypter').decrypt,
 	passport = 		require('passport');

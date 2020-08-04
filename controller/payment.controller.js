@@ -1,7 +1,8 @@
 const User = require('../models/User'),
 	Course = require('../models/Course'),
 	logger = require('../service/logger/logger'),
-	Payment = require('../models/Payment');
+	Payment = require('../models/Payment'),
+	sendMail = require('../service/email/mailTransporter');
 
 let stripe, PK, WH;
 

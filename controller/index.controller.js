@@ -14,8 +14,6 @@ module.exports.getIndexPage = async (req, res, next) => {
 		courses = await Course.find({"importantDates.registrationDeadline": {$gt: Date.now() - 172800000}}).sort('importantDates.courseStarts')
 	}
 
-	logger.warn(`This is a test message`);
-
 	res.render('index', {
 		courses: courses,
 		user: req.user || 'NONE'
