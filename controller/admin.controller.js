@@ -5,34 +5,6 @@ const Course = 		require('../models/Course'),
 	Preset = 		require('../models/Preset'),
 	fs = 			require('fs');
 
-function constructCourseObject(req) {
-	let course =  {
-		name: req.body.name,
-		importantDates: {
-			courseStarts: new Date(req.body.courseStarts).toUTCString(),
-			courseEnds: new Date(req.body.courseEnds).toUTCString(),
-			discountDeadline: new Date(req.body.registrationDeadline1).toUTCString(),
-			registrationDeadline: new Date(req.body.registrationDeadline2).toUTCString()
-		},
-		pricing: {
-			discountPrice: req.body.priceBefore,
-			finalPrice: req.body.priceAfter
-		},
-		seats: {
-			total: req.body.numPlaces,
-		},
-		richText: {
-			description: req.body.description,
-			timeline: req.body.timeline,
-			willLearn: req.body.willLearn
-		}
-	};
-
-	req.body.chatLink ? course.chatLink = req.body.chatLink : true;
-	req.file ? course.image = req.file.path.replace(/\\/g, '/').trim() : true;
-
-	return course;
-}
 
 module.exports.getUpdateCourse = (req, res, next) => {
 	Course.findById(req.params.id, (err, course) => {
@@ -58,7 +30,33 @@ module.exports.getCreateCourse = (req, res, next) => {
 };
 
 module.exports.createCourse = (req, res, next) => {
-	Course.create(constructCourseObject(req), (err, course) => {
+	let newCourseData =  {
+		name: req.body.name,
+		importantDates: {
+			courseStarts: new Date(req.body.courseStarts).toUTCString(),
+			courseEnds: new Date(req.body.courseEnds).toUTCString(),
+			discountDeadline: new Date(req.body.registrationDeadline1).toUTCString(),
+			registrationDeadline: new Date(req.body.registrationDeadline2).toUTCString()
+		},
+		pricing: {
+			discountPrice: req.body.priceBefore,
+			finalPrice: req.body.priceAfter
+		},
+		seats: {
+			total: req.body.numPlaces,
+			occupied: 0
+		},
+		richText: {
+			description: req.body.description,
+			timeline: req.body.timeline,
+			willLearn: req.body.willLearn
+		}
+	};
+
+	req.body.chatLink ? newCourseData.chatLink = req.body.chatLink : true;
+	req.file ? newCourseData.image = req.file.path.replace(/\\/g, '/').trim() : true;
+
+	Course.create(newCourseData, (err, course) => {
 		if(err){
 			logger.error(err);
 			console.log(req.body);
@@ -71,7 +69,28 @@ module.exports.createCourse = (req, res, next) => {
 };
 
 module.exports.updateCourseInfo = (req, res, next) => {
-	Course.findByIdAndUpdate(req.params.id, constructCourseObject(req), (err, course) => {
+	let updatedData =  {
+		name: req.body.name,
+		importantDates: {
+			courseStarts: new Date(req.body.courseStarts).toUTCString(),
+			courseEnds: new Date(req.body.courseEnds).toUTCString(),
+			discountDeadline: new Date(req.body.registrationDeadline1).toUTCString(),
+			registrationDeadline: new Date(req.body.registrationDeadline2).toUTCString()
+		},
+		pricing: {
+			discountPrice: req.body.priceBefore,
+			finalPrice: req.body.priceAfter
+		},
+		'seats.total': req.body.numPlaces,
+		richText: {
+			description: req.body.description,
+			timeline: req.body.timeline,
+			willLearn: req.body.willLearn
+		}
+	};
+	req.body.chatLink ? updatedData.chatLink = req.body.chatLink : true;
+
+	Course.findByIdAndUpdate(req.params.id, {$set: updatedData}, (err, course) => {
 		if(err){
 			logger.error(err);
 		} else {
@@ -122,7 +141,7 @@ module.exports.deleteVideo = (req, res, next) => {
 };
 
 module.exports.updateVideo = (req, res, next) => {
-	Video.findByIdAndUpdate(req.params.videoID, req.body, (err, video) => {
+	Video.findOneAndUpdate({_id: req.params.videoID}, req.body, (err, video) => {
 		if(err) {
 			logger.error(err);
 		} else {
