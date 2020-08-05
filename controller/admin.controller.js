@@ -20,7 +20,6 @@ function constructCourseObject(req) {
 		},
 		seats: {
 			total: req.body.numPlaces,
-			occupied: 0,
 		},
 		richText: {
 			description: req.body.description,
