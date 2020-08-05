@@ -235,7 +235,7 @@ module.exports.doPwdReset = (req, res, next) => {
 
 module.exports.logout = (req, res, next) => {
 	try {
-		logger.info(`User ${req.user.username} logged out`);
+		logger.info(`${req.user.username} (${req.user._id}) logged out`);
 	}
 	catch(e){}
 	req.logout();
