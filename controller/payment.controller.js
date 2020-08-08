@@ -91,8 +91,8 @@ module.exports.success = (req, res, next) => {
 					let user = await User.findById(payment.user);
 					user.courses.push(payment.course);
 					user.subscriptionEnds = new Date(today.setMonth(today.getMonth()+1));
-					user.discount.discountPrice = (user.discount.discountCount+1) % 5;
-					user.markModified('discount.discountPrice');
+					user.discount.discountCount = (user.discount.discountCount+1) % 5;
+					user.markModified('discount.discountCount');
 					user.save();
 
 					let course = await Course.findById(payment.course);
