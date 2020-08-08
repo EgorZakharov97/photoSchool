@@ -11,9 +11,9 @@ if(process.env.NODE_ENV === 'development'){
 	PK = process.env.STRIPE_PUBLIC_DEV;
 	WH = process.env.STRIPE_WH_DEV;
 } else {
-	stripe = require('stripe')(process.env.STRIPE_SECRET);
-	PK = process.env.STRIPE_PUBLIC;
-	WH = process.env.STRIPE_WH;
+	stripe = require('stripe')(process.env.STRIPE_SECRET_DEV);
+	PK = process.env.STRIPE_PUBLIC_DEV;
+	WH = process.env.STRIPE_WH_DEV;
 }
 
 module.exports.preparePayment = (req, res, next) => {
