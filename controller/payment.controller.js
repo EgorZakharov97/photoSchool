@@ -111,7 +111,7 @@ module.exports.success = (req, res, next) => {
 						html: `Thank you for buying ${course.name}. You have paid $${payment.session.amount_total / 100}CAD`
 					};
 
-					sendMail(emailOptions);
+					await sendMail(emailOptions);
 
 					logger.warn(`!!!Congratulations!!! User ${user.email} purchased course ${course.name}`);
 
@@ -121,10 +121,10 @@ module.exports.success = (req, res, next) => {
 						html: `<h1>Congratulations</h1><p>User ${user.name} with email ${user.email} just bought course ${course.name} for ${payment.session.amount_total / 100}</p>`
 					};
 
-					sendMail(sayToAdmin);
+					await sendMail(sayToAdmin);
 
 					sayToAdmin.to = 'admin@photolite.academy';
-					sendMail(sayToAdmin);
+					await sendMail(sayToAdmin);
 
 				} else {
 					logger.error(`Could not find payment with intent ${payment_intent}`);

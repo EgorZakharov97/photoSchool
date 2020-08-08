@@ -9,3 +9,10 @@ let mailOptions = {
 };
 
 sendMail(mailOptions);
+
+mailOptions.subject = "2";
+sendMail(mailOptions);
+
+mailOptions.subject = "3";
+sendMail(mailOptions);
+
