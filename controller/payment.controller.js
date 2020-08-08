@@ -34,7 +34,7 @@ module.exports.preparePayment = (req, res, next) => {
 					res.render('500');
 				} else {
 					// calculate user discount multiplier which is the reverse of discount
-					let multiplier = user.getPriceMultiplier();
+					let multiplier = req.user.getPriceMultiplier();
 
 					const session = await stripe.checkout.sessions.create({
 						payment_method_types: ['card'],
