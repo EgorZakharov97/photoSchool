@@ -12,6 +12,8 @@ async function renderPortalForAdmin(req, res, next) {
 	let presets = await Preset.find({});
 	let allVideos = await Video.find({});
 	let categories = await Video.distinct('category');
+	let user = await User.findById(req.user);
+	req.session.passport.user = user;
 
 	let videos = {};
 
@@ -36,6 +38,7 @@ async function renderPortalForAdmin(req, res, next) {
 async function renderPortalForUser(req, res, next) {
 	let user = await User.findById(req.user._id);
 	let courses = await Course.find({_id: user.courses});
+	req.session.passport.user = user;
 	let materials = [];
 	let videos = [];
 	let presets = [];
