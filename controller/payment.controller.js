@@ -99,7 +99,6 @@ module.exports.success = (req, res, next) => {
 					user.subscriptionEnds = new Date(today.setMonth(today.getMonth()+1));
 					user.discount.discountCount === 5 ? user.discount.discountCount = 0 : user.discount.discountCount++;
 					user.markModified('discount.discountCount');
-					req.session.passport.user = user;
 					user.save();
 
 					let course = await Course.findById(payment.course);
