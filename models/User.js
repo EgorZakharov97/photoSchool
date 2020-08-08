@@ -49,7 +49,10 @@ const UserSchema = new mongoose.Schema({
 		}
 	],
 	discount: {
-		discountCount: Number
+		discountCount: {
+			type: Number,
+			default: 0
+		}
 	}
 });
 
