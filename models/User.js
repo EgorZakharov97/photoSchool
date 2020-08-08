@@ -100,7 +100,7 @@ UserSchema.methods.getPriceMultiplier = function () {
 			multiplier = 0.75;
 			break;
 		case 5:
-			multiplier = 0.0001;
+			multiplier = 0;
 			break;
 		default:
 			multiplier = 1;

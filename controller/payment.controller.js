@@ -36,6 +36,12 @@ module.exports.preparePayment = (req, res, next) => {
 					// calculate user discount multiplier which is the reverse of discount
 					let user = await User.findById(req.user._id);
 					let multiplier = user.getPriceMultiplier();
+					let price;
+					if(multiplier === 0){
+						price = 50
+					} else {
+						price = course.calculateCurrentPrice() * 100 * multiplier
+					}
 
 					const session = await stripe.checkout.sessions.create({
 						payment_method_types: ['card'],
@@ -45,7 +51,7 @@ module.exports.preparePayment = (req, res, next) => {
 								product_data: {
 									name: course.name,
 								},
-								unit_amount: course.calculateCurrentPrice() * 100 * multiplier,
+								unit_amount: price,
 							},
 							quantity: 1,
 						}],
