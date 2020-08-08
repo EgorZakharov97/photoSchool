@@ -92,6 +92,7 @@ module.exports.success = (req, res, next) => {
 					user.courses.push(payment.course);
 					user.subscriptionEnds = new Date(today.setMonth(today.getMonth()+1));
 					user.discount.discountPrice = (user.discount.discountCount+1) % 5;
+					user.markModified('discount.discountPrice');
 					user.save();
 
 					let course = await Course.findById(payment.course);
@@ -101,7 +102,7 @@ module.exports.success = (req, res, next) => {
 					let emailOptions = {
 						to: user.email,
 						subject: 'PhotoLight Purchase Confirmation',
-						html: `Thank you for buying ${course.name}. You have payed $${payment.session.amount_total / 100}CAD`
+						html: `Thank you for buying ${course.name}. You have paid $${payment.session.amount_total / 100}CAD`
 					};
 
 					sendMail(emailOptions);
