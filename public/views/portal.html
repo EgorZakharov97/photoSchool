@@ -55,7 +55,12 @@
         <div class="tabs-content w-tab-content">
           <div data-w-tab="Workshops" class="w-tab-pane w--tab-active">
             <div class="tab-wrapper">
-              <h3 class="section-heading portal"><span class="text-span-10">My </span>Workshops</h3>
+
+              <div class="header-splitter">
+                <h3 class="section-heading portal"><span class="text-span-10">My </span>Workshops</h3>
+                <%- include('partials/progress.ejs') -%>
+              </div>
+
               <div class="class-wrapper-portal">
                 <% if(user.admin) { %>
                   <a href="/admin/course" class="cors-register-now-2 courses w-inline-block">
@@ -67,11 +72,13 @@
                   </a>
                 <% } %>
               </div>
+
               <div class="w-layout-grid grid-6">
                 <% for(let i = 0; i < courses.length; i++){ %>
                   <%- include('partials/course.ejs', {course: courses[i]}) -%>
                 <% } %>
               </div>
+
             </div>
           </div>
           <div data-w-tab="Tutorials" class="w-tab-pane">

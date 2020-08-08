@@ -47,7 +47,10 @@ const UserSchema = new mongoose.Schema({
 			type: mongoose.Schema.Types.ObjectID,
 			ref: "Course"
 		}
-	]
+	],
+	discount: {
+		discountCount: Number
+	}
 });
 
 UserSchema.methods.setPassword = function(password) {
@@ -78,6 +81,32 @@ UserSchema.methods.toAuthJSON = function() {
 		email: this.email,
 		token: this.generateJWT(),
 	};
+};
+
+// This one calculates the price multiplier for a workshop (discount for points saving)
+UserSchema.methods.getPriceMultiplier = function () {
+	let multiplier;
+	switch (this.discount.discountCount) {
+		case 1:
+			multiplier = 0.9;
+			break;
+		case 2:
+			multiplier = 0.85;
+			break;
+		case 3:
+			multiplier = 0.80;
+			break;
+		case 4:
+			multiplier = 0.75;
+			break;
+		case 5:
+			multiplier = 0;
+			break;
+		default:
+			multiplier = 1;
+			break;
+	}
+	return multiplier;
 };
 
 module.exports = mongoose.model("User", UserSchema);

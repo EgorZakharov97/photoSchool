@@ -10,6 +10,12 @@
   grid-column-gap: 16px;
 }
 
+.header-splitter {
+  display: flex;
+  justify-content: space-between;
+
+}
+
 .w-form-formradioinput--inputType-custom {
   border-top-width: 1px;
   border-bottom-width: 1px;
@@ -5792,7 +5798,7 @@
   .class-wrapper-portal {
     display: block;
     height: 100%;
-    margin-top: 140px;
+    margin-top: 40px;
     border: 1px none #000;
   }
   .class-portal {

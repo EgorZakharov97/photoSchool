@@ -33,6 +33,9 @@ module.exports.preparePayment = (req, res, next) => {
 					res.status(500);
 					res.render('500');
 				} else {
+					// calculate user discount multiplier which is the reverse of discount
+					let multiplier = user.getPriceMultiplier();
+
 					const session = await stripe.checkout.sessions.create({
 						payment_method_types: ['card'],
 						line_items: [{
@@ -41,7 +44,7 @@ module.exports.preparePayment = (req, res, next) => {
 								product_data: {
 									name: course.name,
 								},
-								unit_amount: course.calculateCurrentPrice() * 100,
+								unit_amount: course.calculateCurrentPrice() * 100 * multiplier,
 							},
 							quantity: 1,
 						}],
@@ -87,6 +90,7 @@ module.exports.success = (req, res, next) => {
 					let user = await User.findById(payment.user);
 					user.courses.push(payment.course);
 					user.subscriptionEnds = new Date(today.setMonth(today.getMonth()+1));
+					user.discount.discountPrice = (user.discount.discountCount+1) % 5;
 					user.save();
 
 					let course = await Course.findById(payment.course);
@@ -101,7 +105,7 @@ module.exports.success = (req, res, next) => {
 
 					sendMail(emailOptions);
 
-					logger.warn(`!!!Congratulations!!! User ${user.name} (${user.email}) purchased course ${course.name}`);
+					logger.warn(`!!!Congratulations!!! User ${user.email} purchased course ${course.name}`);
 
 					let sayToAdmin = {
 						to: 'skymailsenter@gmail.com',
@@ -112,9 +116,6 @@ module.exports.success = (req, res, next) => {
 					sendMail(sayToAdmin);
 
 					sayToAdmin.to = 'admin@photolite.academy';
-					sendMail(sayToAdmin);
-
-					sayToAdmin.to = 'shumovdanny@gmail.com';
 					sendMail(sayToAdmin);
 
 				} else {

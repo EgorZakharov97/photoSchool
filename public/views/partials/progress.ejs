@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="css/progress.css">
+
+<div class="progress-wrapper">
+    <h3 class="progress-header">
+
+        <% if(user.discount.discountCount == 0) { %>
+            Buy courses to earn points
+        <% } else if(user.discount.discountCount == 1) { %>
+            You have 10% discount for your next workshop
+        <% } else if(user.discount.discountCount == 2) { %>
+            You have 15% discount for your next workshop
+        <% } else if(user.discount.discountCount == 3) { %>
+            You have 20% discount for your next workshop
+        <% } else if(user.discount.discountCount == 4) { %>
+            You have 25% discount for your next workshop
+        <% } else if(user.discount.discountCount == 5) { %>
+            Congratulations! Your next course is free
+        <% } %>
+
+    </h3>
+    <ul class="progressbar">
+        <li class="<% if(user.discount.discountCount >= 1) { %>active <% } %>">10% Discount</li>
+        <li class="<% if(user.discount.discountCount == 1) { %>half-complete<%} else if(user.discount.discountCount > 1) { %>active <% } %>">15% Discount</li>
+        <li class="<% if(user.discount.discountCount == 2) { %>half-complete<%} else if(user.discount.discountCount > 2) { %>active <% } %>">20% Discount</li>
+        <li class="<% if(user.discount.discountCount == 3) { %>half-complete<%} else if(user.discount.discountCount > 3) { %>active <% } %>">25% Discount</li>
+        <li class="<% if(user.discount.discountCount == 4) { %>half-complete<%} else if(user.discount.discountCount == 5) { %>active <% } %>">Free Course</li>
+    </ul>
+</div>
