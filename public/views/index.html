@@ -17,6 +17,7 @@
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/photolite-academy.webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/payment-section.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
   <script type="text/javascript">WebFont.load({  google: {    families: ["Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic","Exo:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic","Changa One:400,400italic","Droid Sans:400,700","Droid Serif:400,400italic,700,700italic","Oswald:200,300,400,500,600,700","Bitter:400,700,400italic","Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic","Great Vibes:400","Merriweather:300,300italic,400,400italic,700,700italic,900,900italic"]  }});</script>
   <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
@@ -368,19 +369,24 @@
       <div class="text-block-14">Copyright © 2020 Spark Photography. All rights reserved.</div>
     </div>
   </footer>
-  <div id="section-by" class="section-buy">
+
+  <section id="section-by" class="section-buy">
     <div class="payment-container w-container">
       <div class="payment-block">
         <div id="buy-close" class="close-btn">
-          <div style="cursor: pointer" class="text-block-15">X</div>
+          <div class="text-block-15">X</div>
         </div>
         <div id="coursePic" class="course-buy-pic"></div>
         <div class="but-description">Wokshop + 1 month of portal access</div>
-        <h1 id="courseName" class="buy-course-name">NAN</h1>
-        <div id="courseStarts" class="but-description low">NAN</div>
+        <h1 id="courseName" class="buy-course-name">Male Pornography</h1>
+        <div id="courseStarts" class="but-description low">Aug 14</div>
         <div id="blockLoggedIn" class="buy-email">
           <div class="buy-hint">You are logged in as:</div>
-          <div id="usrEmail" class="buy-user-email">NAN</div>
+          <div id="usrEmail" class="buy-user-email">skymailsenter@gmail.com</div>
+        </div>
+        <div class="dateblock checkout">
+          <div class="date-phrase">Final Price</div>
+          <div id="finPrice" class="date-duration">$200</div>
         </div>
         <div id="email-form" class="form-block-3 w-form">
 
@@ -390,16 +396,27 @@
             <label for="pwrd" class="field-label-6">Create Password</label>
             <input id="courseID" type="text" name="courseID" value="" style="display: none">
             <input type="password" class="text-field-4 w-input" maxlength="256" name="password" data-name="password" placeholder="" id="pwrd" required="">
+            <div style="margin-top: 20px;" class="have-coupon">
+              <input id="cpnInput" type="text" class="text-field-4 w-input" maxlength="256" name="coupon" data-name="coupon" placeholder="Have a coupon?" id="coupon">
+              <input id="cpnSubmitForm" type="submit" value="Apply" data-wait="Please wait..." class="submit-button-4 w-button">
+            </div>
             <input type="submit" value="Proceed to Checkout" data-wait="Please wait..." class="submit-button-3 w-button">
           </form>
 
         </div>
-        <div class="dateblock checkout">
-          <div class="date-phrase">Final Price</div>
-          <div id="finPrice" class="date-duration">NAN</div>
+        <div class="w-form">
+
+          <form id="couponForm" name="email-form-2" data-name="Email Form 2" method="post" action="/buy/checkCoupon"><label for="name-2" class="field-label-6">Have a coupon?</label>
+            <div class="have-coupon">
+              <input type="text" class="text-field-4 w-input" maxlength="256" name="coupon" data-name="coupon" placeholder="" id="coupon" required="">
+              <input id="cpnSubmit" type="submit" value="Apply" data-wait="Please wait..." class="submit-button-4 w-button">
+            </div>
+          </form>
+
         </div><a href="#" id="logCheckout" class="buy-buy">Proceed to Checkout</a></div>
     </div>
-  </div>
+  </section>
+
   <!-- Start of LiveChat (www.livechatinc.com) code -->
   <script>
     window.__lc = window.__lc || {};

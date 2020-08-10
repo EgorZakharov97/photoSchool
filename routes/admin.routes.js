@@ -34,4 +34,11 @@ router.route('/video')
 router.route('/video/:id')
 	.get(isAdmin, controller.deleteVideo);
 
+router.route('/coupon')
+	.get(isAdmin, controller.getCouponManager)
+	.post(isAdmin, controller.createCoupon);
+
+router.route('/coupon/:id')
+	.get(isAdmin, controller.deleteCoupon);
+
 module.exports = router;

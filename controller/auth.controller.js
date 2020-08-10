@@ -18,6 +18,10 @@ module.exports.fastRegistrationCheck = (req, res, next) => {
 		session: true
 	};
 
+	if(req.body.coupon && req.body.coupon != ''){
+		authOptions.successRedirect += ('&' + req.body.coupon);
+	}
+
 	User.findOne({email: req.body.email}, async (err, user) => {
 		if(err) {
 			logger.error(err);

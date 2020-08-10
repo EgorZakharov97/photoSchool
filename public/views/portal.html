@@ -36,6 +36,7 @@
           <div class="portal-tab-links"><a data-w-id="35e95c24-2a78-7c37-9a14-36416311b6c5" href="#" class="tab-button tab-button-active w-button">Workshops</a><a data-w-id="855b3228-1593-9d07-6d1c-8b8c19a15555" href="#" class="tab-button w-button">Tutorials</a><a data-w-id="2fa5e394-bbd3-fb74-e84b-42e476298583" href="#" class="tab-button w-button">Materials</a><a data-w-id="97d85560-c95d-b340-727d-83b5ba47cfed" href="#" class="tab-button w-button">Presets</a></div>
         </div>
         <div class="btn-wrapper"><a href="/auth/update" class="link-2">Manage Profile</a></div>
+        <% if(user.admin) { %> <div class="btn-wrapper"><a href="/admin/coupon" class="link-2">Coupons</a></div> <% } %>
       </div>
       <div data-duration-in="300" data-duration-out="100" class="tabs-2 w-tabs">
         <div class="tabs-menu-3 w-tab-menu">

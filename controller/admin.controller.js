@@ -3,8 +3,24 @@ const Course = 		require('../models/Course'),
 	Video =			require('../models/Video'),
 	logger = 		require('../service/logger/logger'),
 	Preset = 		require('../models/Preset'),
+	Coupon = 		require('../models/Coupon'),
+	couponGen = 	require('voucher-code-generator'),
 	fs = 			require('fs');
 
+
+module.exports.getCouponManager = (req, res, next) => {
+	Coupon.find({}, (err, coupons) => {
+		if(err){
+			logger.error('Could not search for coupons');
+			res.status(500);
+			res.end();
+		} else {
+			res.render('admin-coupons', {
+				coupons: coupons
+			})
+		}
+	})
+};
 
 module.exports.getUpdateCourse = (req, res, next) => {
 	Course.findById(req.params.id, (err, course) => {
@@ -26,6 +42,60 @@ module.exports.getUpdateCourse = (req, res, next) => {
 module.exports.getCreateCourse = (req, res, next) => {
 	res.render('admin-course', {
 		newCourse: true
+	})
+};
+
+module.exports.createCoupon = (req, res, next) => {
+	let name = req.body.name;
+	let length;
+	req.body.length === '' ? length = 6 : length = Number(req.body.length);
+	let prefix;
+	req.body.prefix === '' ? prefix = false : prefix = req.body.prefix;
+	let postfix;
+	req.body.postfix === '' ? postfix = false : postfix = req.body.postfix;
+	let expires;
+	req.body.shouldExpire ? expires = req.body.expires : expires = false;
+	let singleUse;
+	req.body.usage === 'onetime' ? singleUse = true : singleUse = false;
+	let discount = req.body.discount;
+
+	let couponData = {};
+	couponData.length = length;
+	couponData.count = 1;
+	prefix ? couponData.prefix = prefix : false;
+	postfix ? couponData.postfix = postfix : false;
+
+	let code = couponGen.generate(couponData)[0];
+
+	couponData = {};
+	couponData.name = name;
+	couponData.code = code;
+	couponData.wasUsed = 0;
+	expires ? couponData.expiryDate = new Date(expires).toUTCString() : false;
+	couponData.singleUse = singleUse;
+	couponData.discount = discount;
+
+	Coupon.create(couponData, (err, newCoupon) => {
+		if(err){
+			logger.error('Could not create new coupon');
+			res.status(500);
+			res.end();
+		} else {
+			res.redirect('/admin/coupon');
+		}
+	})
+
+};
+
+module.exports.deleteCoupon = (req, res, next) => {
+	Coupon.findByIdAndRemove(req.params.id, (err) => {
+		if(err) {
+			logger.error('Cound not search for a coupon');
+			res.status(500);
+			res.end();
+		} else {
+			res.redirect('/admin/coupon');
+		}
 	})
 };
 

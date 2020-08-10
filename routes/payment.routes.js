@@ -13,4 +13,7 @@ router.route('/course/:id')
 router.route('/webhook')
 	.post(controller.success);
 
+router.route('/checkCoupon')
+	.post(controller.checkCoupon);
+
 module.exports = router;

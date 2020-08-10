@@ -19,6 +19,10 @@ PaymentSchema = mongoose.Schema({
 	intent: {
 		type: String,
 		required: true
+	},
+	coupon: {
+		type: mongoose.Schema.Types.ObjectID,
+		ref: "Coupon"
 	}
 });
 

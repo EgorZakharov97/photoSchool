@@ -2,6 +2,7 @@ const User = require('../models/User'),
 	Course = require('../models/Course'),
 	logger = require('../service/logger/logger'),
 	Payment = require('../models/Payment'),
+	Coupon = require('../models/Coupon'),
 	sendMail = require('../service/email/mailTransporter');
 
 let stripe, PK, WH;
@@ -16,14 +17,25 @@ if(process.env.NODE_ENV === 'development'){
 	WH = process.env.STRIPE_WH;
 }
 
-module.exports.preparePayment = (req, res, next) => {
-	Course.findById(req.params.id, async (err, course) => {
+module.exports.preparePayment = async (req, res, next) => {
+	let params = req.params.id;
+	let [courseID, couponCode] = params.split('&');
+	let coupon = false;
+
+	if(couponCode){
+		coupon = await Coupon.findOne({code: couponCode});
+		coupon = checkCouponValidity(coupon, req.user.email);
+	}
+
+
+	Course.findById(courseID, async (err, course) => {
 		if(err){
 			logger.error(err);
 			res.status(500);
 			res.render('500');
 		} else {
 			if(course){
+
 				if(course.seats.total <= course.seats.occupied){
 					logger.error(`Purchase denied: ${course.name} has no more spots`);
 					res.status(500);
@@ -43,6 +55,13 @@ module.exports.preparePayment = (req, res, next) => {
 						price = course.calculateCurrentPrice() * 100 * multiplier
 					}
 
+					if(coupon) {
+						let discount = coupon.discount;
+						let multiplier = (1-discount/100);
+						price *= multiplier;
+					}
+
+
 					const session = await stripe.checkout.sessions.create({
 						payment_method_types: ['card'],
 						line_items: [{
@@ -60,14 +79,19 @@ module.exports.preparePayment = (req, res, next) => {
 						cancel_url: process.env.HOST,
 					});
 
-					Payment.create({
+					let paymentData = {
 						user: req.user._id,
 						course: course._id,
 						timeCreated: new Date(),
 						received: false,
 						session: session,
 						intent: session.payment_intent
-					});
+					};
+
+					if(coupon)
+						paymentData.coupon = coupon;
+
+					Payment.create(paymentData);
 					res.render('buy', {session_id: session.id, PK: PK})
 				}
 			} else {
@@ -105,6 +129,10 @@ module.exports.success = (req, res, next) => {
 					course.seats.occupied++;
 					course.save();
 
+					// let coupon = await Coupon.findById(payment.coupon);
+					// coupon.wasUsed++;
+					// coupon.save();
+
 					let emailOptions = {
 						to: user.email,
 						subject: 'PhotoLight Purchase Confirmation',
@@ -137,4 +165,48 @@ module.exports.success = (req, res, next) => {
 		return res.status(400).end();
 	}
 	res.json({received: true});
+};
+
+function checkCouponValidity(coupon, email="Unknown"){
+	if(coupon) {
+		if(coupon.singleUse && coupon.wasUsed > 0){
+			coupon = false;
+			logger.info(`${email} is trying to use a single use coupon more than once`);
+		} else if(coupon.expiryDate >= (new Date()).toUTCString()){
+			coupon = false;
+			logger.info(`${email} is trying to use an outdated coupon`);
+		} else {
+			logger.info(`${email} has successfully applied coupon ${coupon.code}`);
+		}
+	} else {
+		logger.info(`${email} is trying to apply a coupon that does not exist`);
+	}
+	return coupon;
+}
+
+module.exports.checkCoupon = (req, res, next) => {
+	let code = req.body.coupon;
+	Coupon.findOne({code: code}, (err, coupon) => {
+		if(err){
+			logger.error('Could not find coupon');
+			res.status(500);
+			res.end()
+		} else {
+			if (coupon) {
+				let email;
+				if (req.user){
+					email = req.user.email;
+				}
+				coupon = checkCouponValidity(coupon, email);
+				if(coupon){
+					res.json({found: true, valid: true, code: coupon.code, discount: coupon.discount})
+				} else {
+					res.json({found: true, valid: false, code: coupon.code, discount: coupon.discount})
+				}
+			} else {
+				res.status(404);
+				res.json({found: false})
+			}
+		}
+	})
 };
