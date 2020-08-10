@@ -4,7 +4,6 @@ const Course = 		require('../models/Course'),
 	logger = 		require('../service/logger/logger'),
 	Preset = 		require('../models/Preset'),
 	Coupon = 		require('../models/Coupon'),
-	couponGen = 	require('voucher-code-generator'),
 	fs = 			require('fs');
 
 
@@ -47,12 +46,7 @@ module.exports.getCreateCourse = (req, res, next) => {
 
 module.exports.createCoupon = (req, res, next) => {
 	let name = req.body.name;
-	let length;
-	req.body.length === '' ? length = 6 : length = Number(req.body.length);
-	let prefix;
-	req.body.prefix === '' ? prefix = false : prefix = req.body.prefix;
-	let postfix;
-	req.body.postfix === '' ? postfix = false : postfix = req.body.postfix;
+	let code = req.body.code;
 	let expires;
 	req.body.shouldExpire ? expires = req.body.expires : expires = false;
 	let singleUse;
@@ -60,14 +54,6 @@ module.exports.createCoupon = (req, res, next) => {
 	let discount = req.body.discount;
 
 	let couponData = {};
-	couponData.length = length;
-	couponData.count = 1;
-	prefix ? couponData.prefix = prefix : false;
-	postfix ? couponData.postfix = postfix : false;
-
-	let code = couponGen.generate(couponData)[0];
-
-	couponData = {};
 	couponData.name = name;
 	couponData.code = code;
 	couponData.wasUsed = 0;
