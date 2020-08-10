@@ -186,27 +186,28 @@ function checkCouponValidity(coupon, email="Unknown"){
 
 module.exports.checkCoupon = (req, res, next) => {
 	let code = req.body.coupon;
-	Coupon.findOne({code: code}, (err, coupon) => {
-		if(err){
-			logger.error('Could not find coupon');
-			res.status(500);
-			res.end()
-		} else {
-			if (coupon) {
-				let email;
-				if (req.user){
-					email = req.user.email;
-				}
-				coupon = checkCouponValidity(coupon, email);
-				if(coupon){
-					res.json({found: true, valid: true, code: coupon.code, discount: coupon.discount})
-				} else {
-					res.json({found: true, valid: false, code: coupon.code, discount: coupon.discount})
-				}
+	if(code){
+		Coupon.findOne({code: code}, (err, coupon) => {
+			if(err){
+				logger.error('Could not find coupon');
+				res.status(500);
+				res.end()
 			} else {
-				res.status(404);
-				res.json({found: false})
+				if (coupon) {
+					let email;
+					if (req.user){
+						email = req.user.email;
+					}
+					coupon = checkCouponValidity(coupon, email);
+					if(coupon){
+						res.json({found: true, valid: true, code: coupon.code, discount: coupon.discount})
+					} else {
+						res.json({found: true, valid: false, code: coupon.code})
+					}
+				} else {
+					res.json({found: false, valid: false})
+				}
 			}
-		}
-	})
+		})
+	}
 };

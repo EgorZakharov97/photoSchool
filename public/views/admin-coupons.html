@@ -58,6 +58,10 @@
               <div>Expires: </div>
               <p class="text-block-16"><%= coupon.expiryDate.toUTCString() %> </p>
             </div>
+            <% } else { %>
+            <div class="expires">
+              <div>This coupon never expires</div>
+            </div>
             <% } %>
             <div class="expires">
               <div>Discount amount: </div>

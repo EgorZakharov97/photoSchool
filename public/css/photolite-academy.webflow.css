@@ -4935,6 +4935,13 @@
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+#user-message {
+  font-family: exo, sans-serif;
+  font-weight: 400;
+  color: #ff2f0f;
+  size: 18px;
+}
+
 .payment-block {
   position: relative;
   display: -webkit-box;

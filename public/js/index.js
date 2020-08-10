@@ -4,6 +4,8 @@ let currCoursePrice;
 let couponApplied = false;
 
 $('.course-buy-button').click((e) => {
+	$('#user-message').text('');
+
 	let currCourseName = $(e.target).attr('cName');
 	let currCourseStarts = $(e.target).attr('cStart');
 	currCoursePrice = $(e.target).attr('cPrice');
@@ -56,16 +58,20 @@ function checkCouponAndApply(data) {
 					let priceWithDiscount = Math.round(currCoursePrice * (100-newDiscount))/100;
 					$('#finPrice').text('$' + priceWithDiscount + ' CAD');
 					couponApplied = res.code;
-					console.log('Coupon was applied!')
+					console.log('Coupon was applied!');
+					$('#user-message').text('Coupon was applied').css('color', 'green');
 				} else {
-					console.log('Coupon was already applied')
+					console.log('Coupon was already applied');
+					$('#user-message').text('This coupon was already applied').css('color', 'red');
 				}
 			} else {
-				console.log('Coupon is not valid')
+				console.log('Coupon is not valid');
+				$('#user-message').text('This coupon is no longer valid').css('color', 'red');
 			}
 
 		} else {
-			console.log('Coupon was not found')
+			console.log('Coupon was not found');
+			$('#user-message').text('Sorry, we dont know this coupon').css('color', 'red');
 		}
 	})
 }
