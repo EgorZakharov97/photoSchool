@@ -12,9 +12,9 @@ if(process.env.NODE_ENV === 'development'){
 	PK = process.env.STRIPE_PUBLIC_DEV;
 	WH = process.env.STRIPE_WH_DEV;
 } else {
-	stripe = require('stripe')(process.env.STRIPE_SECRET);
-	PK = process.env.STRIPE_PUBLIC;
-	WH = process.env.STRIPE_WH;
+	stripe = require('stripe')(process.env.STRIPE_SECRET_DEV);
+	PK = process.env.STRIPE_PUBLIC_DEV;
+	WH = process.env.STRIPE_WH_DEV;
 }
 
 module.exports.preparePayment = async (req, res, next) => {
@@ -129,31 +129,46 @@ module.exports.success = (req, res, next) => {
 					course.seats.occupied++;
 					course.save();
 
-					// let coupon = await Coupon.findById(payment.coupon);
-					// coupon.wasUsed++;
-					// coupon.save();
+					let coupon = await Coupon.findById(payment.coupon);
+					coupon.wasUsed++;
+					coupon.save();
 
-					let emailOptions = {
-						to: user.email,
-						subject: 'PhotoLight Purchase Confirmation',
-						html: `Thank you for buying ${course.name}. You have paid $${payment.session.amount_total / 100}CAD`
-					};
+					fs.readFile('./service/email/templates/payment-confirmation.html', 'utf-8', (err, data) => {
+						if (err) {
+							logger.error(err);
+							res.status(500);
+							res.render('500');
+						} else {
+							const message = ejs.render(data, {
+								username: user.username || user.email,
+								courseDescription: course.richText.description.replace(/(<([^>]+)>)/gi, ""),
+								courseName: course.name,
+								coursePrice: payment.session.amount_total/100,
+								courseImage: process.env.HOST + course.image
+							});
 
-					await sendMail(emailOptions);
+							let emailOptions = {
+								to: user.email,
+								subject: 'PhotoLight Purchase Confirmation',
+								html: message
+							};
 
-					logger.warn(`!!!Congratulations!!! User ${user.email} purchased course ${course.name}`);
+							sendMail(emailOptions);
 
-					let sayToAdmin = {
-						to: 'skymailsenter@gmail.com',
-						subject: 'Congratulations!',
-						html: `<h1>Congratulations</h1><p>User ${user.name} with email ${user.email} just bought course ${course.name} for ${payment.session.amount_total / 100}</p>`
-					};
+							logger.warn(`!!!Congratulations!!! User ${user.email} purchased course ${course.name}`);
 
-					await sendMail(sayToAdmin);
+							let sayToAdmin = {
+								to: 'skymailsenter@gmail.com',
+								subject: 'Congratulations!',
+								html: `<h1>Congratulations</h1><p>User ${user.name} with email ${user.email} just bought course ${course.name} for ${payment.session.amount_total / 100}</p>`
+							};
 
-					sayToAdmin.to = 'admin@photolite.academy';
-					await sendMail(sayToAdmin);
+							sendMail(sayToAdmin);
 
+							sayToAdmin.to = 'admin@photolite.academy';
+							sendMail(sayToAdmin);
+						}
+					});
 				} else {
 					logger.error(`Could not find payment with intent ${payment_intent}`);
 					return res.status(500).end();

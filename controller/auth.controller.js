@@ -3,6 +3,8 @@ const User = 			require('../models/User'),
 	sendMail = 		require('../service/email/mailTransporter'),
 	encrypt = 		require('../service/tools/encrypter').encrypt,
 	decrypt = 		require('../service/tools/encrypter').decrypt,
+	fs = 			require('fs'),
+	ejs = 			require('ejs'),
 	passport = 		require('passport');
 
 let authOptions = {
@@ -107,20 +109,24 @@ module.exports.registerNewUser = (req, res, next) => {
 				newUser.save();
 				logger.info(`New user created: ${newUser.username}, id: ${newUser._id}`);
 
-				// Sending verification email
-				let emailOptions = {
-					to: newUser.email,
-					subject: 'Photolite password reset',
-					html: `<h1>Hello from Photolite Academy!</h1><p>Here is the <a href=\"${newUser.verification.verificationLink}\">link</a> to verify your email</p><p>${newUser.verification.verificationLink}</p>`
-				};
-				sendMail(emailOptions, (err, info) => {
+				fs.readFile('./service/email/templates/email-confirmation.html', 'utf-8', (err, data) => {
 					if(err){
-						logger.error(err)
+						logger.error(err);
+						res.status(500);
+						res.render('500');
 					} else {
-						logger.info(`New user confirmation was sent to ${newUser.email}`);
+						const message = ejs.render(data, {link: newUser.verification.verificationLink});
+
+						// Sending verification email
+						let emailOptions = {
+							to: newUser.email,
+							subject: 'Photolite email verification',
+							html: message
+						};
+						sendMail(emailOptions);
+						res.redirect('/auth/local/confirm');
 					}
-				});
-				res.redirect('/auth/local/confirm');
+				})
 			}
 		})
 	} else {
@@ -160,21 +166,25 @@ module.exports.sendPwrdMsg = (req, res, next) => {
 					let secret = user.email + '|' + new Date().toString();
 					user.password.reset.hash = encrypt(secret);
 
-					let emailOptions = {
-						to: user.email,
-						subject: 'Photolite password reset',
-						html: `<h1>Hello from Photolite Academy</h1><p>Here is a <a href=/"${process.env.HOST + '/auth/local/reset/' + user.password.reset.hash}/">link</a> to reset your password. Do not share this link to anyone.</p><p>${process.env.HOST + '/auth/local/reset/' + user.password.reset.hash}</p>`
-					};
-
-					sendMail(emailOptions, (err, info) => {
-						if(err){
-							logger.error(err)
+					fs.readFile('./service/email/templates/reset-password.html', 'utf-8', (err, data) => {
+						if (err) {
+							logger.error(err);
+							res.status(500);
+							res.render('500');
 						} else {
-							logger.info(`Password reset email was sent to ${user.email}`);
+
+							const message = ejs.render(data, {link: process.env.HOST + '/auth/local/reset/' + user.password.reset.hash});
+
+							let emailOptions = {
+								to: user.email,
+								subject: 'Photolite password reset',
+								html: message
+							};
+
+							sendMail(emailOptions);
+							res.send("Email confirmation has been sent to your email")
 						}
 					});
-
-					res.send("Email confirmation has been sent to your email")
 				} else {
 					res.redirect('/auth/local/reset')
 				}
