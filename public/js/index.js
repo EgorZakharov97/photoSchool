@@ -81,7 +81,7 @@ $('#cpnSubmit').click(event => {
 	let data = $('#couponForm').serialize();
 	checkCouponAndApply(data);
 	let href = $('#logCheckout').attr('href');
-	href += ('&' + data.coupon);
+	href += ('&' + data.split('=')[1]);
 	$('#logCheckout').attr('href', href);
 });
 
