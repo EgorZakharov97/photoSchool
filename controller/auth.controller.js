@@ -86,49 +86,55 @@ module.exports.getUpdateUserInfoPage = (req, res, next) => {
 module.exports.registerNewUser = (req, res, next) => {
 	let profile = req.body;
 	if(profile.password === profile.password_2){
-		User.create({
-			email: profile.email,
-			username: profile.username,
-			sex: profile.sex,
-			verification: {
-				verified: false,
-				verificationLink: process.env.HOST + '/auth/local/confirm/' + encrypt(profile.email)
-			},
-			complete: true,
-			experience: profile.experience,
-			phoneNumber: profile.phoneNumber,
-			comingFrom: 'local',
-			admin: false,
-			courses: []
-		}, (err, newUser) => {
-			if(err){
-				logger.error(err);
-				res.send("User already exists");
-			} else {
-				newUser.setPassword(profile.password);
-				newUser.save();
-				logger.info(`New user created: ${newUser.username}, id: ${newUser._id}`);
+		try {
+			User.create({
+				email: profile.email,
+				username: profile.username,
+				sex: profile.sex,
+				verification: {
+					verified: false,
+					verificationLink: process.env.HOST + '/auth/local/confirm/' + encrypt(profile.email)
+				},
+				complete: true,
+				experience: profile.experience,
+				phoneNumber: profile.phoneNumber,
+				comingFrom: 'local',
+				admin: false,
+				courses: []
+			}, (err, newUser) => {
+				if(err){
+					logger.error(err);
+					res.send("User already exists");
+				} else {
+					newUser.setPassword(profile.password);
+					newUser.save();
+					logger.info(`New user created: ${newUser.username}, id: ${newUser._id}`);
 
-				fs.readFile('./service/email/templates/email-confirmation.html', 'utf-8', (err, data) => {
-					if(err){
-						logger.error(err);
-						res.status(500);
-						res.render('500');
-					} else {
-						const message = ejs.render(data, {link: newUser.verification.verificationLink});
+					fs.readFile('./service/email/templates/email-confirmation.html', 'utf-8', (err, data) => {
+						if(err){
+							logger.error(err);
+							res.status(500);
+							res.render('500');
+						} else {
+							const message = ejs.render(data, {link: newUser.verification.verificationLink});
 
-						// Sending verification email
-						let emailOptions = {
-							to: newUser.email,
-							subject: 'Photolite email verification',
-							html: message
-						};
-						sendMail(emailOptions);
-						res.redirect('/auth/local/confirm');
-					}
-				})
-			}
-		})
+							// Sending verification email
+							let emailOptions = {
+								to: newUser.email,
+								subject: 'Photolite email verification',
+								html: message
+							};
+							sendMail(emailOptions);
+							res.redirect('/auth/local/confirm');
+						}
+					})
+				}
+			})
+		}
+		catch(e){
+			logger.error(e);
+			res.send('This email was already  taken');
+		}
 	} else {
 		res.send("Passwords does not match");
 	}
