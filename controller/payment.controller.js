@@ -50,15 +50,16 @@ module.exports.preparePayment = async (req, res, next) => {
 					let multiplier = user.getPriceMultiplier();
 					let price;
 					if(multiplier === 0){
-						price = 50
+						price = 50;
+						coupon = false;
 					} else {
 						price = course.calculateCurrentPrice() * 100 * multiplier
 					}
 
 					if(coupon) {
 						let discount = coupon.discount;
-						let multiplier = (1-discount/100);
-						price *= multiplier;
+						let multiplierD = (1-discount/100);
+						price *= multiplierD;
 					}
 
 
@@ -89,7 +90,7 @@ module.exports.preparePayment = async (req, res, next) => {
 					};
 
 					if(coupon)
-						paymentData.coupon = coupon;
+						paymentData.coupon = coupon._id;
 
 					Payment.create(paymentData);
 					res.render('buy', {session_id: session.id, PK: PK})
