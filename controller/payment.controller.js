@@ -12,9 +12,9 @@ if(process.env.NODE_ENV === 'development'){
 	PK = process.env.STRIPE_PUBLIC_DEV;
 	WH = process.env.STRIPE_WH_DEV;
 } else {
-	stripe = require('stripe')(process.env.STRIPE_SECRET_DEV);
-	PK = process.env.STRIPE_PUBLIC_DEV;
-	WH = process.env.STRIPE_WH_DEV;
+	stripe = require('stripe')(process.env.STRIPE_SECRET);
+	PK = process.env.STRIPE_PUBLIC;
+	WH = process.env.STRIPE_WH;
 }
 
 module.exports.preparePayment = async (req, res, next) => {
@@ -23,7 +23,6 @@ module.exports.preparePayment = async (req, res, next) => {
 	let coupon = false;
 
 	if(couponCode){
-		console.log(couponCode)
 		coupon = await Coupon.findOne({code: couponCode});
 		coupon = checkCouponValidity(coupon, req.user.email);
 	}
