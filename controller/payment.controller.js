@@ -23,6 +23,7 @@ module.exports.preparePayment = async (req, res, next) => {
 	let coupon = false;
 
 	if(couponCode){
+		console.log(couponCode)
 		coupon = await Coupon.findOne({code: couponCode});
 		coupon = checkCouponValidity(coupon, req.user.email);
 	}
@@ -89,8 +90,11 @@ module.exports.preparePayment = async (req, res, next) => {
 						intent: session.payment_intent
 					};
 
-					if(coupon)
+					if(coupon){
 						paymentData.coupon = coupon._id;
+					}
+
+
 
 					Payment.create(paymentData);
 					res.render('buy', {session_id: session.id, PK: PK})
@@ -130,9 +134,21 @@ module.exports.success = (req, res, next) => {
 					course.seats.occupied++;
 					course.save();
 
-					let coupon = await Coupon.findById(payment.coupon);
-					coupon.wasUsed++;
-					coupon.save();
+					if(payment.coupon){
+						Coupon.findById(payment.coupon, (err, coupon) => {
+							if(err){
+								logger.error(err);
+							} else {
+								if(coupon){
+									coupon.wasUsed++;
+									coupon.save();
+								} else {
+									logger.error("Should have found a coupon but didn't");
+								}
+							}
+						});
+					}
+
 
 					fs.readFile('./service/email/templates/payment-confirmation.html', 'utf-8', (err, data) => {
 						if (err) {
