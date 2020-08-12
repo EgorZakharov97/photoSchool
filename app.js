@@ -75,7 +75,7 @@ if(process.env.NODE_ENV === 'development'){
 } else {
 	const pricateKey = fs.readFileSync(process.env.PATH_APP_PK, 'utf8');
 	const ca = fs.readFileSync(process.env.PATH_APP_CA, 'utf8');
-	const certificate = fs.readFileSync(process.env.PATH_APP_SERT, 'utf8');
+	const certificate = fs.readFileSync(process.env.PATH_APP_CERT, 'utf8');
 	const credentials = {
 		key: pricateKey,
 		cert: certificate,
