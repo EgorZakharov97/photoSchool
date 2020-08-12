@@ -174,17 +174,6 @@ module.exports.success = (req, res, next) => {
 							logger.warn(`!!!Congratulations!!! User ${user.email} purchased course ${course.name}`);
 
 							sendMail(emailOptions);
-
-							let sayToAdmin = {
-								to: 'skymailsenter@gmail.com',
-								subject: 'Congratulations!',
-								html: `<h1>Congratulations</h1><p>User ${user.name} with email ${user.email} just bought course ${course.name} for ${payment.session.amount_total / 100}</p>`
-							};
-
-							sendMail(sayToAdmin);
-
-							sayToAdmin.to = 'admin@photolite.academy';
-							sendMail(sayToAdmin);
 						}
 					});
 				} else {
