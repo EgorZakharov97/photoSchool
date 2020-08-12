@@ -4,7 +4,8 @@ const User = require('../models/User'),
 	Payment = require('../models/Payment'),
 	Coupon = require('../models/Coupon'),
 	sendMail = require('../service/email/mailTransporter'),
-	fs = require('fs');
+	fs = require('fs'),
+	ejs = require('ejs');
 
 let stripe, PK, WH;
 
