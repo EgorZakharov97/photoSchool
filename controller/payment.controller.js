@@ -3,7 +3,8 @@ const User = require('../models/User'),
 	logger = require('../service/logger/logger'),
 	Payment = require('../models/Payment'),
 	Coupon = require('../models/Coupon'),
-	sendMail = require('../service/email/mailTransporter');
+	sendMail = require('../service/email/mailTransporter'),
+	fs = require('fs');
 
 let stripe, PK, WH;
 
