@@ -169,9 +169,9 @@ module.exports.success = (req, res, next) => {
 								html: message
 							};
 
-							sendMail(emailOptions);
-
 							logger.warn(`!!!Congratulations!!! User ${user.email} purchased course ${course.name}`);
+
+							sendMail(emailOptions);
 
 							let sayToAdmin = {
 								to: 'skymailsenter@gmail.com',
