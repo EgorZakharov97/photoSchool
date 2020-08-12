@@ -162,7 +162,7 @@ module.exports.success = (req, res, next) => {
 								courseDescription: course.richText.description.replace(/(<([^>]+)>)/gi, ""),
 								courseName: course.name,
 								coursePrice: payment.session.amount_total/100,
-								courseImage: process.env.HOST + course.image
+								courseImage: process.env.HOST + '/' + course.image
 							});
 
 							let emailOptions = {
