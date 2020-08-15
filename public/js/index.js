@@ -6,13 +6,13 @@ let couponApplied = false;
 $('.course-buy-button').click((e) => {
 	$('#user-message').text('');
 
-	let currCourseName = $(e.target).attr('cName');
-	let currCourseStarts = $(e.target).attr('cStart');
-	currCoursePrice = $(e.target).attr('cPrice');
-	currCourseDiscount = $(e.target).attr('cDisc');
-	let currCourseID = $(e.target).attr('cID');
-	let currCourseImg = $(e.target).attr('cPic');
-	let email = $(e.target).attr('uEmail');
+	let currCourseName = $(e.target).attr('cname');
+	let currCourseStarts = $(e.target).attr('cstart');
+	currCoursePrice = $(e.target).attr('cprice');
+	currCourseDiscount = $(e.target).attr('cdisc');
+	let currCourseID = $(e.target).attr('cid');
+	let currCourseImg = $(e.target).attr('cpic');
+	let email = $(e.target).attr('uemail');
 
 	if(currCourseDiscount === '100'){
 		currCoursePrice = 0.50;
