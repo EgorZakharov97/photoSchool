@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Thu Aug 13 2020 23:59:58 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Fri Aug 14 2020 21:57:19 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="5f1212b6860f15805b0e6e15" data-wf-site="5f1212b6860f150f9f0e6e14">
 <head>
   <meta charset="utf-8">
@@ -24,10 +24,6 @@
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
   <script src="https://checkout.stripe.com/checkout.js" defer=""></script>
-  <script>
-    let stripePublic = '<%= STRIPE_PUBLIC %>';
-  </script>
-  <script src="store.js" defer=""></script>
 </head>
 <body class="body">
   <div class="section-welcome">
@@ -51,10 +47,10 @@
     <div class="w-container">
       <div class="welcome-phrase"><span class="text-span-15">Learn Photography.</span> Improve your Creativity. Practice with real models, stylists and coaches. </div>
       <div class="welcome-buttons">
-        <a href="#about" class="welcome-button first w-inline-block">
+        <a href="#about" class="button red on-black mg w-inline-block">
           <h3 class="heading">How does it work?</h3>
         </a>
-        <a href="#courses" class="welcome-button transparent w-inline-block">
+        <a href="#courses" class="button w-inline-block">
           <h3 class="heading">Let&#x27;s Study!</h3>
         </a>
       </div>
@@ -101,7 +97,9 @@
   </div>
   <div id="about" class="section-for-whom">
     <div class="w-container">
-      <h3 class="section-heading"><span class="text-span">Who is it for?</span><br></h3>
+      <div class="div-block-13">
+        <h3 class="section-heading"><span class="text-span">Who is it for?</span><br></h3>
+      </div>
     </div>
     <div class="who-blocks">
       <div class="who-block-wrapper">
@@ -127,15 +125,13 @@
   <div class="section-how-work">
     <div class="w-container">
       <div class="how-work-text">
-        <h2 class="heading-on-black"><span class="text-span-2">How</span> does it work¿</h2>
-        <div class="rich-text white w-richtext">
+        <h2 class="section-heading on-black smaller"><span class="text-span-2">How</span> does it work¿</h2>
+        <div class="rich-text on-black w-richtext">
           <p><strong>It&#x27;s easy!</strong> Each of our studying programs is made of two parts. Online and offline. When you register for a workshop you get access to a student portal with video tutorials, presets, and the most important - workshop group chats, where you can chat with other students and your coaches.</p>
           <p>Each workshop is made of several parts.</p>
           <p><strong>Theory</strong> - this is where we get to know each other and talk about theoretical background based on the workshop theme.</p>
           <p><strong>Practice</strong> - this is where it&#x27;s getting interesting. We set up a whole set for you with a model, makeup artists, stylist, and unique concept. We take pictures together, then you take pictures by yourself!</p>
           <p><strong>Feedback</strong> - after the workshop you will have some photos to work with. We will ask you to send us your top 3 images, so we can give you some feedback on the composition, color, light, and other aspects.</p>
-          <p>‍</p>
-          <p>‍</p>
         </div>
       </div>
     </div>
@@ -170,7 +166,7 @@
     <div class="w-container">
       <div class="w-layout-grid grid-3">
         <div id="w-node-8e4fe85ea04b-5b0e6e15" data-w-id="13cbcfde-4455-f4e4-6a46-8e4fe85ea04b" class="content-col _2"></div>
-        <h2 id="w-node-bff495009c87-5b0e6e15" class="heading-on-black"><span class="text-span-2">Watch </span>courses and vebinars</h2>
+        <h3 id="w-node-bff495009c87-5b0e6e15" class="section-heading on-black smaller"><span class="text-span-2">Watch </span>courses and vebinars</h3>
         <p id="w-node-06861aeb8c29-5b0e6e15" class="black-simple-paragraph">You will have acess to video tutorials, lessons and vebinars with other artists and students. This acess is exclusive and limited to 1 month after your workshop date.</p>
       </div>
     </div>
@@ -180,8 +176,8 @@
       <div class="w-layout-grid grid-4">
         <h3 id="w-node-a31edfce4188-5b0e6e15" class="section-heading smaller"><span class="text-span">Study</span> when practice.</h3>
         <div id="w-node-e74044531675-5b0e6e15" class="div-block-12">
-          <div class="rich-text _2 w-richtext">
-            <h2>Yes!You are going to take photos.</h2>
+          <div class="section-main-paragraph w-richtext">
+            <h2>Yes! You are going to take photos.</h2>
             <p>During our workshops, each student is going to have some time to take pictures one on one with a model at the set that we&#x27;ve prepared for you.</p>
             <p><strong>Build a unique portfolio.</strong></p>
             <p>Each of our workshops is going to have a unique concept behind it. It means that the photos you take during the workshop are going to be &quot;out of this world&quot;.</p>
@@ -189,8 +185,8 @@
             <p>We will have a serious team on each workshop set. This is your chance to learn how to interact with other photographers, models, and stylists.</p>
             <p>‍</p>
           </div>
-          <a href="#courses" class="welcome-button down w-inline-block">
-            <h4 class="heading-3">Let&#x27;s study!</h4>
+          <a href="#courses" class="button w-inline-block">
+            <h4>Let&#x27;s study!</h4>
           </a>
         </div>
         <div id="w-node-9b4ac7bd11c7-5b0e6e15" class="img-wrapper"></div>
@@ -200,16 +196,16 @@
   <div class="section-results">
     <div class="w-container">
       <h2 class="heading-on-black large"><span class="text-span-2">Check out </span>the work of your coaches.</h2>
-      <a href="#" class="exapmle-lightbox w-inline-block w-lightbox">
+      <a href="#" class="lightbox w-inline-block w-lightbox">
         <div class="lightbox-grid">
-          <div class="example-img-wrapper _1"></div>
-          <div class="example-img-wrapper _2"></div>
-          <div class="example-img-wrapper _3"></div>
-          <div class="example-img-wrapper _4"></div>
-          <div class="example-img-wrapper _5"></div>
-          <div class="example-img-wrapper _6"></div>
-          <div class="example-img-wrapper _7"></div>
-          <div class="example-img-wrapper _8"></div>
+          <div id="w-node-c0a280db89a9-5b0e6e15" class="example-img-wrapper"><img src="images/dsc04718.jpg" srcset="images/dsc04718-p-500.jpeg 500w, images/dsc04718-p-800.jpeg 800w, images/dsc04718-p-1080.jpeg 1080w, images/dsc04718-p-1600.jpeg 1600w, images/dsc04718-p-2000.jpeg 2000w, images/dsc04718-p-2600.jpeg 2600w, images/dsc04718.jpg 3815w" sizes="(max-width: 767px) 200.015625px, (max-width: 991px) 174.71875px, (max-width: 1279px) 225.59375px, 216.1875px" alt="" class="img-lightbox"></div>
+          <div class="example-img-wrapper"><img src="images/dsc06092.jpg" srcset="images/dsc06092-p-500.jpeg 500w, images/dsc06092-p-800.jpeg 800w, images/dsc06092-p-1080.jpeg 1080w, images/dsc06092-p-1600.jpeg 1600w, images/dsc06092-p-2000.jpeg 2000w, images/dsc06092-p-2600.jpeg 2600w, images/dsc06092-p-3200.jpeg 3200w, images/dsc06092.jpg 4000w" sizes="(max-width: 767px) 200px, (max-width: 991px) 174.71875px, (max-width: 1279px) 225.59375px, 216.1875px" alt="" class="img-lightbox"></div>
+          <div class="example-img-wrapper"><img src="images/5f2129771050c21e392a_WXxZ6.jpg" srcset="images/5f2129771050c21e392a_WXxZ6-p-500.jpeg 500w, images/5f2129771050c21e392a_WXxZ6-p-800.jpeg 800w, images/5f2129771050c21e392a_WXxZ6-p-1080.jpeg 1080w, images/5f2129771050c21e392a_WXxZ6-p-1600.jpeg 1600w, images/5f2129771050c21e392a_WXxZ6.jpg 3648w" sizes="(max-width: 767px) 200px, (max-width: 991px) 174.71875px, (max-width: 1279px) 225.59375px, 216.1875px" alt="" class="img-lightbox"></div>
+          <div class="example-img-wrapper"><img src="images/sm2.jpg" srcset="images/sm2-p-500.jpeg 500w, images/sm2-p-800.jpeg 800w, images/sm2-p-1080.jpeg 1080w, images/sm2-p-2000.jpeg 2000w, images/sm2.jpg 4000w" sizes="(max-width: 767px) 200px, (max-width: 991px) 174.71875px, (max-width: 1279px) 225.59375px, 216.1875px" alt="" class="img-lightbox"></div>
+          <div class="example-img-wrapper"><img src="images/dsc02682_1.jpg" srcset="images/dsc02682_1-p-500.jpeg 500w, images/dsc02682_1-p-800.jpeg 800w, images/dsc02682_1-p-1080.jpeg 1080w, images/dsc02682_1.jpg 4000w" sizes="(max-width: 767px) 240px, (max-width: 991px) 174.71875px, (max-width: 1279px) 225.59375px, 216.1875px" alt="" class="img-lightbox"></div>
+          <div class="example-img-wrapper"><img src="images/5f2133783583e85643e7_ugJFd.jpg" srcset="images/5f2133783583e85643e7_ugJFd-p-500.jpeg 500w, images/5f2133783583e85643e7_ugJFd-p-800.jpeg 800w, images/5f2133783583e85643e7_ugJFd-p-1080.jpeg 1080w, images/5f2133783583e85643e7_ugJFd-p-1600.jpeg 1600w, images/5f2133783583e85643e7_ugJFd-p-2000.jpeg 2000w, images/5f2133783583e85643e7_ugJFd.jpg 4367w" sizes="(max-width: 767px) 218.34375px, (max-width: 991px) 174.71875px, (max-width: 1279px) 225.59375px, 216.1875px" alt="" class="img-lightbox"></div>
+          <div class="example-img-wrapper"><img src="images/5f212977c5dda6d061f2_zSB9m.jpg" srcset="images/5f212977c5dda6d061f2_zSB9m-p-500.jpeg 500w, images/5f212977c5dda6d061f2_zSB9m-p-800.jpeg 800w, images/5f212977c5dda6d061f2_zSB9m-p-1080.jpeg 1080w, images/5f212977c5dda6d061f2_zSB9m-p-1600.jpeg 1600w, images/5f212977c5dda6d061f2_zSB9m-p-2000.jpeg 2000w, images/5f212977c5dda6d061f2_zSB9m.jpg 3202w" sizes="(max-width: 767px) 213.453125px, (max-width: 991px) 174.71875px, (max-width: 1279px) 225.59375px, 216.1875px" alt="" class="img-lightbox"></div>
+          <div class="example-img-wrapper"><img src="images/6.PNG" srcset="images/6-p-500.png 500w, images/6.PNG 538w" sizes="(max-width: 767px) 240.171875px, (max-width: 991px) 174.71875px, (max-width: 1279px) 225.59375px, 216.1875px" alt="" class="img-lightbox"></div>
         </div>
         <script type="application/json" class="w-json">{
   "items": [
@@ -300,11 +296,9 @@
   ]
 }</script>
       </a>
-      <div class="btn-wrapper w">
-        <a href="#courses" class="welcome-button w-inline-block">
-          <h4 class="heading-3 red">Let&#x27;s study!</h4>
-        </a>
-      </div>
+      <a href="#courses" class="button on-black w-inline-block">
+        <h4>Let&#x27;s study!</h4>
+      </a>
     </div>
   </div>
   <div class="section-mistakes">
@@ -321,9 +315,10 @@
       <h2 class="heading-on-black modified">Classes <span class="text-span-2">Calendar</span></h2>
     </div>
     <div class="container-7 w-container">
-      <div class="dropdown">
+      <div><% for (let i = 0; i < courses.length; i++) { let course = courses[i]; %></div>
+      <div id="dropdown-sample" class="dropdown">
         <div data-w-id="d2c59415-2b8b-dce1-55d6-037fa139d585" class="dropdown-trigger">
-          <div class="text-block">Male Pornogtaphy</div>
+          <div class="text-block"><%= course.name %></div>
           <div class="date">Aug 20</div>
         </div>
         <div style="height:0PX;display:block" class="dropdown-content">
@@ -389,13 +384,14 @@
           </div>
         </div>
       </div>
+      <div><% } %></div>
     </div>
   </div>
   <div id="contact" class="section-ask">
     <div class="w-container">
       <h3 class="section-heading mid">Any questions <span class="text-span-8">left</span>?</h3>
       <div class="div-block-9">
-        <a href="#" class="link-block w-inline-block">
+        <a href="#" class="button red w-inline-block">
           <div class="text-block-5">Let&#x27;s talk in WhatsUp</div>
         </a>
       </div>

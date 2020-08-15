@@ -8,6 +8,7 @@ const express = require('express'),
 	path = require('path'),
 	passport = require('passport'),
 	cookieParser = require('cookie-parser'),
+	ejs = require('ejs'),
 	http = require('http'),
 	https = require('https'),
 	fs = require('fs'),
@@ -20,6 +21,7 @@ const app = express();
 
 // REQUIRED FUNCTIONS
 const logger = require('./service/logger/logger');
+const userStats = require('./service/middleware/userStats');
 
 // App settings
 app.set('views', path.join(__dirname, 'Public'));
@@ -27,6 +29,7 @@ app.set('view engine', 'html');
 app.set('views', __dirname + '/public/views');
 
 // MIDDLEWARE
+app.engine('html', ejs.renderFile);
 app.use(partials());
 app.use(cookieParser());
 app.use('*/css',express.static('public/css'));
