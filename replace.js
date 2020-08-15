@@ -22,6 +22,8 @@ function replaceInFIle(fileName) {
         } else {
             file = file.replace(/&lt;/g, '<');
             file = file.replace(/&gt;/g, '>');
+            file = file.replace(/&quot;/g, '"');
+            file = file.replace(/&#x27;/g, "'");
     
             fs.writeFile(path, file, 'utf8', (err2) => {
                 err2 ? console.log(err2) : false;
