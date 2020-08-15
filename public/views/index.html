@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Sat Aug 15 2020 01:41:41 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sat Aug 15 2020 03:35:11 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="5f1212b6860f15805b0e6e15" data-wf-site="5f1212b6860f150f9f0e6e14">
 <head>
   <meta charset="utf-8">
@@ -316,7 +316,7 @@
     <div class="container-7 w-container">
       <div class="ejs"><% for (let i = 0; i < courses.length; i++) { let course = courses[i]; %><br><% const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June",    "July", "Aug", "Sept", "Oct", "Nov", "Dec"]; %><br><% let dateStarts = monthNames[course.importantDates.courseStarts.getUTCMonth()] + ' ' + course.importantDates.courseStarts.getUTCDate() %></div>
       <div id="dropdown-sample" class="dropdown">
-        <div data-w-id="d2c59415-2b8b-dce1-55d6-037fa139d585" class="dropdown-trigger">
+        <div img="<%= course.image %>" data-w-id="d2c59415-2b8b-dce1-55d6-037fa139d585" class="dropdown-trigger">
           <div class="text-block"><%= course.name %></div>
           <div class="date"><%= dateStarts %></div>
         </div>
@@ -360,7 +360,7 @@
                   <div class="date-duration"><%= course.seats.total - course.seats.occupied %></div>
                 </div>
               </div>
-              <div class="ejs"><% if(course.seats.total > course.seats.occupied) { %></div><a class="cors-register-now-2 courses" cprice="<%= course.calculateCurrentPrice() %>" uemail="<%= user.email %>" cpic="<%= course.image %>" href="#" cname="<%= course.name%>" cdisc="<%= discount %>" id="w-node-037fa139d5be-5b0e6e15" cid="<%= course._id %>">Register now</a>
+              <div class="ejs"><% if(course.seats.total > course.seats.occupied) { %></div><a class="cors-register-now-2 courses course-buy-button" cprice="<%= course.calculateCurrentPrice() %>" uemail="<%= user.email %>" cpic="<%= course.image %>" href="#" cname="<%= course.name%>" cdisc="<%= discount %>" id="w-node-037fa139d5be-5b0e6e15" cid="<%= course._id %>">Register now</a>
               <div class="ejs"><% } %></div>
             </div>
           </div>
@@ -410,9 +410,17 @@
       <div class="text-block-14">Copyright © 2020 Spark Photography. All rights reserved.</div>
     </div>
   </footer>
+  <div><%- include('partials/section-buy.ejs') -%></div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js?site=5f1212b6860f150f9f0e6e14" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="js/webflow.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+  <script>
+    $('.dropdown-trigger').each(function() {
+      let img = $(this).attr('img');
+      $(this).css('background-image', "-webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url('" + img + "')");
+      $(this).css('background-image', "background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('" + img + "')");
+    })
+</script>
   <!--  Start of LiveChat (www.livechatinc.com) code  -->
   <script>
     window.__lc = window.__lc || {};

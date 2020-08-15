@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Sat Aug 15 2020 01:41:41 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sat Aug 15 2020 04:19:31 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="5f13acfd98a06f0f5ff02e3c" data-wf-site="5f1212b6860f150f9f0e6e14">
 <head>
   <meta charset="utf-8">
@@ -32,17 +32,22 @@
               <h3 class="heading-13">Exit</h3>
             </a>
           </div>
-          <h1 class="member-name-heading">Egor Zakharov</h1>
+          <h1 class="member-name-heading"><%= user.username %></h1>
           <div class="portal-tab-links"><a data-w-id="35e95c24-2a78-7c37-9a14-36416311b6c5" href="#" class="tab-button tab-button-active w-button">Workshops</a><a data-w-id="855b3228-1593-9d07-6d1c-8b8c19a15555" href="#" class="tab-button w-button">Tutorials</a><a data-w-id="2fa5e394-bbd3-fb74-e84b-42e476298583" href="#" class="tab-button w-button">Materials</a><a data-w-id="97d85560-c95d-b340-727d-83b5ba47cfed" href="#" class="tab-button w-button">Presets</a></div>
         </div>
-        <div class="btn-wrapper"><a href="/auth/update" class="link-2">Manage Profile</a></div>
+        <div class="div-block-14">
+          <div class="btn-wrapper"><a href="/auth/update" class="link-2">Manage Profile</a></div>
+          <div class="ejs"><% if(user.admin) { %></div>
+          <div class="btn-wrapper"><a href="/admin/coupon" class="link-2">Coupons</a></div>
+          <div class="ejs"><% } %></div>
+        </div>
       </div>
       <div data-duration-in="300" data-duration-out="100" class="tabs-2 w-tabs">
         <div class="tabs-menu-3 w-tab-menu">
-          <a data-w-tab="Workshops" class="tab-link w-inline-block w-tab-link w--current">
+          <a data-w-tab="Workshops" class="tab-link w-inline-block w-tab-link">
             <div>Workshops</div>
           </a>
-          <a data-w-tab="Tutorials" class="tab-link w-inline-block w-tab-link">
+          <a data-w-tab="Tutorials" class="tab-link w-inline-block w-tab-link w--current">
             <div>Tutorials</div>
           </a>
           <a data-w-tab="Materials" class="tab-link w-inline-block w-tab-link">
@@ -53,216 +58,136 @@
           </a>
         </div>
         <div class="tabs-content w-tab-content">
-          <div data-w-tab="Workshops" class="w-tab-pane w--tab-active">
+          <div data-w-tab="Workshops" class="w-tab-pane">
             <div class="tab-wrapper">
-              <h3 class="section-heading portal"><span class="text-span-10">My </span>Workshops</h3>
+              <div class="splitter">
+                <h3 class="section-heading portal"><span class="text-span-10">My </span>Workshops</h3>
+                <div class="text-block-15"><%- include('partials/progress.ejs') -%></div>
+              </div>
               <div class="class-wrapper-portal">
+                <div class="ejs"><% if(user.admin) { %></div>
+                <a href="/admin/course" class="cors-register-now-2 courses w-inline-block">
+                  <div class="text-block-2">Create Course</div>
+                </a>
+                <div class="ejs"><% } else { %></div>
                 <a href="/home" class="cors-register-now-2 courses w-inline-block">
                   <div class="text-block-2">Browse courses</div>
                 </a>
+                <div class="ejs"><% } %></div>
               </div>
               <div class="w-layout-grid grid-6">
+                <div class="ejs"><% for(let i = 0; i < courses.length; i++){ %></div>
                 <div class="dropdown">
+                  <div class="ejs"><% const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June","July", "Aug", "Sept", "Oct", "Nov", "Dec"]; let course = courses[i]%></div>
                   <div data-w-id="96f267f8-825f-e856-30b6-9a5b1e1bca4a" class="dropdown-trigger">
-                    <div class="text-block">Male Pornogtaphy</div>
-                    <div class="date">Aug 20</div>
+                    <div class="text-block"><%= course.name %></div>
+                    <div class="date"><%= monthNames[course.importantDates.courseStarts.getUTCMonth()] %><%= course.importantDates.courseStarts.getUTCDate()%></div>
                   </div>
                   <div style="height:0PX;display:block" class="dropdown-content">
                     <div class="cladd-desc-wrapper">
                       <div class="w-layout-grid grid-5">
                         <div id="w-node-9a5b1e1bca52-5ff02e3c" class="course-card">
-                          <div class="rich-text-block-7 w-richtext">
-                            <h2>What’s a Rich Text element?</h2>
-                            <p>The rich text element allows you to create and format headings, paragraphs, blockquotes, images, and video all in one place instead of having to add and format them individually. Just double-click and easily create content.</p>
-                            <h4>Static and dynamic content editing</h4>
-                            <p>A rich text element can be used with static or dynamic content. For static content, just drop it into any page and begin editing. For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Voila!</p>
-                            <h4>How to customize formatting for each rich text</h4>
-                            <p>Headings, paragraphs, blockquotes, figures, images, and figure captions can all be styled after a class is added to the rich text element using the "When inside of" nested selector system.</p>
-                          </div>
+                          <div class="rich-text"><%- course.richText.description -%></div>
                         </div>
                         <div id="w-node-9a5b1e1bca60-5ff02e3c" class="course-card">
-                          <div class="w-richtext">
-                            <h2>What’s a Rich Text element?</h2>
-                            <p>The rich text element allows you to create and format headings, paragraphs, blockquotes, images, and video all in one place instead of having to add and format them individually. Just double-click and easily create content.</p>
-                            <h4>Static and dynamic content editing</h4>
-                            <ul role="list">
-                              <li>A rich text element can be used with static or dynamic content.</li>
-                              <li>A rich text element can be used with static or dynamic content.</li>
-                              <li>A rich text element can be used with static or dynamic content.</li>
-                              <li>A rich text element can be used with static or dynamic content.</li>
-                            </ul>
-                            <h4>How to customize formatting for each rich text</h4>
-                            <p>Headings, paragraphs, blockquotes, figures, images, and figure captions can all be styled after a class is added to the rich text element using the "When inside of" nested selector system.</p>
-                          </div>
+                          <div class="rich-text"><%- course.richText.willLearn -%></div>
                         </div>
                         <div id="w-node-9a5b1e1bca75-5ff02e3c" class="course-card">
-                          <div class="w-richtext">
-                            <h2>What’s a Rich Text element?</h2>
-                            <p>The rich text element allows you to create and format headings, paragraphs, blockquotes, images, and video all in one place instead of having to add and format them individually. Just double-click and easily create content.</p>
-                            <h4>Static and dynamic content editing</h4>
-                            <p>A rich text element can be used with static or dynamic content. For static content, just drop it into any page and begin editing. For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Voila!</p>
-                            <h4>How to customize formatting for each rich text</h4>
-                            <p>Headings, paragraphs, blockquotes, figures, images, and figure captions can all be styled after a class is added to the rich text element using the "When inside of" nested selector system.</p>
-                          </div>
-                        </div><a id="w-node-5dabce7edb67-5ff02e3c" href="#" class="cors-register-now-2 courses">Join workshop chat</a></div>
+                          <div class="rich-text"><%- course.richText.timeline -%></div>
+                        </div>
+                        <div class="ejs"><% if(course.chatLink) { %></div><a id="w-node-5dabce7edb67-5ff02e3c" href="#" class="cors-register-now-2 courses">Join workshop chat</a>
+                        <div class="ejs"><% } %><% if(user.admin) { %></div><a id="w-node-8cbbf409a393-5ff02e3c" href="/admin/course/<%= course._id %>" class="cors-register-now-2 courses">Edit this Course</a>
+                        <div class="ejs"><% } %></div>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <div class="ejs"><% } %></div>
               </div>
             </div>
           </div>
-          <div data-w-tab="Tutorials" class="w-tab-pane">
+          <div data-w-tab="Tutorials" class="w-tab-pane w--tab-active">
             <div class="tab-wrapper">
               <h3 class="section-heading portal"><span class="text-span-10">Video </span>tutorials</h3>
+              <div class="ejs"><% if(user.admin) { %></div>
+              <a href="/admin/video" class="cors-register-now-2 courses w-inline-block">
+                <div class="text-block-2">Add new video</div>
+              </a>
+              <div class="ejs"><% } else { %></div>
               <a href="/home" class="cors-register-now-2 courses w-inline-block">
                 <div class="text-block-2">Browse courses</div>
               </a>
-              <div class="portal-new-video">
-                <h4 class="course-name">Beginner</h4>
+              <div class="ejs"><% } %> <% for(let i = 0; i < categories.length; i++){ %></div>
+              <div class="portal-video-group">
                 <div class="course-videos">
+                  <div class="ejs"><% let vidos = videos[categories[i]]; let cat = categories[i]; %><% for(let k = 0; k < vidos.length; k++) { let video=vidos[i]%></div>
+                  <h4 class="course-name"><%= cat %></h4>
                   <div class="video-card">
                     <div class="wideo-wrapper">
-                      <div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FsrEQNsSrb6s%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DsrEQNsSrb6s&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FsrEQNsSrb6s%2Fhqdefault.jpg&key=96f1f04c5f4143bcb0f2e68c87d65feb&type=text%2Fhtml&schema=youtube" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div>
+                      <div class="w-embed">
+                        <div style="padding-top:56.17021276595745%" class="w-video w-embed"><%- video.URL -%></div>
+                      </div>
                     </div>
                     <div class="video-description">
-                      <h3 class="video-heading">Lecture 1</h3>
-                      <div class="text-block-11"> - a short course on how to be a debil</div>
+                      <div class="splitter always-split">
+                        <h3 class="heading on-white"><%= video.name %></h3>
+                        <div class="text-block-16"><% if(user.admin) {%><a id="delete-video" href="/admin/video/<%= video._id %>">Delete</a><% } %></div>
+                      </div>
+                      <div class="video-desc"><%= video.description %></div>
                     </div>
                   </div>
-                  <div class="video-card">
-                    <div class="wideo-wrapper">
-                      <div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2F45PeyQ8Fovc%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D45PeyQ8Fovc&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2F45PeyQ8Fovc%2Fhqdefault.jpg&key=96f1f04c5f4143bcb0f2e68c87d65feb&type=text%2Fhtml&schema=youtube" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div>
-                    </div>
-                    <div class="video-description">
-                      <h3 class="video-heading">Debil</h3>
-                      <div class="text-block-11"> - a short course on how to be a debil</div>
-                    </div>
-                  </div>
-                  <div class="video-card">
-                    <div class="wideo-wrapper">
-                      <div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FGb4bCFTC2Oc%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DGb4bCFTC2Oc&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FGb4bCFTC2Oc%2Fhqdefault.jpg&key=96f1f04c5f4143bcb0f2e68c87d65feb&type=text%2Fhtml&schema=youtube" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div>
-                    </div>
-                    <div class="video-description">
-                      <h3 class="video-heading">Debil</h3>
-                      <div class="text-block-11"> - a short course on how to be a debil</div>
-                    </div>
-                  </div>
-                  <div class="video-card">
-                    <div class="wideo-wrapper">
-                      <div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FGb4bCFTC2Oc%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DGb4bCFTC2Oc&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FGb4bCFTC2Oc%2Fhqdefault.jpg&key=96f1f04c5f4143bcb0f2e68c87d65feb&type=text%2Fhtml&schema=youtube" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div>
-                    </div>
-                    <div class="video-description">
-                      <h3 class="video-heading">Debil</h3>
-                      <div class="text-block-11"> - a short course on how to be a debil</div>
-                    </div>
-                  </div>
+                  <div class="ejs"><% } %></div>
                 </div>
               </div>
-              <div class="portal-new-video">
-                <h4 class="course-name">Beginner</h4>
-                <div class="course-videos">
-                  <div class="video-card">
-                    <div class="wideo-wrapper">
-                      <div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FsrEQNsSrb6s%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DsrEQNsSrb6s&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FsrEQNsSrb6s%2Fhqdefault.jpg&key=96f1f04c5f4143bcb0f2e68c87d65feb&type=text%2Fhtml&schema=youtube" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div>
-                    </div>
-                    <div class="video-description">
-                      <h3 class="video-heading">Lecture 1</h3>
-                      <div class="text-block-11"> - a short course on how to be a debil</div>
-                    </div>
-                  </div>
-                  <div class="video-card">
-                    <div class="wideo-wrapper">
-                      <div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2F45PeyQ8Fovc%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D45PeyQ8Fovc&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2F45PeyQ8Fovc%2Fhqdefault.jpg&key=96f1f04c5f4143bcb0f2e68c87d65feb&type=text%2Fhtml&schema=youtube" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div>
-                    </div>
-                    <div class="video-description">
-                      <h3 class="video-heading">Debil</h3>
-                      <div class="text-block-11"> - a short course on how to be a debil</div>
-                    </div>
-                  </div>
-                  <div class="video-card">
-                    <div class="wideo-wrapper">
-                      <div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FGb4bCFTC2Oc%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DGb4bCFTC2Oc&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FGb4bCFTC2Oc%2Fhqdefault.jpg&key=96f1f04c5f4143bcb0f2e68c87d65feb&type=text%2Fhtml&schema=youtube" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div>
-                    </div>
-                    <div class="video-description">
-                      <h3 class="video-heading">Debil</h3>
-                      <div class="text-block-11"> - a short course on how to be a debil</div>
-                    </div>
-                  </div>
-                  <div class="video-card">
-                    <div class="wideo-wrapper">
-                      <div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FGb4bCFTC2Oc%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DGb4bCFTC2Oc&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FGb4bCFTC2Oc%2Fhqdefault.jpg&key=96f1f04c5f4143bcb0f2e68c87d65feb&type=text%2Fhtml&schema=youtube" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div>
-                    </div>
-                    <div class="video-description">
-                      <h3 class="video-heading">Debil</h3>
-                      <div class="text-block-11"> - a short course on how to be a debil</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div class="dropdown">
-                  <div class="dropdown-content"></div>
-                </div>
-              </div>
+              <div class="ejs"><% } %></div>
             </div>
           </div>
           <div data-w-tab="Materials" class="w-tab-pane">
             <div class="tab-wrapper">
               <h3 class="section-heading portal"><span class="text-span-16">Mat</span>erials</h3>
+              <div class="ejs"><% if(user.admin) { %></div>
+              <a href="/admin/material" class="cors-register-now-2 courses w-inline-block">
+                <div class="text-block-2">Add material</div>
+              </a>
+              <div class="ejs"><% } else { %></div>
               <a href="/home" class="cors-register-now-2 courses w-inline-block">
                 <div class="text-block-2">Browse courses</div>
               </a>
+              <div class="ejs"><% } %></div>
               <div class="portal-files">
                 <div class="w-layout-grid grid-7">
+                  <div class="ejs"><% for(let i = 0; i < materials.length; i++) { let material = materials[i]; %></div>
                   <div class="reading-container">
                     <div class="reading-pic"></div>
-                    <h1 class="heading-14">Posing Guide by Olya Shendrik</h1>
-                    <h3 class="heading-15">Read</h3>
-                  </div>
-                  <div class="reading-container _2">
-                    <div class="reading-pic _2"></div>
-                    <h1 class="heading-14">Posing Guide by Olya Shendrik</h1>
-                    <h3 class="heading-15">Read</h3>
-                  </div>
+                    <div class="splitter always-split">
+                      <h1 class="heading-14"><%= material.name %></h1>
+                      <div><% if(user.admin) {%><a class="delete-material" href="/admin/material/<%= material._id %>">Delete</a><% } %></div>
+                    </div><a href="/file/get/<%= material._id %>" target="_blank" class="material-read">Read</a></div>
+                  <div class="ejs"><% } %></div>
                 </div>
               </div>
+              <div></div>
             </div>
           </div>
           <div data-w-tab="Presets" class="w-tab-pane">
             <div class="tab-wrapper">
               <h3 class="section-heading portal"><span class="text-span-10">Pre</span>sets</h3>
+              <div class="ejs"><% if(user.admin) { %></div>
+              <a href="/admin/preset" class="cors-register-now-2 courses w-inline-block">
+                <div class="text-block-2">Add preset</div>
+              </a>
+              <div class="ejs"><% } else { %></div>
               <a href="/home" class="cors-register-now-2 courses w-inline-block">
                 <div class="text-block-2">Browse courses</div>
               </a>
+              <div class="ejs"><% } %></div>
               <div class="portal-files">
                 <div class="w-layout-grid grid-7">
-                  <a href="#" class="preset w-inline-block">
-                    <h3 class="preset-heading">Heading</h3>
+                  <div class="ejs"><% for(let i = 0; i < presets.length; i++){  let preset = presets[i]; %></div>
+                  <a href="/get/file/<%= preset._id %>" target="_blank" class="preset w-inline-block">
+                    <h3 class="preset-heading"><%= preset.name %></h3>
                   </a>
-                  <a href="#" class="preset _1 w-inline-block">
-                    <h3 class="preset-heading">Heading</h3>
-                  </a>
-                  <a href="#" class="preset _2 w-inline-block">
-                    <h3 class="preset-heading">Heading</h3>
-                  </a>
-                  <a href="#" class="preset w-inline-block">
-                    <h3 class="preset-heading">Heading</h3>
-                  </a>
-                  <a href="#" class="preset w-inline-block">
-                    <h3 class="preset-heading">Heading</h3>
-                  </a>
-                  <a href="#" class="preset w-inline-block">
-                    <h3 class="preset-heading">Heading</h3>
-                  </a>
-                  <a href="#" class="preset w-inline-block">
-                    <h3 class="preset-heading">Heading</h3>
-                  </a>
-                  <a href="#" class="preset w-inline-block">
-                    <h3 class="preset-heading">Heading</h3>
-                  </a>
-                  <a id="w-node-4cebe5604862-5ff02e3c" href="#" class="preset _2 w-inline-block">
-                    <h3 class="preset-heading">Heading</h3>
-                  </a>
+                  <div class="ejs"><% } %></div>
                 </div>
               </div>
             </div>

@@ -1,10 +1,12 @@
 const section = $('#section-by');
+console.log(section)
 let currCourseDiscount;
 let currCoursePrice;
 let couponApplied = false;
 
 $('.course-buy-button').click((e) => {
 	$('#user-message').text('');
+	console.log('click')
 
 	let currCourseName = $(e.target).attr('cname');
 	let currCourseStarts = $(e.target).attr('cstart');

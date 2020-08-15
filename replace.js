@@ -9,7 +9,7 @@ fs.readdir('./public/views', (err, files) => {
         return
     } else {
         files.forEach(fileName => {
-            replaceInFIle(fileName);
+            fileName.includes('.html') ? replaceInFIle(fileName) : false;
         });
     }
 })
@@ -24,6 +24,8 @@ function replaceInFIle(fileName) {
             file = file.replace(/&gt;/g, '>');
             file = file.replace(/&quot;/g, '"');
             file = file.replace(/&#x27;/g, "'");
+            file = file.replace(/VD_ON/g, '<%-');
+            file = file.replace(/VD_CL/g, '-%>');
     
             fs.writeFile(path, file, 'utf8', (err2) => {
                 err2 ? console.log(err2) : false;

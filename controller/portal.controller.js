@@ -25,7 +25,7 @@ async function renderPortalForAdmin(req, res, next) {
 		videos[video.category].push(video);
 	});
 
-	res.render('portal', {
+	res.render('members-portal', {
 		user: req.user,
 		courses: courses,
 		materials: materials,
@@ -68,7 +68,7 @@ async function renderPortalForUser(req, res, next) {
 		videos[video.category].push(video);
 	});
 
-	res.render('portal', {
+	res.render('members-portal', {
 		user: req.user,
 		courses: courses,
 		materials: materials,
