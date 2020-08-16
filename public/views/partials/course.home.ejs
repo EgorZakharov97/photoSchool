@@ -12,25 +12,25 @@
     <div style="height:0PX;display:block" class="dropdown-content">
         <div class="cladd-desc-wrapper">
             <div class="w-layout-grid grid_course_home">
-                <div id="w-node-037fa139d58d-5b0e6e15" class="course-card">
+                <div id="w-node-037fa139d58d-761ad3b7" class="course-card">
                     <div class="rich-text-block-7 w-richtext">
                         <%- course.richText.description -%>
                     </div>
                 </div>
-                <div id="w-node-037fa139d59b-5b0e6e15" class="course-card">
+                <div id="w-node-037fa139d59b-761ad3b7" class="course-card">
                     <div class="w-richtext">
                         <%- course.richText.willLearn -%>
                     </div>
                 </div>
-                <div id="w-node-037fa139d5b0-5b0e6e15" class="course-card">
+                <div id="w-node-037fa139d5b0-761ad3b7" class="course-card">
                     <div class="w-richtext">
                         <%- course.richText.timeline -%>
                     </div>
                 </div>
-                <div id="w-node-9ac068139c83-5b0e6e15" class="course-card dates">
+                <div id="w-node-9ac068139c83-761ad3b7" class="course-card dates">
                     <div class="dateblock">
                         <div class="date-phrase">Duration</div>
-                        <div class="date-duration red"><%= new Date(course.importantDates.courseStarts - course.importantDates.courseEnds).getDay() - 1 %> Days</div>
+                        <div class="date-duration red"><%= new Date(course.importantDates.courseEnds - course.importantDates.courseStarts).getDate()+1 %> Days</div>
                     </div>
                     <div class="dateblock">
                         <div class="date-phrase">Price before <%= monthNames[course.importantDates.discountDeadline.getUTCMonth()] + ' ' + course.importantDates.discountDeadline.getUTCDate() %></div>
@@ -55,8 +55,8 @@
                         <div class="date-duration"><%= course.seats.total - course.seats.occupied %></div>
                     </div>
                 </div>
-                <% if(course.seats.total > course.seats.occupied) { %>
-                    <a id="w-node-037fa139d5be-5b0e6e15" cDisc="<%= discount %>" cPic="<%= course.image %>" uEmail="<%= user.email %>" cID="<%= course._id %>" cPrice="<%= course.calculateCurrentPrice() %>" cName="<%= course.name%>" cStart="<%= dateStarts %>" href="#" class="cors-register-now-2 courses course-buy-button">Register now</a>
+                <% if((course.seats.total > course.seats.occupied) && ((user.courses && !user.courses.includes(String(course._id))) || !user.courses)) { %>
+                    <a id="w-node-037fa139d5be-761ad3b7" cDisc="<%= discount %>" cPic="<%= course.image %>" uEmail="<%= user.email %>" cID="<%= course._id %>" cPrice="<%= course.calculateCurrentPrice() %>" cName="<%= course.name%>" cStart="<%= dateStarts %>" href="#" class="cors-register-now-2 courses course-buy-button">Register now</a>
                 <% } %>
             </div>
         </div>

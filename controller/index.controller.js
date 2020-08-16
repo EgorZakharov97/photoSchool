@@ -6,21 +6,24 @@ const express = require('express'),
 module.exports.getIndexPage = async (req, res, next) => {
 	let courses;
 	let discount;
+	let pastCourses;
 	if(req.user) {
-		if(req.user.admin){
-			courses = await Course.find({}).sort('importantDates.courseStarts');
-		} else {
-			let user = await User.findById(req.user._id);
-			discount = Math.round((1 - user.getPriceMultiplier()) * 100);
-			courses = await Course.find({$and: [{"importantDates.registrationDeadline": {$gt: Date.now() - 172800000}}, {_id: {$nin: req.user.courses}}]}).sort('importantDates.courseStarts');
-		}
+		let user = await User.findById(req.user._id);
+		discount = Math.round((1 - user.getPriceMultiplier()) * 100);
+		courses = await Course.find({"importantDates.registrationDeadline": {$gt: Date.now() - 172800000}}).sort('importantDates.courseStarts');
 	} else {
 		courses = await Course.find({"importantDates.registrationDeadline": {$gt: Date.now() - 172800000}}).sort('importantDates.courseStarts')
 	}
 
+	pastCourses = await Course
+		.find({"importantDates.courseEnds": {$lt: Date.now()}})
+		.sort('importantDates.courseStarts')
+		.populate('comments');
+
 	res.render('index', {
 		courses: courses,
 		user: req.user || 'NONE',
-		discount: discount || 'NONE'
+		discount: discount || 'NONE',
+		pastCourses: pastCourses || []
 	});
 };

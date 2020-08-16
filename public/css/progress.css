@@ -6,6 +6,7 @@
   width: 700px;
   display: flex;
   align-items: center;
+  padding-inline-start: 0;
 }
 
 .progress-header {

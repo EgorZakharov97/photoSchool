@@ -64,13 +64,19 @@ const CourseSchema = new mongoose.Schema({
 	chatLink: {
 		type: String,
 		required: false
-	}
+	},
+	comments: [
+		{
+			type: mongoose.Schema.Types.ObjectID,
+            ref: "Comment",
+		}
+	]
 });
 
 CourseSchema.methods.calculateCurrentPrice = function() {
 	let today = new Date();
 	let price;
-	today > this.importantDates.discountDeadline ? price = this.pricing.finalPrice : price = this.pricing.discountPrice;
+	today > new Date(this.importantDates.discountDeadline)+1 ? price = this.pricing.finalPrice : price = this.pricing.discountPrice;
 	return price;
 };
 

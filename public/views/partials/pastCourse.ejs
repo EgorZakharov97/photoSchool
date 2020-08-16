@@ -1,0 +1,69 @@
+<% const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June",
+    "July", "Aug", "Sept", "Oct", "Nov", "Dec"
+]; %>
+
+<% let dateStarts = monthNames[course.importantDates.courseStarts.getUTCMonth()] + ' ' + course.importantDates.courseStarts.getUTCDate() + ' ' + course.importantDates.courseStarts.getFullYear() %>
+
+<div id="dropdown-sample" class="dropdown">
+        <div data-w-id="e0453274-9ba5-db2a-8b7c-5f99f075914c" class="dropdown-trigger" style="background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url('<%= course.image %>'); background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('<%= course.image %>');">
+          <div class="text-block"><%= course.name %></div>
+          <div class="date"><%= dateStarts %></div>
+        </div>
+        <div style="height:0PX;display:block" class="dropdown-content">
+          <div class="cladd-desc-wrapper">
+            <div class="w-layout-grid grid_course_home">
+              <div id="w-node-5f99f0759154-761ad3b7" class="course-card">
+                <div class="rich-text-block-7 w-richtext">
+                  <%- course.richText.description -%>
+                </div>
+              </div>
+              <div id="w-node-5f99f0759162-761ad3b7" class="course-card">
+                <div class="w-richtext">
+                  <%- course.richText.willLearn -%>
+                </div>
+              </div>
+              <div id="w-node-5f99f0759177-761ad3b7" class="course-card">
+                <div class="w-richtext">
+                  <%- course.richText.timeline -%>
+                </div>
+              </div>
+              <% if(user.admin || course.comments.length > 0 || (user.courses && user.courses.includes(String(course._id)))) {%> 
+              <div id="w-node-d2be69dc1b7b-761ad3b7" class="course-card">
+                <h2 class="heading-2">See what people think about this workshop</h2>
+                <% if(user.admin || (user.courses && user.courses.includes(String(course._id)))){ %>
+                  <div class="new-comment w-form">
+                    <form class="form-3 comment-form" method="post" course="<%= course._id %>">
+                      <div class="textarea editor"></div>
+                      <div class="btn-wrappr">
+                        <input type="submit" value="Submit" data-wait="Please wait..." class="button in-comment w-button">
+                      </div>
+                    </form>
+                  </div>
+                <% } %>
+                <div class="all-comments">
+                  <% for(let i = 0; i < course.comments.length; i++) { %>
+                  <% let comment = course.comments[course.comments.length-1 - i]; %>
+                    <div class="comment">
+                      <div class="comment-contents">
+                        <div class="comment-user">
+                          <div class="person-avatar small" style="background-image: url('<%= comment.author.img || '/public/images/bull2-min.png' %>')"></div>
+                          <h5 class="person-name"><%= comment.author.name %></h5>
+                        </div>
+                        <div class="comment-text-wrapper">
+                          <blockquote id="<%= comment._id %>" class="comment-text"><%- comment.body %></blockquote>
+                        </div>
+                      </div>
+                      <div class="comment-tools">
+                      <% if(user.admin || user._id == comment.author.id) { %>
+                      <a href="#" comment="<%= comment._id %>" class="comment-action edit-comment">Edit</a>
+                      <% } %>
+                      </div>
+                    </div>
+                  <% } %>
+                </div>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>

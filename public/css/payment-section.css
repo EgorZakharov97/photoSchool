@@ -51,6 +51,7 @@
 }
 
 .close-btn {
+  cursor: pointer;
   position: absolute;
   left: auto;
   top: -3%;
@@ -91,6 +92,8 @@
 .text-block-15 {
   position: absolute;
   text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
 .field-label-6 {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Sun Aug 02 2020 07:37:46 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="5f1212b6860f15805b0e6e15" data-wf-site="5f1212b6860f150f9f0e6e14">
+<!--  Last Published: Sat Aug 15 2020 07:02:47 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="5f37781400e9804e761ad3b7" data-wf-site="5f1212b6860f150f9f0e6e14">
 <head>
   <meta charset="utf-8">
   <title>Photolite Academy</title>
@@ -17,13 +17,14 @@
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/photolite-academy.webflow.css" rel="stylesheet" type="text/css">
-  <link href="css/payment-section.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-  <script type="text/javascript">WebFont.load({  google: {    families: ["Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic","Exo:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic","Changa One:400,400italic","Droid Sans:400,700","Droid Serif:400,400italic,700,700italic","Oswald:200,300,400,500,600,700","Bitter:400,700,400italic","Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic","Great Vibes:400","Merriweather:300,300italic,400,400italic,700,700italic,900,900italic"]  }});</script>
+  <script type="text/javascript">WebFont.load({  google: {    families: ["Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic","Exo:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic","Changa One:400,400italic","Droid Sans:400,700","Droid Serif:400,400italic,700,700italic","Oswald:200,300,400,500,600,700","Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]  }});</script>
   <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
   <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <link rel="stylesheet" href="public/css/payment-section.css">
 </head>
 <body class="body">
   <div class="section-welcome">
@@ -36,7 +37,7 @@
           <nav role="navigation" class="nav-menu w-nav-menu"><a href="index.html" data-w-id="2c2591f4-9f50-3a72-5deb-6458ad5eca79" aria-current="page" class="nav-link w-nav-link w--current">What is it?</a><a href="#about" data-w-id="2c2591f4-9f50-3a72-5deb-6458ad5eca7b" class="nav-link w-nav-link">Who is it for?</a><a href="#contact" data-w-id="2c2591f4-9f50-3a72-5deb-6458ad5eca7d" class="nav-link w-nav-link">Ask Questions</a><a href="#courses" data-w-id="0a41055f-2f34-d583-b521-7a789ba44ea8" class="nav-link w-nav-link">Courses</a><a href="/portal" data-w-id="c77b1bd3-badf-0e3a-0091-1b3c49d0af2b" class="nav-link w-nav-link">Portal</a>
             <div class="nav-divider"></div>
             <h3 class="nav-help">Get Help</h3>
-            <a target="_blank" href="https://wa.me/12048813113" class="link-button w-inline-block">
+            <a href="#" class="link-button w-inline-block">
               <h3 class="link-button-text">Talk to us</h3>
             </a>
           </nav>
@@ -47,10 +48,10 @@
     <div class="w-container">
       <div class="welcome-phrase"><span class="text-span-15">Learn Photography.</span> Improve your Creativity. Practice with real models, stylists and coaches. </div>
       <div class="welcome-buttons">
-        <a style="background-color: transparent; border: 1px solid #E74C32" href="#about" class="welcome-button first w-inline-block">
+        <a href="#about" class="button red on-black mg w-inline-block">
           <h3 class="heading">How does it work?</h3>
         </a>
-        <a href="#courses" class="welcome-button transparent w-inline-block">
+        <a href="#courses" class="button w-inline-block">
           <h3 class="heading">Let&#x27;s Study!</h3>
         </a>
       </div>
@@ -59,26 +60,26 @@
       <div class="welcome-about">
         <div class="about-col">
           <a href="#" class="link-wrapper w-inline-block">
-            <div class="about-logo dani"></div>
-            <h4 class="heading-2">@shumov_danny</h4>
+            <div class="person-avatar dani"></div>
+            <h4 class="person-name">@shumov_danny</h4>
           </a>
           <div class="rich-text w-richtext">
             <h2>Danny Shumov</h2>
-            <p>Hello! My name is Danny. </p>
+            <p>Hello! My name is Danny.</p>
             <p>I&#x27;ve been taking pictures for my entire life and honestly if somebody told me there are workshops like this in my city I&#x27;d sell my soul for it, but you are lucky. Today you can pay for it with a credit card :)</p>
-            <p>I had a chance to study photography from the world class artists, like Elizaveta Porodina, Dmitry Gusev and Igor Novikov. I&#x27;ve gained a lot of experience working on creatives and editorial projects and now I&#x27;m ready to share this knowledge with you. </p>
+            <p>I had a chance to study photography from the world class artists, like Elizaveta Porodina, Dmitry Gusev and Igor Novikov. I&#x27;ve gained a lot of experience working on creatives and editorial projects and now I&#x27;m ready to share this knowledge with you.</p>
             <p>Cheers.</p>
             <p>‍</p>
           </div>
         </div>
         <div class="about-col">
           <a href="#" class="link-wrapper w-inline-block">
-            <div class="about-logo olya"></div>
-            <h4 class="heading-2">@olya_shendrik</h4>
+            <div class="person-avatar olya"></div>
+            <h4 class="person-name">@olya_shendrik</h4>
           </a>
           <div class="rich-text w-richtext">
             <h2>Olya Shendrik</h2>
-            <p>Hello my creative people! </p>
+            <p>Hello my creative people! </p>
             <p>My name is Olya (Olia, Ola, Oli, Olga or whatever is easier for you).</p>
             <p>I feel like I’ve been taking pictures forever, but to be honest I started to take actually worthy pictures only couple years ago after I had a chance to learn the psychology of photography from the best (IMHO) Dmitry Gusev.</p>
             <p>As much as I just like to talk about art and inspiration I like to share my photography knowledge with people who interested in that. If you one of them I don’t think that you will miss this opportunity of getting unique knowledge from our workshop.</p>
@@ -91,13 +92,15 @@
           <div class="quote">&quot;</div>
           <div class="quote">&quot;</div>
         </div>
-        <blockquote data-w-id="11d8f825-404a-57a1-3b42-34a19b8b698b" class="block-quote-2"><span data-w-id="de06dbb6-c432-136a-1b7e-a16df6c1ab2f">We are very excited to bring this photography workshop to life and share our experience with you.</span> <span data-w-id="b329a83d-389a-1b67-d9c7-f89cc94ca382">This is some kind of event we wish we had at the beginning of our photography path. We went through a bunch of mistakes by ourselves</span> <span data-w-id="d18aef4c-9606-641a-40bd-124e2f934106">now our mission is to help you avoid them and grow with us. Hope to meet you soon!</span></blockquote>
+        <blockquote data-w-id="11d8f825-404a-57a1-3b42-34a19b8b698b" class="block-quote-2"><span data-w-id="de06dbb6-c432-136a-1b7e-a16df6c1ab2f"><strong>We are very excited to bring this photography workshop to life and share our experience with you. This is some kind of event we wish we had at the beginning of our photography path. We went through a bunch of mistakes by ourselves now our mission is to help you avoid them and grow with us. Hope to meet you soon!</strong></span></blockquote>
       </div>
     </div>
   </div>
   <div id="about" class="section-for-whom">
     <div class="w-container">
-      <h3 class="section-heading"><span class="text-span">Who is it for?</span><br></h3>
+      <div class="div-block-13">
+        <h3 class="section-heading"><span class="text-span">Who is it for?</span><br></h3>
+      </div>
     </div>
     <div class="who-blocks">
       <div class="who-block-wrapper">
@@ -109,13 +112,13 @@
       <div class="who-block-wrapper">
         <div class="who-block">
           <h3 class="for-whom-heading-block">For Professionals</h3>
-          <div class="for-whom-text">We are not here to show you some basics!<br>We focus on your creativity first and there&#x27;s always a challenging &quot;out of the box&quot; concept explained in each workshop. Get ready for a challenge!</div>
+          <div class="for-whom-text"><strong>We are not here to show you some basics!</strong><br><strong>We focus on your creativity first and there&#x27;s always a challenging &quot;out of the box&quot; concept explained in each workshop. Get ready for a challenge!</strong></div>
         </div>
       </div>
       <div class="who-block-wrapper">
         <div class="who-block">
           <h3 class="for-whom-heading-block">Not Protogtaphers</h3>
-          <div class="for-whom-text">Looking for a new hobby? Bored? We gotch you. Explore photography and learn new skills with us. Explore the world through an artistic approach.<br>It&#x27;s fun!</div>
+          <div class="for-whom-text"><strong>Looking for a new hobby? Bored? We gotch you. Explore photography and learn new skills with us. Explore the world through an artistic approach.</strong><br><strong>It&#x27;s fun!</strong></div>
         </div>
       </div>
     </div>
@@ -123,15 +126,13 @@
   <div class="section-how-work">
     <div class="w-container">
       <div class="how-work-text">
-        <h2 class="heading-on-black"><span class="text-span-2">How</span> does it work¿</h2>
-        <div class="rich-text white w-richtext">
+        <h2 class="section-heading on-black smaller"><span class="text-span-2">How</span> does it work¿</h2>
+        <div class="rich-text on-black w-richtext">
           <p><strong>It&#x27;s easy!</strong> Each of our studying programs is made of two parts. Online and offline. When you register for a workshop you get access to a student portal with video tutorials, presets, and the most important - workshop group chats, where you can chat with other students and your coaches.</p>
           <p>Each workshop is made of several parts.</p>
           <p><strong>Theory</strong> - this is where we get to know each other and talk about theoretical background based on the workshop theme.</p>
           <p><strong>Practice</strong> - this is where it&#x27;s getting interesting. We set up a whole set for you with a model, makeup artists, stylist, and unique concept. We take pictures together, then you take pictures by yourself!</p>
           <p><strong>Feedback</strong> - after the workshop you will have some photos to work with. We will ask you to send us your top 3 images, so we can give you some feedback on the composition, color, light, and other aspects.</p>
-          <p>‍</p>
-          <p>‍</p>
         </div>
       </div>
     </div>
@@ -159,160 +160,154 @@
     <div class="w-container">
       <h3 class="section-heading"><span class="text-span">Dive into </span>the theory</h3>
       <div class="dive-into-img-wrapper"></div>
-      <p class="section-main-paragraph">
-        We will explain to you the most complicated concept of photography using the most understandable methods. We know how boring the theoretical part of education can be, that's why we divided all the information into offline and online blocks. <br><br>You will have video tutorials, posing guides, and reading recommendations. At the same time, we will provide you with a strong base during our in-person workshops, passing the knowledge we gained from world-class artists.
-      </p>
+      <p class="section-main-paragraph">We will explain to you the most complicated concept of photography using the most understandable methods. We know how boring the theoretical part of education can be, that&#x27;s why we divided all the information into offline and online blocks.<br><br>You will have video tutorials, posing guides, and reading recommendations. At the same time, we will provide you with a strong base during our in-person workshops, passing the knowledge we gained from world-class artists.</p>
     </div>
   </div>
   <div class="section-videos">
     <div class="w-container">
       <div class="w-layout-grid grid-3">
-        <div id="w-node-8e4fe85ea04b-5b0e6e15" data-w-id="13cbcfde-4455-f4e4-6a46-8e4fe85ea04b" class="content-col _2"></div>
-        <h2 id="w-node-bff495009c87-5b0e6e15" class="heading-on-black"><span class="text-span-2">Watch </span>courses and vebinars</h2>
-        <p id="w-node-06861aeb8c29-5b0e6e15" class="black-simple-paragraph">You will have acess to video tutorials, lessons and vebinars with other artists and students. This acess is exclusive and limited to 1 month after your workshop date.</p>
+        <div id="w-node-8e4fe85ea04b-761ad3b7" data-w-id="13cbcfde-4455-f4e4-6a46-8e4fe85ea04b" class="content-col _2"></div>
+        <h3 id="w-node-bff495009c87-761ad3b7" class="section-heading on-black smaller"><span class="text-span-2">Watch </span>courses and vebinars</h3>
+        <p id="w-node-06861aeb8c29-761ad3b7" class="black-simple-paragraph">You will have acess to video tutorials, lessons and vebinars with other artists and students. This acess is exclusive and limited to 1 month after your workshop date.</p>
       </div>
     </div>
   </div>
   <div class="section-study">
     <div class="w-container">
       <div class="w-layout-grid grid-4">
-        <h3 id="w-node-a31edfce4188-5b0e6e15" class="section-heading smaller"><span class="text-span">Study</span> while practice.</h3>
-        <div id="w-node-e74044531675-5b0e6e15" class="div-block-12">
-          <div class="rich-text _2 w-richtext">
+        <h3 id="w-node-a31edfce4188-761ad3b7" class="section-heading smaller"><span class="text-span">Study</span> when practice.</h3>
+        <div id="w-node-e74044531675-761ad3b7" class="div-block-12">
+          <div class="section-main-paragraph w-richtext">
             <h2>Yes! You are going to take photos.</h2>
-            <p>During our workshops, each student is going to have some time to take pictures one on one with a model at the set that we've prepared for you.</p>
+            <p>During our workshops, each student is going to have some time to take pictures one on one with a model at the set that we&#x27;ve prepared for you.</p>
             <p><strong>Build a unique portfolio.</strong></p>
-            <p>Each of our workshops is going to have a unique concept behind it. It means that the photos you take during the workshop are going to be "out of this world".</p>
+            <p>Each of our workshops is going to have a unique concept behind it. It means that the photos you take during the workshop are going to be &quot;out of this world&quot;.</p>
             <p><strong>Learn to work with a team.</strong></p>
             <p>We will have a serious team on each workshop set. This is your chance to learn how to interact with other photographers, models, and stylists.</p>
             <p>‍</p>
           </div>
-          <a href="#courses" class="welcome-button down w-inline-block">
-            <h4 style="color: black; font-weight: 600;" class="heading-3">Let&#x27;s study!</h4>
+          <a href="#courses" class="button w-inline-block">
+            <h4>Let&#x27;s study!</h4>
           </a>
         </div>
-        <div id="w-node-9b4ac7bd11c7-5b0e6e15" class="img-wrapper"></div>
+        <div id="w-node-9b4ac7bd11c7-761ad3b7" class="img-wrapper"></div>
       </div>
     </div>
   </div>
   <div class="section-results">
     <div class="w-container">
       <h2 class="heading-on-black large"><span class="text-span-2">Check out </span>the work of your coaches.</h2>
-      <a href="#" class="exapmle-lightbox w-inline-block w-lightbox">
+      <a href="#" class="lightbox w-inline-block w-lightbox">
         <div class="lightbox-grid">
-          <div class="example-img-wrapper _1"></div>
-          <div class="example-img-wrapper _2"></div>
-          <div class="example-img-wrapper _3"></div>
-          <div class="example-img-wrapper _4"></div>
-          <div class="example-img-wrapper _5"></div>
-          <div class="example-img-wrapper _6"></div>
-          <div class="example-img-wrapper _7"></div>
-          <div class="example-img-wrapper _8"></div>
+          <div id="w-node-c0a280db89a9-761ad3b7" class="example-img-wrapper"><img src="images/dsc04718.jpg" srcset="images/dsc04718-p-500.jpeg 500w, images/dsc04718-p-800.jpeg 800w, images/dsc04718-p-1080.jpeg 1080w, images/dsc04718-p-1600.jpeg 1600w, images/dsc04718-p-2000.jpeg 2000w, images/dsc04718-p-2600.jpeg 2600w, images/dsc04718.jpg 3815w" sizes="(max-width: 767px) 200.015625px, (max-width: 991px) 174.71875px, (max-width: 1279px) 225.59375px, 216.1875px" alt="" class="img-lightbox"></div>
+          <div class="example-img-wrapper"><img src="images/dsc06092.jpg" srcset="images/dsc06092-p-500.jpeg 500w, images/dsc06092-p-800.jpeg 800w, images/dsc06092-p-1080.jpeg 1080w, images/dsc06092-p-1600.jpeg 1600w, images/dsc06092-p-2000.jpeg 2000w, images/dsc06092-p-2600.jpeg 2600w, images/dsc06092-p-3200.jpeg 3200w, images/dsc06092.jpg 4000w" sizes="(max-width: 767px) 200px, (max-width: 991px) 174.71875px, (max-width: 1279px) 225.59375px, 216.1875px" alt="" class="img-lightbox"></div>
+          <div class="example-img-wrapper"><img src="images/5f2129771050c21e392a_WXxZ6.jpg" srcset="images/5f2129771050c21e392a_WXxZ6-p-500.jpeg 500w, images/5f2129771050c21e392a_WXxZ6-p-800.jpeg 800w, images/5f2129771050c21e392a_WXxZ6-p-1080.jpeg 1080w, images/5f2129771050c21e392a_WXxZ6-p-1600.jpeg 1600w, images/5f2129771050c21e392a_WXxZ6.jpg 3648w" sizes="(max-width: 767px) 200px, (max-width: 991px) 174.71875px, (max-width: 1279px) 225.59375px, 216.1875px" alt="" class="img-lightbox"></div>
+          <div class="example-img-wrapper"><img src="images/sm2.jpg" srcset="images/sm2-p-500.jpeg 500w, images/sm2-p-800.jpeg 800w, images/sm2-p-1080.jpeg 1080w, images/sm2-p-2000.jpeg 2000w, images/sm2.jpg 4000w" sizes="(max-width: 767px) 200px, (max-width: 991px) 174.71875px, (max-width: 1279px) 225.59375px, 216.1875px" alt="" class="img-lightbox"></div>
+          <div class="example-img-wrapper"><img src="images/dsc02682_1.jpg" srcset="images/dsc02682_1-p-500.jpeg 500w, images/dsc02682_1-p-800.jpeg 800w, images/dsc02682_1-p-1080.jpeg 1080w, images/dsc02682_1.jpg 4000w" sizes="(max-width: 767px) 240px, (max-width: 991px) 174.71875px, (max-width: 1279px) 225.59375px, 216.1875px" alt="" class="img-lightbox"></div>
+          <div class="example-img-wrapper"><img src="images/5f2133783583e85643e7_ugJFd.jpg" srcset="images/5f2133783583e85643e7_ugJFd-p-500.jpeg 500w, images/5f2133783583e85643e7_ugJFd-p-800.jpeg 800w, images/5f2133783583e85643e7_ugJFd-p-1080.jpeg 1080w, images/5f2133783583e85643e7_ugJFd-p-1600.jpeg 1600w, images/5f2133783583e85643e7_ugJFd-p-2000.jpeg 2000w, images/5f2133783583e85643e7_ugJFd.jpg 4367w" sizes="(max-width: 767px) 218.34375px, (max-width: 991px) 174.71875px, (max-width: 1279px) 225.59375px, 216.1875px" alt="" class="img-lightbox"></div>
+          <div class="example-img-wrapper"><img src="images/5f212977c5dda6d061f2_zSB9m.jpg" srcset="images/5f212977c5dda6d061f2_zSB9m-p-500.jpeg 500w, images/5f212977c5dda6d061f2_zSB9m-p-800.jpeg 800w, images/5f212977c5dda6d061f2_zSB9m-p-1080.jpeg 1080w, images/5f212977c5dda6d061f2_zSB9m-p-1600.jpeg 1600w, images/5f212977c5dda6d061f2_zSB9m-p-2000.jpeg 2000w, images/5f212977c5dda6d061f2_zSB9m.jpg 3202w" sizes="(max-width: 767px) 213.453125px, (max-width: 991px) 174.71875px, (max-width: 1279px) 225.59375px, 216.1875px" alt="" class="img-lightbox"></div>
+          <div class="example-img-wrapper"><img src="images/6.PNG" srcset="images/6-p-500.png 500w, images/6.PNG 538w" sizes="(max-width: 767px) 240.171875px, (max-width: 991px) 174.71875px, (max-width: 1279px) 225.59375px, 216.1875px" alt="" class="img-lightbox"></div>
         </div>
         <script type="application/json" class="w-json">{
-          "items": [
-            {
-              "type": "image",
-              "_id": "5f21337994e1135d6b01248b",
-              "fileName": "5f21337994e1135d6b01248b_dsc04718.jpg",
-              "origFileName": "dsc04718.jpg",
-              "width": 3815,
-              "height": 5722,
-              "fileSize": 1257449,
-              "url": "images/dsc04718.jpg"
-            },
-            {
-              "type": "image",
-              "_id": "5f213377e75e6d74fe3dfac3",
-              "fileName": "5f213377e75e6d74fe3dfac3_dsc06092.jpg",
-              "origFileName": "dsc06092.jpg",
-              "width": 4000,
-              "height": 6000,
-              "fileSize": 236387,
-              "url": "images/dsc06092.jpg"
-            },
-            {
-              "width": 3648,
-              "caption": "",
-              "height": 5472,
-              "fileName": "5f2129771050c21e392aa4e3_img_9571.jpg",
-              "origFileName": "img_9571.jpg",
-              "url": "images/img_9571.jpg",
-              "_id": "5f2129771050c21e392aa4e3",
-              "type": "image",
-              "fileSize": 648625
-            },
-            {
-              "type": "image",
-              "_id": "5f213377b4840fa20c98a048",
-              "fileName": "5f213377b4840fa20c98a048_dsc02642.jpg",
-              "origFileName": "dsc02642.jpg",
-              "width": 4000,
-              "height": 6000,
-              "fileSize": 663985,
-              "url": "images/dsc02642.jpg"
-            },
-            {
-              "width": 4000,
-              "caption": "",
-              "height": 5000,
-              "fileName": "5f21337771ac9bd8fdd4e77d_dsc02682.jpg",
-              "origFileName": "dsc02682.jpg",
-              "url": "images/dsc02682.jpg",
-              "_id": "5f21337771ac9bd8fdd4e77d",
-              "type": "image",
-              "fileSize": 345154
-            },
-            {
-              "width": 4367,
-              "caption": "",
-              "height": 6000,
-              "fileName": "5f2133783583e85643e7ba6c_dsc02028.jpg",
-              "origFileName": "dsc02028.jpg",
-              "url": "images/dsc02028.jpg",
-              "_id": "5f2133783583e85643e7ba6c",
-              "type": "image",
-              "fileSize": 716278
-            },
-            {
-              "width": 3202,
-              "caption": "",
-              "height": 4500,
-              "fileName": "5f212977c5dda6d061f29534_img_9217_copy1.jpg",
-              "origFileName": "img_9217_copy1.jpg",
-              "url": "images/img_9217_copy1.jpg",
-              "_id": "5f212977c5dda6d061f29534",
-              "type": "image",
-              "fileSize": 354561
-            },
-            {
-              "type": "image",
-              "_id": "5f21327d7eb954bb5ece474c",
-              "fileName": "5f21327d7eb954bb5ece474c_6.PNG",
-              "origFileName": "6.PNG",
-              "width": 538,
-              "height": 672,
-              "fileSize": 943772,
-              "url": "images/6.PNG"
-            }
-          ]
-        }</script>
+  "items": [
+    {
+      "type": "image",
+      "_id": "5f21337994e1135d6b01248b",
+      "fileName": "5f37781400e98011a91ad43f_dsc04718.jpg",
+      "origFileName": "dsc04718.jpg",
+      "width": 3815,
+      "height": 5722,
+      "fileSize": 1257449,
+      "url": "images/dsc04718.jpg"
+    },
+    {
+      "type": "image",
+      "_id": "5f213377e75e6d74fe3dfac3",
+      "fileName": "5f37781400e980b7a61ad436_dsc06092.jpg",
+      "origFileName": "dsc06092.jpg",
+      "width": 4000,
+      "height": 6000,
+      "fileSize": 236387,
+      "url": "images/dsc06092.jpg"
+    },
+    {
+      "width": 3648,
+      "caption": "",
+      "height": 5472,
+      "fileName": "5f37781400e98010fd1ad413_img_9571.jpg",
+      "origFileName": "img_9571.jpg",
+      "url": "images/img_9571.jpg",
+      "_id": "5f2129771050c21e392aa4e3",
+      "type": "image",
+      "fileSize": 648625
+    },
+    {
+      "type": "image",
+      "_id": "5f213377b4840fa20c98a048",
+      "fileName": "5f37781400e98086431ad43a_dsc02642.jpg",
+      "origFileName": "dsc02642.jpg",
+      "width": 4000,
+      "height": 6000,
+      "fileSize": 663985,
+      "url": "images/dsc02642.jpg"
+    },
+    {
+      "width": 4000,
+      "caption": "",
+      "height": 5000,
+      "fileName": "5f37781400e98081ca1ad437_dsc02682.jpg",
+      "origFileName": "dsc02682.jpg",
+      "url": "images/dsc02682.jpg",
+      "_id": "5f21337771ac9bd8fdd4e77d",
+      "type": "image",
+      "fileSize": 345154
+    },
+    {
+      "width": 4367,
+      "caption": "",
+      "height": 6000,
+      "fileName": "5f37781400e98060181ad43b_dsc02028.jpg",
+      "origFileName": "dsc02028.jpg",
+      "url": "images/dsc02028.jpg",
+      "_id": "5f2133783583e85643e7ba6c",
+      "type": "image",
+      "fileSize": 716278
+    },
+    {
+      "width": 3202,
+      "caption": "",
+      "height": 4500,
+      "fileName": "5f37781400e98023671ad410_img_9217_copy1.jpg",
+      "origFileName": "img_9217_copy1.jpg",
+      "url": "images/img_9217_copy1.jpg",
+      "_id": "5f212977c5dda6d061f29534",
+      "type": "image",
+      "fileSize": 354561
+    },
+    {
+      "type": "image",
+      "_id": "5f21327d7eb954bb5ece474c",
+      "fileName": "5f37781400e98027491ad427_6.PNG",
+      "origFileName": "6.PNG",
+      "width": 538,
+      "height": 672,
+      "fileSize": 943772,
+      "url": "images/6.PNG"
+    }
+  ]
+}</script>
       </a>
-      <div class="btn-wrapper w">
-        <a href="#courses" class="welcome-button w-inline-block">
-          <h4 class="heading-3 red">Let&#x27;s study!</h4>
-        </a>
-      </div>
+      <a href="#courses" class="button on-black w-inline-block">
+        <h4>Let&#x27;s study!</h4>
+      </a>
     </div>
   </div>
   <div class="section-mistakes">
     <div class="w-container">
       <div class="w-layout-grid grid-3">
-        <div id="w-node-7163463799c2-5b0e6e15" class="img-container"></div>
-        <h3 id="w-node-3e1bc47b03fd-5b0e6e15" class="section-heading left"><span class="text-span">Learn </span>from mistakes.</h3>
-        <p id="w-node-bae95e1de94e-5b0e6e15" class="section-main-paragraph left">After each workshop, you will have some material to use for your portfolio and we'd love to help you understand what are your images like from an expert point of view.
-          <br><br>We will ask you to send us the top 3 images you took during the workshop and we will review them. We will give you some valuable feedback and personal advice.
-        </p>
+        <div id="w-node-7163463799c2-761ad3b7" class="img-container"></div>
+        <h3 id="w-node-3e1bc47b03fd-761ad3b7" class="section-heading left"><span class="text-span">Learn </span>from your mistakes.</h3>
+        <p id="w-node-bae95e1de94e-761ad3b7" class="section-main-paragraph left">After each workshop, you will have some material to use for your portfolio and we&#x27;d love to help you understand what are your images like from an expert point of view.<br><br>We will ask you to send us the top 3 images you took during the workshop and we will review them. We will give you some valuable feedback and personal advice.</p>
       </div>
     </div>
   </div>
@@ -321,18 +316,26 @@
       <h2 class="heading-on-black modified">Classes <span class="text-span-2">Calendar</span></h2>
     </div>
     <div class="container-7 w-container">
-      <div class="w-embed">
         <% for(let i=0; i < courses.length; i++) { %>
           <%- include('partials/course.home.ejs', {course: courses[i]}) -%>
       <% } %>
-      </div>
+    </div>
+  </div>
+  <div id="courses" class="section-courses past-courses">
+    <div class="container-courses w-container">
+      <h2 class="heading-on-black modified">Past <span class="text-span-2">Classes</span></h2>
+    </div>
+    <div class="container-7 w-container">
+      <% for(let i=0; i < pastCourses.length; i++) { %>
+        <%- include('partials/pastCourse.ejs', {course: pastCourses[i]}) -%>
+    <% } %>
     </div>
   </div>
   <div id="contact" class="section-ask">
     <div class="w-container">
       <h3 class="section-heading mid">Any questions <span class="text-span-8">left</span>?</h3>
       <div class="div-block-9">
-        <a target="_blank" href="https://wa.me/12048813113" class="link-block w-inline-block">
+        <a target="_blank" href="https://wa.me/12048813113" class="button red">
           <div class="text-block-5">Let&#x27;s talk in WhatsUp</div>
         </a>
       </div>
@@ -418,6 +421,25 @@
       </div>
     </div>
   </section>
+  <div id="edit-comment" class="edit-course">
+    <div class="w-container">
+      <div class="window">
+        <h2 class="heading-window">Edit your comment</h2>
+        <div>
+          <div id="comment-editor" class="div-block-14"></div>
+        </div>
+        <div class="splitter">
+          <a href="#" id="comment-btn-red" class="button red w-inline-block">
+            <h3 class="heading">Update</h3>
+          </a>
+          <a href="#" id="comment-btn-white" class="button on-white w-inline-block">
+            <h3 class="heading black">Delete</h3>
+          </a>
+        </div>
+        <div data-w-id="2562af65-ff64-6da9-3390-16bf712dd2e9" class="close">X</div>
+      </div>
+    </div>
+  </div>
 
   <!-- Start of LiveChat (www.livechatinc.com) code -->
   <script>
@@ -427,7 +449,6 @@
   </script>
   <noscript><a href="https://www.livechatinc.com/chat-with/12046713/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechatinc.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
   <!-- End of LiveChat code -->
-
 
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js?site=5f1212b6860f150f9f0e6e14" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="js/webflow.js" type="text/javascript"></script>
@@ -444,5 +465,9 @@
     gtag('config', 'UA-174491211-1');
   </script>
 <!--End of  google analytics-->
+
+<!-- Quill -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="/public/js/comments-tools.js"></script>
 </body>
 </html>
