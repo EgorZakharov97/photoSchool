@@ -1,7 +1,8 @@
 const express = require('express'),
 	logger = require('../service/logger/logger'),
 	Course = require('../models/Course'),
-	User = require('../models/User');
+	User = require('../models/User'),
+	Review = require('../models/Review');
 
 module.exports.getIndexPage = async (req, res, next) => {
 	let courses;
@@ -27,3 +28,30 @@ module.exports.getIndexPage = async (req, res, next) => {
 		pastCourses: pastCourses || []
 	});
 };
+
+module.exports.getReviewPage = (req, res, next) => {
+	let email = req.params.email;
+	if(email){
+		res.render('review-form', {email: email, HOST: process.env.HOST});
+	} else {
+		res.status(500);
+		res.render('500');
+	}
+}
+
+module.exports.postReview = (req, res, next) => {
+	let email = req.params.email;
+	if(email) {
+		Review.create(req.body, (err, review) => {
+			if(err){
+				logger.error(err);
+				res.status(500);
+				res.redirect('/');
+			} else {
+				logger.info(`${email} just left a review with id ${review.id}`);
+				logger.info(`Portal: ${review.portal}\nWorkshop: ${review.workshop}\nWebEx: ${review.webex}\nBody:\n${review.body}\n`);
+				res.redirect('/');
+			}
+		})
+	}
+}

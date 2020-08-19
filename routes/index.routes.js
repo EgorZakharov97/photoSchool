@@ -29,4 +29,8 @@ router.get('/disclaimer', (req, res) => {
 	res.render('disclaimer')
 });
 
+router.route('/review/:email')
+	.get(controller.getReviewPage)
+	.post(controller.postReview)
+
 module.exports = router;
