@@ -44,7 +44,9 @@ class DBTransport extends Transport {
 const logger = winston.createLogger({
 	level: "silly",
 	format: winston.format.combine(
-		winston.format.timestamp(),
+		winston.format.timestamp({
+			format: 'YYYY-MM-DD HH:mm:ss'
+		  }),
 		winston.format.simple()
 	),
 	transports: [
