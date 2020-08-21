@@ -24,6 +24,7 @@
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <link rel="stylesheet" href="public/css/payment-section.css">
 </head>
 <body class="body">
   <div class="section-welcome">
@@ -664,43 +665,81 @@
       </div>
     </div>
   </div>
-  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=5f1212b6860f150f9f0e6e14" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="js/webflow.js" type="text/javascript"></script>
-  <script src="js/index.js" type="text/javascript"></script>
-  <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
-  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  <section id="section-by" class="section-buy">
+    <div class="payment-container w-container">
+      <div class="payment-block">
+        <div id="buy-close" class="close-btn">
+          <div class="text-block-15">X</div>
+        </div>
+        <div id="coursePic" class="course-buy-pic"></div>
+        <div class="but-description">Wokshop + 1 month of portal access</div>
+        <h1 id="courseName" class="buy-course-name">Male Pornography</h1>
+        <div id="courseStarts" class="but-description low">Aug 14</div>
+        <div id="blockLoggedIn" class="buy-email">
+          <div class="buy-hint">You are logged in as:</div>
+          <div id="usrEmail" class="buy-user-email">skymailsenter@gmail.com</div>
+        </div>
+        <div class="dateblock checkout">
+          <div class="date-phrase">Final Price</div>
+          <div id="finPrice" class="date-duration">$200</div>
+        </div>
+        <div id="email-form" class="form-block-3 w-form">
+
+          <form method="post" action="/auth/local/fastRegister">
+            <label for="email" class="field-label-5">Email</label>
+            <input type="email" class="w-input" maxlength="256" name="email" data-name="email" placeholder="" id="email">
+            <label for="pwrd" class="field-label-6">Create Password</label>
+            <input id="courseID" type="text" name="courseID" value="" style="display: none">
+            <input type="password" class="text-field-4 w-input" maxlength="256" name="password" data-name="password" placeholder="" id="pwrd" required="">
+            <div style="margin-top: 20px;" class="have-coupon">
+              <input id="cpnInput" type="text" class="text-field-4 w-input" maxlength="256" name="coupon" data-name="coupon" placeholder="Have a coupon?" id="coupon">
+              <input id="cpnSubmitForm" type="submit" value="Apply" data-wait="Please wait..." class="submit-button-4 w-button">
+            </div>
+            <input type="submit" value="Proceed to Checkout" data-wait="Please wait..." class="submit-button-3 w-button">
+          </form>
+
+        </div>
+        <div class="w-form">
+
+          <form id="couponForm" name="email-form-2" data-name="Email Form 2" method="post" action="/buy/checkCoupon"><label for="name-2" class="field-label-6">Have a coupon?</label>
+            <div class="have-coupon">
+              <input type="text" class="text-field-4 w-input" maxlength="256" name="coupon" data-name="coupon" placeholder="" id="coupon" required="">
+              <input id="cpnSubmit" type="submit" value="Apply" data-wait="Please wait..." class="submit-button-4 w-button">
+            </div>
+          </form>
+        </div>
+        <a href="#" id="logCheckout" class="buy-buy">Proceed to Checkout</a>
+        <p id="user-message"> </p>
+      </div>
+    </div>
+  </section>
+  <!-- Start of LiveChat (www.livechatinc.com) code -->
   <script>
-  var quillD = new Quill('#description', {
-    theme: 'snow'
-  });
-  var quillL = new Quill('#will-learn', {
-    theme: 'snow'
-  });
-  var quillT = new Quill('#timeline', {
-    theme: 'snow'
-  });
-    $("#courseForm").submit((e) => {
-      let description = quillD.root.innerHTML;
-      let willLearn = quillL.root.innerHTML;
-      let timeline = quillT.root.innerHTML;
-      $("<input />")
-          .attr('type', 'hidden')
-          .attr('name', 'description')
-          .attr('value', description)
-          .appendTo("#courseForm");
-      $("<input />")
-          .attr('type', 'hidden')
-          .attr('name', 'willLearn')
-          .attr('value', willLearn)
-          .appendTo("#courseForm");
-      $("<input />")
-          .attr('type', 'hidden')
-          .attr('name', 'timeline')
-          .attr('value', timeline)
-          .appendTo("#courseForm");
-      $("#submit").hide();
-      return true
-    })
-</script>
+    window.__lc = window.__lc || {};
+    window.__lc.license = 12046713;
+    ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.livechatinc.com/tracking.js",t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))
+  </script>
+  <noscript><a href="https://www.livechatinc.com/chat-with/12046713/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechatinc.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
+  <!-- End of LiveChat code -->
+
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js?site=5f1212b6860f150f9f0e6e14" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="js/webflow.js" type="text/javascript"></script>
+  <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+  <script src="public/js/index.js"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174491211-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-174491211-1');
+  </script>
+<!--End of  google analytics-->
+
+<!-- Quill -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="/public/js/comments-tools.js"></script>
 </body>
 </html>

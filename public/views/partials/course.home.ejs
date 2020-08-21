@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <% if((course.seats.total > course.seats.occupied) && ((user.courses && !user.courses.includes(String(course._id))) || !user.courses)) { %>
-                    <a id="w-node-037fa139d5be-761ad3b7" cDisc="<%= discount %>" cPic="<%= course.image %>" uEmail="<%= user.email %>" cID="<%= course._id %>" cPrice="<%= course.pricing.price %>" cName="<%= course.name%>" cStart="<%= dateStarts %>" href="#" class="cors-register-now-2 courses course-buy-button">Register now</a>
+                    <a id="w-node-037fa139d5be-761ad3b7" cDisc="<%= discount %>" cPic="<%= course.image %>" uEmail="<%= user.email %>" cID="<%= course._id %>" cPrice="<%= course.pricing.finalPrice %>" cName="<%= course.name%>" cStart="<%= dateStarts %>" href="#" class="cors-register-now-2 courses course-buy-button">Register now</a>
                 <% } %>
             </div>
         </div>
