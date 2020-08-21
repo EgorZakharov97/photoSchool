@@ -95,7 +95,6 @@ module.exports.createCourse = (req, res, next) => {
 			registrationDeadline: new Date(req.body.registrationDeadline2).toUTCString()
 		},
 		pricing: {
-			discountPrice: req.body.priceBefore,
 			finalPrice: req.body.priceAfter
 		},
 		seats: {

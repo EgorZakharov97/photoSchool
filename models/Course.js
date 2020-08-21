@@ -14,20 +14,12 @@ const CourseSchema = new mongoose.Schema({
 			type: Date,
 			required: true
 		},
-		discountDeadline: {
-			type: Date,
-			required: true
-		},
 		registrationDeadline: {
 			type: Date,
 			required: true
 		}
 	},
 	pricing: {
-		discountPrice: {
-			type: Number,
-			required: true
-		},
 		finalPrice: {
 			type: Number,
 			required: true
@@ -72,12 +64,5 @@ const CourseSchema = new mongoose.Schema({
 		}
 	]
 });
-
-CourseSchema.methods.calculateCurrentPrice = function() {
-	let today = new Date();
-	let price;
-	today > new Date(this.importantDates.discountDeadline)+1 ? price = this.pricing.finalPrice : price = this.pricing.discountPrice;
-	return price;
-};
 
 module.exports = mongoose.model("Course", CourseSchema);

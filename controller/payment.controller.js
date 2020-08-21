@@ -55,7 +55,7 @@ module.exports.preparePayment = async (req, res, next) => {
 						price = 50;
 						coupon = false;
 					} else {
-						price = course.calculateCurrentPrice() * 100 * multiplier
+						price = course.pricing.finalPrice * 100 * multiplier
 					}
 
 					if(coupon) {
@@ -94,8 +94,6 @@ module.exports.preparePayment = async (req, res, next) => {
 					if(coupon){
 						paymentData.coupon = coupon._id;
 					}
-
-
 
 					Payment.create(paymentData);
 					res.render('buy', {session_id: session.id, PK: PK})

@@ -34,16 +34,10 @@
           <label>Date the course ends</label>
           <input <% if(!newCourse){%> value="<%= course.importantDates.courseEnds.toISOString().substring(0, 10) %>" <%}%> type="date" class="w-input" maxlength="256" name="courseEnds" data-name="courseEnds" placeholder="Course Ends" id="courseEnds" required="">
 
-          <label>Registration Deadline for Discount</label>
-          <input <% if(!newCourse){%> value="<%= course.importantDates.discountDeadline.toISOString().substring(0, 10) %>" <%}%> type="date" class="w-input" maxlength="256" name="registrationDeadline1" data-name="registrationDeadline1" placeholder="Registration Deadline 1" id="registrationDeadline" required="">
-
-          <label>Registration Deadline for Course</label>
+          <label>Registration Deadline</label>
           <input <% if(!newCourse){%> value="<%= course.importantDates.registrationDeadline.toISOString().substring(0, 10) %>" <%}%> type="date" class="w-input" maxlength="256" name="registrationDeadline2" data-name="registrationDeadline2" placeholder="Registration Deadline 2" id="registrationDeadline-2" required="">
 
-          <label>Price before deadline</label>
-          <input <% if(!newCourse){%> value="<%= course.pricing.discountPrice %>" <%}%> type="number" class="w-input" maxlength="256" name="priceBefore" data-name="priceBefore" placeholder="Price Before Deadline" id="priceBefore" required="">
-
-          <label>Price After Deadline</label>
+          <label>Final Price</label>
           <input <% if(!newCourse){%> value="<%= course.pricing.finalPrice %>" <%}%> type="number" class="w-input" maxlength="256" name="priceAfter" data-name="priceAfter" placeholder="Price After Deadline" id="priceAfter" required="">
 
           <label>Number of seats</label>

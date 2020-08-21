@@ -31,6 +31,13 @@
   border-top-right-radius: 50%;
 }
 
+#w-node-037fa139d5be-761ad3b7 {
+  -ms-grid-row: 5;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
+  grid-area: button;
+}
+
 .w-form-formradioinput--inputType-custom.w--redirected-focus {
   box-shadow: 0px 0px 3px 1px #3898ec;
 }
@@ -2672,7 +2679,7 @@
 }
 
 .cors-register-now-2.courses {
-  display: none;
+  display: block;
   width: 100%;
   margin-top: 40px;
   -webkit-transition: all 200ms ease;

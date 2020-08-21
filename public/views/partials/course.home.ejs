@@ -33,11 +33,7 @@
                         <div class="date-duration red"><%= new Date(course.importantDates.courseEnds - course.importantDates.courseStarts).getDate()+1 %> Days</div>
                     </div>
                     <div class="dateblock">
-                        <div class="date-phrase">Price before <%= monthNames[course.importantDates.discountDeadline.getUTCMonth()] + ' ' + course.importantDates.discountDeadline.getUTCDate() %></div>
-                        <div class="date-duration red">$<%= course.pricing.discountPrice %> CAD</div>
-                    </div>
-                    <div class="dateblock">
-                        <div class="date-phrase">Price after <%= monthNames[course.importantDates.discountDeadline.getUTCMonth()] + ' ' + course.importantDates.discountDeadline.getUTCDate() %></div>
+                        <div class="date-phrase">Price</div>
                         <div class="date-duration">$<%= course.pricing.finalPrice %> CAD</div>
                     </div>
                     <% if (discount !== 'NONE') { %>
@@ -56,7 +52,7 @@
                     </div>
                 </div>
                 <% if((course.seats.total > course.seats.occupied) && ((user.courses && !user.courses.includes(String(course._id))) || !user.courses)) { %>
-                    <a id="w-node-037fa139d5be-761ad3b7" cDisc="<%= discount %>" cPic="<%= course.image %>" uEmail="<%= user.email %>" cID="<%= course._id %>" cPrice="<%= course.calculateCurrentPrice() %>" cName="<%= course.name%>" cStart="<%= dateStarts %>" href="#" class="cors-register-now-2 courses course-buy-button">Register now</a>
+                    <a id="w-node-037fa139d5be-761ad3b7" cDisc="<%= discount %>" cPic="<%= course.image %>" uEmail="<%= user.email %>" cID="<%= course._id %>" cPrice="<%= course.pricing.price %>" cName="<%= course.name%>" cStart="<%= dateStarts %>" href="#" class="cors-register-now-2 courses course-buy-button">Register now</a>
                 <% } %>
             </div>
         </div>
