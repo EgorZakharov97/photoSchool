@@ -5,30 +5,30 @@
 <% let dateStarts = monthNames[course.importantDates.courseStarts.getUTCMonth()] + ' ' + course.importantDates.courseStarts.getUTCDate() + ' ' + course.importantDates.courseStarts.getFullYear() %>
 
 <div id="dropdown-sample" class="dropdown">
-        <div data-w-id="e0453274-9ba5-db2a-8b7c-5f99f075914c" class="dropdown-trigger" style="background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url('<%= course.image %>'); background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('<%= course.image %>');">
+        <div data-w-id="b5404d77-6c67-ee0b-0eda-4beaa4a5f75b" class="dropdown-trigger" style="background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url('<%= course.image %>'); background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('<%= course.image %>');">
           <div class="text-block"><%= course.name %></div>
           <div class="date"><%= dateStarts %></div>
         </div>
         <div style="height:0PX;display:block" class="dropdown-content">
           <div class="cladd-desc-wrapper">
             <div class="w-layout-grid grid_course_home">
-              <div id="w-node-5f99f0759154-761ad3b7" class="course-card">
+              <div id="w-node-4beaa4a5f763-fbba94a3" class="course-card">
                 <div class="rich-text-block-7 w-richtext">
                   <%- course.richText.description -%>
                 </div>
               </div>
-              <div id="w-node-5f99f0759162-761ad3b7" class="course-card">
+              <div id="w-node-4beaa4a5f771-fbba94a3" class="course-card">
                 <div class="w-richtext">
                   <%- course.richText.willLearn -%>
                 </div>
               </div>
-              <div id="w-node-5f99f0759177-761ad3b7" class="course-card">
+              <div id="w-node-4beaa4a5f786-fbba94a3" class="course-card">
                 <div class="w-richtext">
                   <%- course.richText.timeline -%>
                 </div>
               </div>
               <% if(user.admin || course.comments.length > 0 || (user.courses && user.courses.includes(String(course._id)))) {%> 
-              <div id="w-node-d2be69dc1b7b-761ad3b7" class="course-card">
+              <div id="w-node-4beaa4a5f794-fbba94a3" class="course-card">
                 <h2 class="heading-2">See what people think about this workshop</h2>
                 <% if(user.admin || (user.courses && user.courses.includes(String(course._id)))){ %>
                   <div class="new-comment w-form">

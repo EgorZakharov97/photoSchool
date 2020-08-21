@@ -35,6 +35,7 @@ app.use(cookieParser());
 app.use('*/css',express.static('public/css'));
 app.use('*/js',express.static('public/js'));
 app.use('*/images',express.static('public/images'));
+app.use('*/videos',express.static('public/videos'));
 app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(methodOverride("_method"));
