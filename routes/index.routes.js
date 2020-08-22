@@ -31,6 +31,9 @@ router.get('/disclaimer', (req, res) => {
 
 router.route('/review/:email')
 	.get(controller.getReviewPage)
-	.post(controller.postReview)
+	.post(controller.postReview);
+
+router.route('/leave-email')
+	.post(controller.leaveEmail);
 
 module.exports = router;

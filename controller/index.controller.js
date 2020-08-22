@@ -2,7 +2,8 @@ const express = require('express'),
 	logger = require('../service/logger/logger'),
 	Course = require('../models/Course'),
 	User = require('../models/User'),
-	Review = require('../models/Review');
+	Review = require('../models/Review'),
+	Subscriber = require('../models/Subscriber');
 
 module.exports.getIndexPage = async (req, res, next) => {
 	let courses;
@@ -54,4 +55,19 @@ module.exports.postReview = (req, res, next) => {
 			}
 		})
 	}
+}
+
+module.exports.leaveEmail = async (req, res, next) => {
+	if(req.body.email){
+		let email = req.body.email;
+		let valid;
+		let subscriberWithThisEmail = await Subscriber.findOne({email: email});
+		email.includes('@') && email.includes('.') && !subscriberWithThisEmail ? valid = true : valid = false;
+
+		if (valid) Subscriber.create({email: email}, (err, subs) => {
+			err ? logger.error(err) : logger.info(`Someone subscribed (${email})`);
+		}) 
+	}
+
+	res.redirect('back');
 }
