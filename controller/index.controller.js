@@ -5,7 +5,25 @@ const express = require('express'),
 	Review = require('../models/Review'),
 	Subscriber = require('../models/Subscriber');
 
-module.exports.getIndexPage = async (req, res, next) => {
+module.exports.getIndexPage = (req, res, next) => {
+	res.render('index')
+};
+
+module.exports.getWorkshopsPage = async (req, res, next) => {
+	res.render('workshops')
+}
+
+module.exports.getReviewPage = (req, res, next) => {
+	let email = req.params.email;
+	if(email){
+		res.render('review-form', {email: email, HOST: process.env.HOST});
+	} else {
+		res.status(500);
+		res.render('500');
+	}
+}
+
+module.exports.getWorkshops = async (req, res, next) => {
 	let courses;
 	let discount;
 	let pastCourses;
@@ -22,22 +40,11 @@ module.exports.getIndexPage = async (req, res, next) => {
 		.sort('importantDates.courseStarts')
 		.populate('comments');
 
-	res.render('index', {
+	res.json({
 		courses: courses,
-		user: req.user || 'NONE',
 		discount: discount || 'NONE',
 		pastCourses: pastCourses || []
 	});
-};
-
-module.exports.getReviewPage = (req, res, next) => {
-	let email = req.params.email;
-	if(email){
-		res.render('review-form', {email: email, HOST: process.env.HOST});
-	} else {
-		res.status(500);
-		res.render('500');
-	}
 }
 
 module.exports.postReview = (req, res, next) => {
@@ -69,5 +76,5 @@ module.exports.leaveEmail = async (req, res, next) => {
 		}) 
 	}
 
-	res.redirect('back');
+	res.json({msg: "OK"})
 }

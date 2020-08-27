@@ -36,4 +36,8 @@ router.route('/review/:email')
 router.route('/leave-email')
 	.post(controller.leaveEmail);
 
+router.route('/workshops')
+	.get(controller.getWorkshopsPage)
+	.post(controller.getWorkshops)
+
 module.exports = router;
