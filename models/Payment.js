@@ -9,6 +9,14 @@ PaymentSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectID,
 		ref: "Course"
 	},
+	workshop: {
+		type: mongoose.Schema.Types.ObjectID,
+		ref: "Workshop"
+	},
+	subscription: {
+		type: mongoose.Schema.Types.ObjectID,
+		ref: "Subscription"
+	},
 	timeCreated: {
 		type: Date,
 		required: true

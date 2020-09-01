@@ -5,19 +5,10 @@ const CourseSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	importantDates: {
-		courseStarts: {
-			type: Date,
-			required: true
-		},
-		courseEnds: {
-			type: Date,
-			required: true
-		},
-		registrationDeadline: {
-			type: Date,
-			required: true
-		}
+	public: {
+		type: Boolean,
+		required: true,
+		default: false,
 	},
 	pricing: {
 		finalPrice: {
@@ -25,42 +16,23 @@ const CourseSchema = new mongoose.Schema({
 			required: true
 		}
 	},
-	seats: {
-		total: {
-			type: Number,
-			required: true
-		},
-		occupied: {
-			type: Number,
-			default: 0
-		}
-	},
 	image: {
 		type: String,
 		required: false
 	},
-	richText: {
-		description: {
-			type: String,
-			required: true
-		},
-		timeline: {
-			type: String,
-			required: true
-		},
-		willLearn: {
-			type: String,
-			required: true
-		}
-	},
-	chatLink: {
-		type: String,
-		required: false
-	},
-	comments: [
+	videos: [
 		{
-			type: mongoose.Schema.Types.ObjectID,
-            ref: "Comment",
+			type: String,
+		}
+	],
+	files: [
+		{
+			type: String,
+		}
+	],
+	examples: [
+		{
+			type: String,
 		}
 	]
 });

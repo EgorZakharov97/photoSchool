@@ -4,8 +4,8 @@ const express = require('express'),
 	User = require('../models/User'),
 	logger = require('../service/logger/logger'),
 	crypto = require('crypto'),
-	encrypt = require('../service/tools/encrypter').encrypt,
-	decrypt = require('../service/tools/encrypter').decrypt,
+	encrypt = require('../service/business/encrypter').encrypt,
+	decrypt = require('../service/business/encrypter').decrypt,
 	controller = require('../controller/auth.controller'),
 	isAuthenticated = require('../service/middleware/authCheck').isAuthenticated,
 	doesExist = require('../service/middleware/authCheck').doesExist;
@@ -64,5 +64,8 @@ router.route('/local/fastRegister')
 // logout a user
 router.route('/logout')
 	.get(controller.logout);
+
+router.route('/user')
+	.get(controller.getUser);
 
 module.exports = router;

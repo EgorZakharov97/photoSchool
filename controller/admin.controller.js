@@ -47,6 +47,7 @@ module.exports.getCreateCourse = (req, res, next) => {
 module.exports.createCoupon = (req, res, next) => {
 	let name = req.body.name;
 	let code = req.body.code;
+	let product = req.body.product;
 	let expires;
 	req.body.shouldExpire ? expires = req.body.expires : expires = false;
 	let singleUse;
@@ -57,9 +58,10 @@ module.exports.createCoupon = (req, res, next) => {
 	couponData.name = name;
 	couponData.code = code;
 	couponData.wasUsed = 0;
-	expires ? couponData.expiryDate = new Date(expires).toUTCString() : false;
+	expires ? couponData.expiryDate = new Date(expires) : false;
 	couponData.singleUse = singleUse;
 	couponData.discount = discount;
+	couponData.product = product;
 
 	Coupon.create(couponData, (err, newCoupon) => {
 		if(err){

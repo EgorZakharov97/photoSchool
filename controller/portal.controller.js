@@ -1,5 +1,6 @@
 const User = require('../models/User'),
 	logger = require('../service/logger/logger'),
+	Workshop = require('../models/Workshop'),
 	Course = require('../models/Course'),
 	Material = require('../models/Material'),
 	Preset = require('../models/Preset'),
@@ -79,10 +80,66 @@ async function renderPortalForUser(req, res, next) {
 }
 
 module.exports.getPortal = (req, res, next) => {
-	let user = req.user;
-	if(user.admin){
-		renderPortalForAdmin(req, res, next);
+	res.render('members-portal');
+};
+
+module.exports.getWorkshops = (req, res, next) => {
+	User.findById(req.user._id, (err, user) => {
+		if(err) logger.error(err) && res.status(500) && res.render('500');
+		if(user){
+			Workshop.find({
+				users: {$in: req.user._id}
+			}, (err2, workshops) => {
+				if(err2) logger.error(err) && res.status(500) && res.render('500');
+				res.json(workshops);
+			})
+		}
+	})
+};
+
+module.exports.getCourses = (req, res, next) => {
+	let subscriptions = req.user.subscriptions;
+	if(subscriptions) {
+		let latest = subscriptions[subscriptions.length-1]
+		Course.find({}, (err, courses) => {
+			if(err) logger.error(err) && res.status(500) && res.render(500);
+			res.json(courses);
+		})
 	} else {
-		renderPortalForUser(req, res, next);
+		let courseIDs = req.user.courses;
+		if(coursesIDs) {
+			Course.find({_id: {$in: courseIDs}}, (err, courses) => {
+				if(err) logger.error(err) && res.status(500) && res.render(500);
+				res.json(courses);
+			})
+		} else {
+			res.json({});
+		}
+	}
+};
+
+function checkSubscription() {
+
+}
+
+
+module.exports.getVideos = (req, res, next) => {
+	let subscriptions = req.user.subscriptions;
+	if(subscriptions) {
+		let latest = subscriptions[subscriptions.length-1];
+		Course.find({}, (err, courses) => {
+			if(err) logger.error(err) && res.status(500) && res.render(500);
+			res.json(courses);
+		})
+	} else {
+		let courseIDs = req.user.courses;
+		if(coursesIDs) {
+			Course.find({_id: {$in: courseIDs}}, (err, courses) => {
+				if(err) logger.error(err) && res.status(500) && res.render(500);
+				res.json(courses);
+			})
+		} else {
+			res.json({});
+		}
 	}
 };

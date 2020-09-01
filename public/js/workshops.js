@@ -1,11 +1,31 @@
-import CourseContainer from './components/CourseContainer.js';
+import CourseContainer from './components/CourseContainer.js'
+import CourseContainerPast from './components/CourseContainerPast.js'
+import BuyForm from './components/BuyForm.js';
 
-// $.post('/workshops').then(res => {
-//     let workshops = res.courses;
-//     let pastWorkshops = res.pastCourses
-//     let discount = res.discount
+const buyForm = new BuyForm();
 
-//     let currentCoutses = new CourseContainer(workshops, discount)
-// })
+jQuery.loadScript = function (url, callback) {
+    jQuery.ajax({
+        url: url,
+        dataType: 'script',
+        success: callback,
+        async: true
+    });
+}
 
-$('#courses-container').append($('#course-home').clone())
+$.post('/workshops', (res) => {
+    console.log(res)
+    let courses = res.courses;
+    let pastCourses = res.pastCourses;
+    let discount = res.discount;
+    const courseContainer = new CourseContainer(courses, discount, handleRegister.bind(this));
+    const courseContainerPast = new CourseContainerPast(pastCourses);
+}).then(() => {
+    $.loadScript('/public/js/Webflow.js')
+});
+
+function handleRegister(data) {
+    buyForm.setData(data);
+    buyForm.setContent();
+    buyForm.show();
+}

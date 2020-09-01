@@ -41,11 +41,11 @@ const UserSchema = new mongoose.Schema({
 		type: Boolean,
 		default: false
 	},
-	subscriptionEnds: Date,
 	courses: [
 		{
 			type: mongoose.Schema.Types.ObjectID,
-			ref: "Course"
+			ref: "Course",
+			default: []
 		}
 	],
 	discount: {
@@ -53,6 +53,16 @@ const UserSchema = new mongoose.Schema({
 			type: Number,
 			default: 0
 		}
+	},
+	subscriptions: [
+		{
+			type: mongoose.Schema.Types.ObjectID,
+			ref: "Subscription",
+			default: []
+		}
+	],
+	stripe: {
+		clientID: String,
 	}
 });
 

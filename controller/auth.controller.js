@@ -1,8 +1,8 @@
 const User = 			require('../models/User'),
 	logger = 		require('../service/logger/logger'),
 	sendMail = 		require('../service/email/mailTransporter'),
-	encrypt = 		require('../service/tools/encrypter').encrypt,
-	decrypt = 		require('../service/tools/encrypter').decrypt,
+	encrypt = 		require('../service/business/encrypter').encrypt,
+	decrypt = 		require('../service/business/encrypter').decrypt,
 	fs = 			require('fs'),
 	ejs = 			require('ejs'),
 	passport = 		require('passport');
@@ -251,6 +251,14 @@ module.exports.doPwdReset = (req, res, next) => {
 		logger.warn(`!!!someone is trying to reset a password with an invalid Link!!!`);
 		res.json({msg: 'This reset URL does not seem good. Please try requesting a new password again'}).status(401);
 	}
+};
+
+module.exports.getUser = (req, res, next) => {
+	let user = req.user;
+	user.password = undefined;
+	user.verification = undefined;
+	user.origin = undefined;
+	res.json(user);
 };
 
 module.exports.logout = (req, res, next) => {

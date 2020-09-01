@@ -59,7 +59,7 @@ const MemberPortalRoutes = require('./routes/portal.routes');
 const PaymentRoutes = require('./routes/payment.routes');
 const AdminRoutes = require('./routes/admin.routes');
 const FilesRoutes = require('./routes/files.routes');
-const CommentRoutes = require('./routes/comments.routes');
+const TestRoutes = require('./routes/test');
 
 // USE ROUTES
 app.use(IndexRoutes);
@@ -68,7 +68,7 @@ app.use('/portal', MemberPortalRoutes);
 app.use('/buy', PaymentRoutes);
 app.use('/admin', AdminRoutes);
 app.use('/file', FilesRoutes);
-app.use('', CommentRoutes);
+app.use(TestRoutes);
 
 if(process.env.NODE_ENV === 'development'){
 	// Server

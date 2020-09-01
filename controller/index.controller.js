@@ -11,7 +11,7 @@ module.exports.getIndexPage = (req, res, next) => {
 
 module.exports.getWorkshopsPage = async (req, res, next) => {
 	res.render('workshops')
-}
+};
 
 module.exports.getReviewPage = (req, res, next) => {
 	let email = req.params.email;
@@ -21,7 +21,7 @@ module.exports.getReviewPage = (req, res, next) => {
 		res.status(500);
 		res.render('500');
 	}
-}
+};
 
 module.exports.getWorkshops = async (req, res, next) => {
 	let courses;
@@ -45,7 +45,7 @@ module.exports.getWorkshops = async (req, res, next) => {
 		discount: discount || 'NONE',
 		pastCourses: pastCourses || []
 	});
-}
+};
 
 module.exports.postReview = (req, res, next) => {
 	let email = req.params.email;
@@ -62,7 +62,7 @@ module.exports.postReview = (req, res, next) => {
 			}
 		})
 	}
-}
+};
 
 module.exports.leaveEmail = async (req, res, next) => {
 	if(req.body.email){
@@ -77,4 +77,4 @@ module.exports.leaveEmail = async (req, res, next) => {
 	}
 
 	res.json({msg: "OK"})
-}
+};

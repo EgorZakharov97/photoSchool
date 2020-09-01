@@ -12,8 +12,6 @@
 /userFiles
 /public/images/course/
 
-mongo.pem
-
 # misc
 .DS_Store
 .env

@@ -21,6 +21,11 @@ const CouponSchema = new mongoose.Schema({
 	wasUsed: {
 		type: Number,
 		default: 0
+	},
+	product: {
+		type: String,
+		enum: ["Workshop", "Course"],
+		required: true
 	}
 });
 

@@ -5,14 +5,6 @@ let router = 		express.Router();
 router.route('/')
 	.get(controller.getIndexPage);
 
-// router.get('/secret', isAuthenticated, (req, res) => {
-// 	res.send("This is a protected page for authorized users");
-// });
-//
-// router.get('/admin', isAdmin, (req, res) => {
-// 	res.send("This is a protected page for admin");
-// });
-
 router.get('/privacyPolicy', (req, res) => {
 	res.render('privacy-policy')
 });
@@ -39,5 +31,14 @@ router.route('/leave-email')
 router.route('/workshops')
 	.get(controller.getWorkshopsPage)
 	.post(controller.getWorkshops)
+
+router.route('/cubscription')
+	.get();
+
+router.route('/courses')
+	.get();
+
+router.route('/community')
+	.get();
 
 module.exports = router;

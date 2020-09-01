@@ -1,3 +1,27 @@
+$(window).on('load', function(){
+	$.instagramFeed({
+		'username': 'shumov_danny',
+		'container': "#instagram-feed-dany",
+		'display_profile': true,
+		'display_biography': true,
+		'display_igtv': false,
+		'display_gallery':true,
+		'items': 16,
+	});
+});
+
+$(window).on('load', function(){
+	$.instagramFeed({
+		'username': 'olya_shendrik',
+		'container': "#instagram-feed-olya",
+		'display_profile': true,
+		'display_biography': true,
+		'display_igtv': false,
+		'display_gallery':true,
+		'items': 16,
+	});
+});
+
 $("#email-form").submit(e => {
 	e.preventDefault();
 	let form = e.target;
@@ -13,7 +37,7 @@ $("#email-form").submit(e => {
 			$('#email-error').show()
 		}
 	})
-})
+});
 
 
 
