@@ -37,3 +37,12 @@ module.exports.SubscriptionGrantError = class SubscriptionGrantError extends Err
 		Error.captureStackTrace(this, this.constructor);
 	}
 };
+
+module.exports.IncompleteDataError = class IncompleteDataError extends Error {
+	constructor(msg) {
+		super();
+		this.message = msg;
+		this.name = this.constructor.name;
+		Error.captureStackTrace(this, this.constructor);
+	}
+};

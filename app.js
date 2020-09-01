@@ -54,21 +54,21 @@ require('./service/authentication/passportSetup')(app);
 
 // ROUTES
 const IndexRoutes = require('./routes/index.routes');
-const Authentication = require('./routes/auth.routes');
-const MemberPortalRoutes = require('./routes/portal.routes');
-const PaymentRoutes = require('./routes/payment.routes');
+// const Authentication = require('./routes/auth.routes');
+// const MemberPortalRoutes = require('./routes/portal.routes');
+// const PaymentRoutes = require('./routes/payment.routes');
 const AdminRoutes = require('./routes/admin.routes');
-const FilesRoutes = require('./routes/files.routes');
-const TestRoutes = require('./routes/test');
+// const FilesRoutes = require('./routes/files.routes');
+// const TestRoutes = require('./routes/test');
 
 // USE ROUTES
-app.use(IndexRoutes);
-app.use('/auth', Authentication);
-app.use('/portal', MemberPortalRoutes);
-app.use('/buy', PaymentRoutes);
-app.use('/admin', AdminRoutes);
-app.use('/file', FilesRoutes);
-app.use(TestRoutes);
+app.use('/api/v1', IndexRoutes);
+// app.use('/auth', Authentication);
+// app.use('/portal', MemberPortalRoutes);
+// app.use('/buy', PaymentRoutes);
+app.use('/api/v1/admin', AdminRoutes);
+// app.use('/file', FilesRoutes);
+// app.use(TestRoutes);
 
 if(process.env.NODE_ENV === 'development'){
 	// Server
