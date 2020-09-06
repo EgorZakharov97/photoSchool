@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const MaterialSchema = new mongoose.Schema({
+const ChallengeSchema = new mongoose.Schema({
 	name: {
 		type: String,
 		required: true,
@@ -12,10 +12,10 @@ const MaterialSchema = new mongoose.Schema({
 	image: {
 		type: String,
 	},
-	accessBySubscription: {
-		type: Boolean,
+	description: {
+		type: String,
 		required: true
 	}
 });
 
-module.exports = mongoose.model("Material", MaterialSchema);
+module.exports = mongoose.model("Challenge", ChallengeSchema);

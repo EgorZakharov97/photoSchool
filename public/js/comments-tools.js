@@ -19,7 +19,7 @@ $('.editor').each(function(i) {
             .attr('value', body)
             .appendTo(e.target);
 
-    $.post('/course/' + courseID + '/comment', {body: body}, function(res){
+    $.post('/portal/' + courseID + '/comment', {body: body}, function(res){
         if(res.msg){
             location.reload();
         } else {

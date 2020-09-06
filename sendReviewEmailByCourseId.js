@@ -3,7 +3,7 @@ require('dotenv').config();
 const Course = require('./models/Course'),
     User = require('./models/User'),
     mongoose = require('mongoose'),
-    sendMail = require('./service/email/mailTransporter'),
+    sendMail = require('./business/email/mailTransporter'),
     ejs = require('ejs'),
     fs = require('fs');
 

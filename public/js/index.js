@@ -46,7 +46,7 @@ $("#email-form").submit(e => {
 // let currCoursePrice;
 // let couponApplied = false;
 
-// $('.course-buy-button').click((e) => {
+// $('.portal-buy-button').click((e) => {
 // 	$('#user-message').text('');
 
 // 	let currCourseName = $(e.target).attr('cName');
@@ -80,7 +80,7 @@ $("#email-form").submit(e => {
 // 		$('#blockLoggedIn').css('display', 'block');
 // 		$('#logCheckout').css('display', 'block');
 // 		$('#email-form').css('display', 'none');
-// 		$('#logCheckout').attr('href', '/buy/course/' + currCourseID);
+// 		$('#logCheckout').attr('href', '/buy/portal/' + currCourseID);
 // 		$('#couponForm').css('display', 'block');
 // 	}
 

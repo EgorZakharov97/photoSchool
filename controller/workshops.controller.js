@@ -1,8 +1,6 @@
-const logger = require('../service/logger/logger'),
+const logger = require('../business/logger/logger'),
 	Workshop = require('../models/Workshop'),
-	errors = require('../service/errors/Errors'),
-	{handleResponseError, handleResponse} = require('../service/business/responseHandler');
-
+	errors = require('../business/errors/Errors');
 
 module.exports.getWorkshops = (req, res, next) => {
 	// let courses;
@@ -22,30 +20,36 @@ module.exports.getWorkshops = (req, res, next) => {
 	// 	.populate('comments');
 
 	Workshop.find({}, (err, workshops) => {
-		if(err) handleResponseError(err, res);
-		handleResponse(workshops, res);
+		if(err) next(err);
+		res.data = workshops;
+		next();
 	});
 };
 
 module.exports.getWorkshopNames = (req, res, next) => {
 	Workshop.find({}, 'name importantDates.courseStarts', (err, workshops) => {
-		if(err) handleResponseError(err, res);
-		handleResponse(workshops, res);
+		if(err) next(err);
+		res.data = workshops;
+		next();
 	});
 };
 
 module.exports.getWorkshop = (req, res, next) => {
 	Workshop.findOne({name: req.params.name}, (err, workshop) => {
-		if(err) handleResponseError(err ,res);
-		if(workshop) handleResponse(workshop, res);
-		else handleResponseError(new errors.ResourceNotFoundError(`Could not find course with id ${req.params.name}`))
+		if(err) next(err);
+		if(workshop){
+			res.data = workshop;
+			next();
+		}
+		else next(new errors.ResourceNotFoundError(req.params.name))
 	})
 };
 
 module.exports.getPastWorkshops = (req, res, next) => {
 
 	Workshop.find({}, (err, workshops) => {
-		if(err) handleResponseError(err, res);
-		handleResponse(workshops, res);
+		if(err) next(err);
+		res.data = workshops;
+		next();
 	});
 };

@@ -1,7 +1,7 @@
 import Workshop from './Workshop.js'
 
 export default class PastWorkshop extends Workshop {
-    static template = $('#course-past')
+    static template = $('#portal-past')
 
     constructor(workshop={}, discount='NAN') {
         super(workshop, discount)        

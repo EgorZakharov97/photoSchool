@@ -7,7 +7,7 @@ const storage = multer.diskStorage({
 		if (file.mimetype === 'application/pdf') {
 			cb(null, './userFiles/readings')
 		} else if (file.mimetype.includes('image')) {
-			cb(null, './public/images/course')
+			cb(null, './public/images/portal')
 		} else {
 			cb(null, './userFiles/presets')
 		}

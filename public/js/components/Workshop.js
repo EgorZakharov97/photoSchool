@@ -2,7 +2,7 @@ import Component from './Component.js';
 
 export default class Workshop extends Component {
     
-    static template = $('#course-home');
+    static template = $('#portal-home');
     static monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June","July", "Aug", "Sept", "Oct", "Nov", "Dec"];
     
     constructor(workshop={}, discount='NAN', handleRegister) {

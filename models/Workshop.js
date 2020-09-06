@@ -54,6 +54,10 @@ const WorkshopSchema = new mongoose.Schema({
 			required: true
 		}
 	},
+	duration: {
+		type: Number,
+		required: true
+	},
 	chatLink: {
 		type: String,
 		required: false

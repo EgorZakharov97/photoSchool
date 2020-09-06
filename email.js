@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const sendMail = require('./service/email/mailTransporter'),
+const sendMail = require('./business/email/mailTransporter'),
 	ejs = require('ejs'),
 	fs = require('fs');
 

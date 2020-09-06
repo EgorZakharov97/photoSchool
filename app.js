@@ -1,6 +1,8 @@
 require('dotenv').config();
 
 const express = require('express'),
+	responseHandler = require('./business/middleware/responseHandler').responseHandler,
+	errorHandler = require('./business/middleware/responseHandler').errorHandler,
 	partials = require('express-partials'),
 	bodyParser = require('body-parser'),
 	methodOverride = require('method-override'),
@@ -12,7 +14,8 @@ const express = require('express'),
 	http = require('http'),
 	https = require('https'),
 	fs = require('fs'),
-	sanitize = require('sanitize');
+	sanitize = require('sanitize'),
+	cors = require('cors');
 
 const { Certificate } = require('crypto');
 
@@ -20,8 +23,8 @@ const { Certificate } = require('crypto');
 const app = express();
 
 // REQUIRED FUNCTIONS
-const logger = require('./service/logger/logger');
-const userStats = require('./service/middleware/userStats');
+const logger = require('./business/logger/logger');
+const userStats = require('./business/middleware/userStats');
 
 // App settings
 app.set('views', path.join(__dirname, 'Public'));
@@ -30,14 +33,18 @@ app.set('views', __dirname + '/public/views');
 
 // MIDDLEWARE
 app.engine('html', ejs.renderFile);
+app.use(cors({
+	origin: 'http://localhost:3000',
+	credentials: true,
+}));
 app.use(partials());
 app.use(cookieParser());
 app.use('*/css',express.static('public/css'));
 app.use('*/js',express.static('public/js'));
 app.use('*/images',express.static('public/images'));
 app.use('*/videos',express.static('public/videos'));
-app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(sanitize.middleware);
 
@@ -47,13 +54,15 @@ if(process.env.NODE_ENV === 'development'){
 } else {
 	mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 }
+mongoose.set('useFindAndModify', true);
 
 // AUTHENTICATION
-require('./service/authentication/session')(app);
-require('./service/authentication/passportSetup')(app);
+require('./business/authentication/session')(app);
+require('./business/authentication/passportSetup')(app);
 
 // ROUTES
-const IndexRoutes = require('./routes/index.routes');
+const PublicDataRoutes = require('./routes/data.public.routes');
+const ProtectedDataRoutes = require('./routes/data.protected.routes');
 // const Authentication = require('./routes/auth.routes');
 // const MemberPortalRoutes = require('./routes/portal.routes');
 // const PaymentRoutes = require('./routes/payment.routes');
@@ -62,13 +71,18 @@ const AdminRoutes = require('./routes/admin.routes');
 // const TestRoutes = require('./routes/test');
 
 // USE ROUTES
-app.use('/api/v1', IndexRoutes);
+app.use('/api/v1', PublicDataRoutes);
+app.use('/api/v1', ProtectedDataRoutes);
 // app.use('/auth', Authentication);
 // app.use('/portal', MemberPortalRoutes);
 // app.use('/buy', PaymentRoutes);
 app.use('/api/v1/admin', AdminRoutes);
 // app.use('/file', FilesRoutes);
 // app.use(TestRoutes);
+
+
+app.use('/api/v1', responseHandler);
+app.use(errorHandler);
 
 if(process.env.NODE_ENV === 'development'){
 	// Server

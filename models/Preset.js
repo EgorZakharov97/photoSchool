@@ -7,10 +7,12 @@ PresetSchema = new mongoose.Schema({
 	},
 	image: {
 		type: String,
-		required: true
 	},
 	file: {
 		type: String,
+	},
+	accessBySubscription: {
+		type: Boolean,
 		required: true
 	}
 });
