@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const CourseSchema = new mongoose.Schema({
 	name: {
 		type: String,
-		required: true
+		required: true,
+		unique: true
 	},
 	public: {
 		type: Boolean,
@@ -20,19 +21,13 @@ const CourseSchema = new mongoose.Schema({
 		type: String,
 		required: false
 	},
-	videos: [
-		{
-			type: String,
-		}
-	],
-	files: [
-		{
-			type: String,
-		}
-	],
+	description: {
+		type: String,
+		required: true
+	},
 	examples: [
 		{
-			type: String,
+			type: String
 		}
 	]
 });

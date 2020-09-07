@@ -4,10 +4,10 @@ const fs = require('fs'),
 
 function getPath(type) {
 	switch(type){
-		case 'workshop':
+		case 'workshops':
 			return `./public/images/workshops/`;
 
-		case 'tutorial':
+		case 'tutorials':
 			return `./public/images/tutorials/`;
 
 		case 'materials-image':
@@ -21,6 +21,15 @@ function getPath(type) {
 
 		case 'presets-file':
 			return './portalFiles/presets/';
+
+		case 'challenges':
+			return './public/images/challenges/';
+
+		case 'examplecourses':
+			return './portalFiles/examples-course/';
+
+		case 'filecourses-file':
+			return './portalFiles/files-course/';
 
 		default:
 			return `./bin/`;
