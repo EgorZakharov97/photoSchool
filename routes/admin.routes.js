@@ -1,10 +1,12 @@
 const express = require('express'),
 	verification = require('../business/middleware/verification'),
 	genericController = require('../controller/generic.controller'),
+	coursesController = require('../controller/courses.controller'),
 	Coupon = require('../models/Coupon'),
 	Course = require('../models/Course'),
 	VideoCourse = require('../models/VideoCourse'),
 	FileCourse = require('../models/FileCourse'),
+	CategoryTutorial = require('../models/CategoryTutorial'),
 	upload = require('multer')();
 
 let router = express.Router();
@@ -20,7 +22,12 @@ router.route('/tutorial')
 	.post(
 		upload.array('assets'),
 		verification.verifyTutorial,
-		genericController.createOrUpdateDataObject
+		genericController.createOrUpdateDataObject,
+		(req, res, next) => {
+			req.category.tutorials.push(res.data._id);
+			req.category.save();
+			next()
+		}
 	);
 
 router.route('/material')
@@ -80,14 +87,11 @@ router.route('/course/file')
 		genericController.createOrUpdateDataObject
 	);
 
-router.route('/course/examples')
-	.post(
-		upload.array('assets'),
-		verification.verifyCourseExamples,
-		(req, res, next) => {
-
-		}
-	);
+router.post(
+	'/course/:id/examples',
+	upload.array('assets'),
+	coursesController.postExamples
+);
 
 router.delete(
 	'/course/video/:id',
@@ -100,6 +104,11 @@ router.delete(
 	(req, res, next) => {req.DataClass = FileCourse; next()},
 	genericController.removeObjectFilesById,
 	genericController.deleteObjectById
+);
+
+router.delete(
+	'/course/:id/example/:index',
+	coursesController.deleteExample
 );
 
 module.exports = router;

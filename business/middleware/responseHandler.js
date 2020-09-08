@@ -4,7 +4,7 @@ module.exports.responseHandler = function(req, res, next) {
 	res.json({
 		success: true,
 		body: res.data,
-		message: res.msg || ""
+		message: res.msg || res.message || ""
 	})
 };
 

@@ -157,6 +157,18 @@ module.exports.removeObjectFilesById = function(req, res, next) {
 			logger.warn(`${dbObject.name} with id ${dbObject._id} was removed without files cleanup. Probably this object did not have any files.`)
 		}
 
+		if(dbObject.examples){
+			const examples = dbObject.examples;
+			for(let example of examples){
+				try{
+					fileManager.removeFile(example)
+				}
+				catch (e) {
+					logger.warn(`Example image was skipped while debiting files for ${DataClass.collection.collectionName} '${dbObject.name}'`)
+				}
+			}
+		}
+
 		next()
 	})
 };

@@ -25,8 +25,8 @@ function getPath(type) {
 		case 'challenges':
 			return './public/images/challenges/';
 
-		case 'examplecourses':
-			return './portalFiles/examples-course/';
+		case 'example':
+			return './public/images/examples-course/';
 
 		case 'filecourses-file':
 			return './portalFiles/files-course/';
@@ -48,6 +48,11 @@ module.exports.removeFile = function(path) {
 		fs.unlinkSync( __dirname + path);
 	}
 	catch(e){
-		throw e
+		try{
+			fs.unlinkSync(path);
+		}
+		catch (e) {
+			throw e
+		}
 	}
 };

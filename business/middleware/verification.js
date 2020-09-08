@@ -5,6 +5,7 @@ const errors = require('../errors/Errors'),
 	Material = require('../../models/Material'),
 	Coupon = require('../../models/Coupon'),
 	Challenge = require('../../models/Challenge'),
+	CategoryTutorial = require('../../models/CategoryTutorial'),
 	Course = require('../../models/Course'),
 	ExampleCourse = require('../../models/ExampleCourse'),
 	FileCourse = require('../../models/FileCourse'),
@@ -61,7 +62,11 @@ module.exports.verifyTutorial = async (req, res, next) => {
 		data.category &&
 		data.link
 	)) return next(new errors.IncompleteReqDataError(data));
+	let category = await CategoryTutorial.findOne({name: data.category});
+	if(!category) category = await CategoryTutorial.create({name: data.category});
+	req.body.category = category._id;
 	req.DataClass = Tutorial;
+	req.category = category;
 	next()
 };
 
@@ -70,7 +75,6 @@ module.exports.verifyPreset = async (req, res, next) => {
 	if (!(
 		data.name && data.subscription
 	)) return next(new errors.IncompleteReqDataError(data));
-
 	req.body.accessBySubscription = data.subscription;
 	req.DataClass = Preset;
 	next()
@@ -149,17 +153,5 @@ module.exports.verifyFileCourse = (req, res, next) => {
 	)) return next(new errors.IncompleteReqDataError(data));
 
 	req.DataClass = FileCourse;
-	next()
-};
-
-module.exports.verifyCourseExamples = async (req, res, next) => {
-	let data = req.body;
-
-	if(!(
-		data._id
-	)) return next(new errors.IncompleteReqDataError(data));
-
-	let course = await Course.findById(data._id);
-	if(!course || course === {}) return next(errors.ResourceNotFoundError(data._id));
 	next()
 };
