@@ -52,3 +52,14 @@ module.exports.IncompleteReqDataError = class IncompleteDataError extends Error 
 		Error.captureStackTrace(this, this.constructor);
 	}
 };
+
+module.exports.RuntimeError = class RuntimeError extends Error {
+	constructor(msg, data={}) {
+		super();
+		this.message = msg;
+		this.data = data;
+		this.name = this.constructor.name;
+		this.statusCode = 200;
+		Error.captureStackTrace(this, this.constructor);
+	}
+};

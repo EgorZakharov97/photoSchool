@@ -19,7 +19,7 @@ module.exports = (passport) => {
 					logger.error(err);
 					return done(err, null);
 				} else if (userDB) {
-					logger.info(`User ${userDB.username} (${userDB._id}) just logged in`);
+					logger.info(`User ${userDB.username} (${userDB._id}) logged in using Google`);
 					return done(null, userDB)
 				} else {
 					User.create({
@@ -36,7 +36,7 @@ module.exports = (passport) => {
 							logger.error(err2);
 							return done(err2, null);
 						} else {
-							logger.info(`New user created: ${newUser.username}, id: ${newUser._id}`);
+							logger.info(`New user: ${newUser.username}, id: ${newUser._id}, origin: Google`);
 							return done(null, newUser)
 						}
 					})

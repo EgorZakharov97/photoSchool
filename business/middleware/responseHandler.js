@@ -10,8 +10,7 @@ module.exports.responseHandler = function(req, res, next) {
 
 module.exports.errorHandler = function(err, req, res, next) {
 	logger.error(err.stack);
-	if (!err.statusCode) err.statusCode = 200;
-	res.status(err.statusCode);
+	res.status(err.statusCode || 200);
 	res.json({
 		success: false,
 		body: err.data || res.data,

@@ -3,10 +3,8 @@ const express = require('express'),
 	genericController = require('../controller/generic.controller'),
 	coursesController = require('../controller/courses.controller'),
 	Coupon = require('../models/Coupon'),
-	Course = require('../models/Course'),
 	VideoCourse = require('../models/VideoCourse'),
 	FileCourse = require('../models/FileCourse'),
-	CategoryTutorial = require('../models/CategoryTutorial'),
 	upload = require('multer')();
 
 let router = express.Router();

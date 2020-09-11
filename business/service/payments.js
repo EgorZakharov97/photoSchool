@@ -135,7 +135,7 @@ module.exports.getSubscriptionSession = async (user) => {
 	});
 };
 
-// Received user from Database
+// Receives user from Database
 module.exports.getStripeCustomer = async (user) => {
 	if(typeof user !== 'object' || user.collection.collectionName !== 'users') throw new TypeError(`'user' must be of type a Mongoose object, received ${typeof user}`);
 
@@ -159,7 +159,7 @@ module.exports.createSubscription = async (customer) => {
 	const subscription = await stripe.subscriptions.create({
 		customer: customer.id,
 		items: [
-			{price: 'price_1HM4yaG6Hl2ceMlVRNe3z62p'},
+			{price: process.env.STRIPE_SUBSCRIPTION_PRICE},
 		],
 	});
 	return subscription;

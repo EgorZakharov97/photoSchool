@@ -1,6 +1,6 @@
 const mongoose = require('mongoose'),
 	crypto = require('crypto'),
-	jwt = require('express-jwt');
+	jwt = require('jsonwebtoken');
 
 const UserSchema = new mongoose.Schema({
 	email: {
@@ -20,11 +20,12 @@ const UserSchema = new mongoose.Schema({
 		reset: {
 			salt: String,
 			hash: String,
-		}
+		},
 	},
 	verification: {
 		verified: {
 			type: Boolean,
+			required: true,
 			default: false
 		},
 		verificationLink: String
@@ -34,10 +35,12 @@ const UserSchema = new mongoose.Schema({
 		default: 'local'
 	},
 	complete: {
+		required: true,
 		type: Boolean,
 		default: false
 	},
 	admin: {
+		required: true,
 		type: Boolean,
 		default: false
 	},
@@ -45,6 +48,13 @@ const UserSchema = new mongoose.Schema({
 		{
 			type: mongoose.Schema.Types.ObjectID,
 			ref: "Course",
+			default: []
+		}
+	],
+	workshops: [
+		{
+			type: mongoose.Schema.Types.ObjectID,
+			ref: "Workshop",
 			default: []
 		}
 	],
@@ -76,10 +86,14 @@ UserSchema.methods.validatePassword = function(password) {
 	return this.password.hash === hash;
 };
 
+UserSchema.methods.isSubscriptionActive = function() {
+	let lastSubscriptionIndex
+};
+
 UserSchema.methods.generateJWT = function() {
 	const today = new Date();
 	const expirationDate = new Date(today);
-	expirationDate.setDate(today.getDate() + 120);
+	expirationDate.setDate(today.getDate() + 7);
 
 	return jwt.sign({
 		email: this.email,
@@ -92,7 +106,18 @@ UserSchema.methods.toAuthJSON = function() {
 	return {
 		_id: this._id,
 		email: this.email,
+		workshops: this.workshops,
+		courses: this.courses,
+		sex: this.sex,
+		username: this.username,
+		phoneNumber: this.phoneNumber,
+		experience: this.experience,
+		verified: this.verification.verified,
+		complete: this.complete,
+		isAdmin: this.admin,
 		token: this.generateJWT(),
+		discount: this.discount,
+		pwrdReset: !!this.password.reset
 	};
 };
 

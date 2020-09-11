@@ -9,6 +9,7 @@ const express = require('express'),
 	mongoose = require('mongoose'),
 	path = require('path'),
 	passport = require('passport'),
+	isAdmin = require('./business/middleware/authCheck').isAdmin,
 	cookieParser = require('cookie-parser'),
 	ejs = require('ejs'),
 	http = require('http'),
@@ -63,7 +64,7 @@ require('./business/authentication/passportSetup')(app);
 // ROUTES
 const PublicDataRoutes = require('./routes/data.public.routes');
 const ProtectedDataRoutes = require('./routes/data.protected.routes');
-// const Authentication = require('./routes/auth.routes');
+const Authentication = require('./routes/auth.routes');
 // const MemberPortalRoutes = require('./routes/portal.routes');
 // const PaymentRoutes = require('./routes/payment.routes');
 const AdminRoutes = require('./routes/admin.routes');
@@ -73,10 +74,10 @@ const AdminRoutes = require('./routes/admin.routes');
 // USE ROUTES
 app.use('/api/v1', PublicDataRoutes);
 app.use('/api/v1', ProtectedDataRoutes);
-// app.use('/auth', Authentication);
+app.use('/api/v1/auth', Authentication);
 // app.use('/portal', MemberPortalRoutes);
 // app.use('/buy', PaymentRoutes);
-app.use('/api/v1/admin', AdminRoutes);
+app.use('/api/v1/admin',  passport.authenticate('jwt', {session: false}), isAdmin, AdminRoutes);
 // app.use('/file', FilesRoutes);
 // app.use(TestRoutes);
 

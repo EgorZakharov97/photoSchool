@@ -1,4 +1,7 @@
-const passport = require('passport');
+const passport = require('passport'),
+	JwtStrategy = require('passport-jwt').Strategy,
+	ExtractJwt = require('passport-jwt').ExtractJwt,
+	User = require('../../models/User');
 
 module.exports = (app) => {
 	app.use(passport.initialize());
@@ -13,5 +16,5 @@ module.exports = (app) => {
 	});
 
 	require('./authGoogle')(passport);
-	require('./authLocal')(passport);
+	require('./authJWT')(passport);
 };

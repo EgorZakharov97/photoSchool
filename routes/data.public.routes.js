@@ -22,7 +22,7 @@ router.get(
 
 router.get(
 	'/workshop/:name',
-	(req, res, next) => {req.DataClass = Workshop; next()},
+	(req, res, next) => {console.log(req.get('Authentication'));req.DataClass = Workshop; next()},
 	genericController.getDataObjectByName
 );
 
