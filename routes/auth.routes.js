@@ -29,7 +29,19 @@ router.route('/confirm/:code')
 	.get(controller.confirmUser);
 
 router.route('/google')
-	.get(passport.authenticate('google'));
+	.post(controller.authenticateGoogle);
+
+router.route('/update')
+	.post(
+		passport.authenticate('jwt', {session: false}),
+		controller.updateUserInfo
+	);
+
+router.route('/update/payment-method')
+	.post(
+		passport.authenticate('jwt', {session: false}),
+		controller.updatePaymentMethod
+	);
 
 router.route('/google/callback')
 	.post(

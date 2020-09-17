@@ -1,6 +1,7 @@
 const errors = require('../business/errors/Errors'),
 	logger = require('../business/logger/logger'),
-	fileManager = require('../business/service/fileManager');
+	fileManager = require('../business/service/fileManager'),
+	path = require('path');
 
 module.exports.getDataNames = (req, res, next) => {
 	const DataClass = req.DataClass;
@@ -40,12 +41,32 @@ module.exports.getDataObjectByID = (req, res, next) => {
 
 module.exports.getAllOfKind = (req, res, next) => {
 	const DataClass = req.DataClass;
-	DataClass.find({}, (err, object) => {
+	DataClass.find({}, (err, objects) => {
 		if(err) next(err);
 		res.msg = `${DataClass.collection.collectionName} were successfully retrieved`;
-		res.data = object;
+		res.data = objects;
 		next();
 	});
+};
+
+module.exports.manageSubscriptionAndServe = async (req, res, next) => {
+	const DataClass = req.DataClass;
+	const allowedFields = req.query;
+	if(req.user.isSubscribed()){
+		DataClass.find({}, (err, objects) => {
+			if(err) return next(err);
+			res.data = {fullAccess: objects};
+			res.msg = `Full access to ${DataClass.collection.collectionName}`;
+			next()
+		})
+	} else {
+		res.msg = `Access without subscription to ${DataClass.collection.collectionName}`;
+		res.data = {
+			preview: await DataClass.find({accessBySubscription: true}, allowedFields),
+			fullAccess: await DataClass.find({accessBySubscription: false})
+		};
+		next()
+	}
 };
 
 module.exports.createOrUpdateDataObject = (req, res, next) => {
@@ -119,6 +140,19 @@ module.exports.createOrUpdateDataObject = (req, res, next) => {
 		}
 		return newFiles
 	}
+};
+
+module.exports.getListOfObjectsByIds = (req, res, next) => {
+	const DataClass = req.DataClass;
+	const ids = req.query;
+	DataClass.find({
+		_id: {$in: ids}
+	}, (err, objects) => {
+		if(err) return next(err);
+		res.data = objects;
+		res.message = `${DataClass.collection.collectionName} was successfully retrieved`;
+		next()
+	})
 };
 
 module.exports.deleteObjectById = (req, res, next) => {

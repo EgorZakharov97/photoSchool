@@ -25,7 +25,6 @@ const app = express();
 
 // REQUIRED FUNCTIONS
 const logger = require('./business/logger/logger');
-const userStats = require('./business/middleware/userStats');
 
 // App settings
 app.set('views', path.join(__dirname, 'Public'));
@@ -34,10 +33,7 @@ app.set('views', __dirname + '/public/views');
 
 // MIDDLEWARE
 app.engine('html', ejs.renderFile);
-app.use(cors({
-	origin: 'http://localhost:3000',
-	credentials: true,
-}));
+app.use(cors());
 app.use(partials());
 app.use(cookieParser());
 app.use('*/css',express.static('public/css'));
@@ -58,7 +54,7 @@ if(process.env.NODE_ENV === 'development'){
 mongoose.set('useFindAndModify', true);
 
 // AUTHENTICATION
-require('./business/authentication/session')(app);
+// require('./business/authentication/session')(app);
 require('./business/authentication/passportSetup')(app);
 
 // ROUTES
@@ -70,11 +66,13 @@ const Authentication = require('./routes/auth.routes');
 const AdminRoutes = require('./routes/admin.routes');
 // const FilesRoutes = require('./routes/files.routes');
 // const TestRoutes = require('./routes/test');
+const PaymentRoutes = require('./routes/payment.routes');
 
 // USE ROUTES
 app.use('/api/v1', PublicDataRoutes);
 app.use('/api/v1', ProtectedDataRoutes);
 app.use('/api/v1/auth', Authentication);
+app.use('/api/v1/payments', PaymentRoutes);
 // app.use('/portal', MemberPortalRoutes);
 // app.use('/buy', PaymentRoutes);
 app.use('/api/v1/admin',  passport.authenticate('jwt', {session: false}), isAdmin, AdminRoutes);

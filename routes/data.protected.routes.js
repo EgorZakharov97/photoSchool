@@ -1,6 +1,6 @@
 const express = require('express'),
 	genericController = require('../controller/generic.controller'),
-	coursesController = require('../controller/courses.controller'),
+	userDataController = require('../controller/userData.controller'),
 	passport = require('passport'),
 	Challenge = require('../models/Challenge'),
 	Tutorial = require('../models/Tutorial'),
@@ -9,9 +9,36 @@ const express = require('express'),
 	CategoryTutorial = require('../models/CategoryTutorial'),
 	Course = require('../models/Course'),
 	VideoCourse = require('../models/VideoCourse'),
-	FileCourse = require('../models/FileCourse');
+	FileCourse = require('../models/File');
 
 let router = express.Router();
+
+router.get(
+	'/portalFiles/presets/:id',
+	// passport.authenticate('jwt', {session: false}),
+	userDataController.downloadPreset
+);
+
+router.get(
+	'/workshops',
+	passport.authenticate('jwt', {session: false}),
+	userDataController.getWorkshops,
+	genericController.getListOfObjectsByIds
+);
+
+router.get(
+	'/materials',
+	passport.authenticate('jwt', {session: false}),
+	userDataController.getMaterials,
+	genericController.manageSubscriptionAndServe
+);
+
+router.get(
+	'/presets',
+	passport.authenticate('jwt', {session: false}),
+	userDataController.getPresets,
+	genericController.manageSubscriptionAndServe
+);
 
 router.get(
 	'/challenges/head',

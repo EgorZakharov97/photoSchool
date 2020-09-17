@@ -4,7 +4,7 @@ const express = require('express'),
 	coursesController = require('../controller/courses.controller'),
 	Coupon = require('../models/Coupon'),
 	VideoCourse = require('../models/VideoCourse'),
-	FileCourse = require('../models/FileCourse'),
+	FileCourse = require('../models/File'),
 	upload = require('multer')();
 
 let router = express.Router();

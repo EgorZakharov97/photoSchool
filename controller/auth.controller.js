@@ -5,11 +5,10 @@ const User = require('../models/User'),
 	fs = require('fs'),
 	logger = require('../business/logger/logger'),
 	ejs = require('ejs'),
-	errors = require('../business/errors/Errors');
-
-module.exports.getGoogleLink = (req, res, next) => {
-
-}
+	errors = require('../business/errors/Errors'),
+	payments = require('../business/service/payments'),
+	{OAuth2Client} = require('google-auth-library'),
+	client = new OAuth2Client(process.env.AUTH_GOOGLE_SECRET);
 
 module.exports.confirmUser = (req, res, next) => {
 	if(!req.params.code) return next(new errors.RuntimeError('The confirmation link was not found'));
@@ -18,7 +17,7 @@ module.exports.confirmUser = (req, res, next) => {
 		user.verification = {verified: true};
 		user.save();
 		res.msg = "You have been successfully verified";
-		res.body = user.toAuthJSON();
+		res.data = user.toAuthJSON();
 		next()
 	})
 };
@@ -46,6 +45,16 @@ module.exports.register = (req, res, next) => {
 
 			newUser.setPassword(profile.password);
 			newUser.save();
+
+			try{
+				payments.getClientId(newUser)
+			}
+			catch (e) {
+				logger.error(e)
+			}
+
+			newUser.save();
+
 			logger.info(`New user created: ${newUser.username}, id: ${newUser._id}`);
 
 			fs.readFile('./business/email/templates/email-confirmation.html', 'utf-8', (err, data) => {
@@ -69,10 +78,65 @@ module.exports.register = (req, res, next) => {
 	}
 };
 
+module.exports.authenticateGoogle = async (req, res, next) => {
+	const tokenId = req.body.tokenId;
+	const ticket = await client.verifyIdToken({
+		idToken: tokenId,
+		audience: process.env.AUTH_GOOGLE_CLIENT
+	});
+	const payload = ticket.getPayload();
+	const {email, name, picture} = payload;
+
+	let user = await User.findOne({email: email});
+	if(!user){
+		user = await User.create({
+			email,
+			username: name,
+			picture,
+			origin: 'google',
+			verification: {verified: true},
+			admin: false,
+			complete: false
+		});
+
+		try{
+			payments.getClientId(user)
+		}
+		catch (e) {
+			logger.error(e)
+		}
+
+		logger.info(`New user from Google! username: ${user.username}, email: ${user.email}`);
+	} else {
+		logger.info(`User logged in via Google. username: ${user.username}, email: ${user.email}`);
+	}
+
+	res.data = user.toAuthJSON();
+	res.message = "You are authenticated";
+	next()
+};
+
+module.exports.updatePaymentMethod = async (req, res, next) => {
+	let user = await User.findOne({email: req.user.email});
+	if(!user) return next(new errors.ResourceNotFoundError(req.user.email));
+
+	try{
+		await payments.attachPaymentMethod(user, req.body.paymentMethodId);
+		logger.info(`User ${user.username} updated payment method`);
+		res.msg = "Payment method successfully updated";
+		next()
+	}
+	catch (e) {
+		logger.error(e);
+		next(new Error("Failed to update payment method"))
+	}
+};
+
 module.exports.login = (req, res, next) => {
 	User.findOne({email: req.body.email}, (err, user) => {
 		if(err) return next(err);
 		if(!user) return next(new errors.RuntimeError('User not found'));
+		if(user && !user.password.salt) return next(new Error(`Try to use Google to authenticate, or click 'reset password'`));
 		if(user.validatePassword(req.body.password)){
 			logger.info(`User ${user.username} (email ${user.email}) logged in`);
 			res.data = user.toAuthJSON();
@@ -107,7 +171,7 @@ module.exports.sendResetMessage = (req, res, next) => {
 
 			sendMail(emailOptions);
 			res.msg = "Email confirmation has been sent to your email";
-			res.body = user.email;
+			res.data = user.email;
 			next()
 		});
 	});
@@ -156,7 +220,7 @@ module.exports.updateUserInfo = (req, res, next) => {
 		user.save();
 		logger.info(`${user.username} (${user._id}) updated profile`);
 		res.msg = "Profile was successfully updated";
-		res.body = user.toAuthJSON();
+		res.data = user.toAuthJSON();
 		next();
 	});
 };

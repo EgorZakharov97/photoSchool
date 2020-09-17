@@ -8,7 +8,7 @@ const errors = require('../errors/Errors'),
 	CategoryTutorial = require('../../models/CategoryTutorial'),
 	Course = require('../../models/Course'),
 	ExampleCourse = require('../../models/ExampleCourse'),
-	FileCourse = require('../../models/FileCourse'),
+	FileCourse = require('../../models/File'),
 	VideoCourse = require('../../models/VideoCourse');
 
 module.exports.verifyWorkshop = async (req, res, next) => {

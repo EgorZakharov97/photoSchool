@@ -32,7 +32,8 @@ const UserSchema = new mongoose.Schema({
 	},
 	origin: {
 		type: String,
-		default: 'local'
+		default: 'local',
+		required: true
 	},
 	complete: {
 		required: true,
@@ -58,21 +59,33 @@ const UserSchema = new mongoose.Schema({
 			default: []
 		}
 	],
-	discount: {
-		discountCount: {
+	discounts: {
+		workshopDiscountCount: {
 			type: Number,
 			default: 0
 		}
 	},
-	subscriptions: [
-		{
-			type: mongoose.Schema.Types.ObjectID,
-			ref: "Subscription",
-			default: []
+	subscriptions: {
+		basic: {
+			id: {
+				type: String
+			},
+			status: {
+				type: String
+			}
+		},
+		coaching: {
+			id: {
+				type: String
+			},
+			status: {
+				type: String
+			}
 		}
-	],
-	stripe: {
-		clientID: String,
+	},
+	stripeClient: {
+		clientId: String,
+		defaultPaymentMethod: String
 	}
 });
 
@@ -86,8 +99,8 @@ UserSchema.methods.validatePassword = function(password) {
 	return this.password.hash === hash;
 };
 
-UserSchema.methods.isSubscriptionActive = function() {
-	let lastSubscriptionIndex
+UserSchema.methods.isSubscribed = function() {
+	return true
 };
 
 UserSchema.methods.generateJWT = function() {
@@ -96,7 +109,6 @@ UserSchema.methods.generateJWT = function() {
 	expirationDate.setDate(today.getDate() + 7);
 
 	return jwt.sign({
-		email: this.email,
 		id: this._id,
 		exp: parseInt(expirationDate.getTime() / 1000, 10),
 	}, process.env.AUTH_LOCAL_USER_SECRET);
@@ -117,14 +129,20 @@ UserSchema.methods.toAuthJSON = function() {
 		isAdmin: this.admin,
 		token: this.generateJWT(),
 		discount: this.discount,
-		pwrdReset: !!this.password.reset
+		pwrdReset: !!this.password.reset,
+		customerId: this.stripeClient.id,
+		stripeClient: this.stripeClient
 	};
+};
+
+UserSchema.methods.increaseWorkshopDiscountCount = function () {
+	this.discounts.workshopDiscountCount = (this.discounts.workshopDiscountCount + 1) % 4
 };
 
 // This one calculates the price multiplier for a workshop (discount for points saving)
 UserSchema.methods.getPriceMultiplier = function () {
 	let multiplier;
-	switch (this.discount.discountCount) {
+	switch (this.discounts.workshopDiscountCount) {
 		case 1:
 			multiplier = 0.9;
 			break;

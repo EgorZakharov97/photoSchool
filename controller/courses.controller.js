@@ -2,7 +2,7 @@ const errors = require('../business/errors/Errors'),
 	logger = require('../business/logger/logger'),
 	Course = require('../models/Course'),
 	VideoCourse = require('../models/VideoCourse'),
-	FileCourse = require('../models/FileCourse'),
+	FileCourse = require('../models/File'),
 	randomstring = require('randomstring'),
 	fileManager = require('../business/service/fileManager');
 

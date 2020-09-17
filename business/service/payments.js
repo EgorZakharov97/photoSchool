@@ -136,31 +136,93 @@ module.exports.getSubscriptionSession = async (user) => {
 };
 
 // Receives user from Database
-module.exports.getStripeCustomer = async (user) => {
+function getClientId(user) {
 	if(typeof user !== 'object' || user.collection.collectionName !== 'users') throw new TypeError(`'user' must be of type a Mongoose object, received ${typeof user}`);
 
-	let customer;
-	if (user.stripe && user.stripe.clientID){
-		customer = await stripe.customers.retrieve(user.stripe.clientID);
-	} else {
-		customer = await stripe.customers.create({
-			description: 'My Test Customer (created for API docs)',
-			email: user.email
-		});
-		user.stripe = {clientID: customer.id};
-		user.markModified('stripe');
+	if (user.stripeClient.clientId) return user.stripeClient.clientId;
+
+	return stripe.customers.create({
+		description: 'Photolite Academy Customer',
+		email: user.email
+	}).then(onStripeCustomer).catch(onStripeError);
+
+	function onStripeCustomer(customer){
+		user.stripeClient.clientId = customer.id;
 		user.save();
+		return customer;
 	}
 
-	return customer;
+	function onStripeError(err) {
+		throw err
+	}
+} module.exports.getClientId = getClientId;
+
+module.exports.attachPaymentMethod = async (user, paymentMethodId) => {
+	if(typeof user !== 'object' || user.collection.collectionName !== 'users') throw new TypeError(`'user' must be of type a Mongoose object, received ${typeof user}`);
+
+	const clientId = await getClientId(user);
+	
+	try {
+		await stripe.paymentMethods.attach(paymentMethodId, {
+			customer: clientId
+		});
+	}
+	catch (e) {
+		throw e
+	}
+
+	const client = await stripe.customers.update(
+		clientId,
+		{
+			invoice_settings: {
+				default_payment_method: paymentMethodId,
+			},
+		}
+	);
+
+	user.stripeClient.defaultPaymentMethod = client.invoice_setting.default_payment_method;
+	user.save();
+
+	return clientId
 };
 
-module.exports.createSubscription = async (customer) => {
+module.exports.createSubscription = async (user, priceId) => {
+	if(typeof user !== 'object' || user.collection.collectionName !== 'users') throw new TypeError(`'user' must be of type a Mongoose object, received ${typeof user}`);
+
+	const clientId = getClientId(user);
+
+	const activeSubscription = await stripe.subscriptions.list({
+		customer: clientId,
+		price: priceId,
+		status: 'active'
+	});
+	// if (activeSubscription.data.length > 0){
+	// 	throw new errors.SubscriptionGrantError(`Client with id ${client.id} already has active subscription for price ${priceId}`)
+	// }
+
 	const subscription = await stripe.subscriptions.create({
-		customer: customer.id,
+		customer: clientId,
 		items: [
-			{price: process.env.STRIPE_SUBSCRIPTION_PRICE},
+			{price: priceId},
 		],
 	});
+
+	manageDBSubscriptions(user, subscription);
 	return subscription;
 };
+
+function manageDBSubscriptions(user, subscription){
+	switch (priceID) {
+		case process.env.STRIPE_BASIC_SUBSCRIPTION:
+			logger.info(`Subscription was updated for user ${user.username} (id: ${user._id})`);
+			user.subscriptions.basic = {
+				id: subscription.id,
+				status: subscription.status
+			};
+			user.save();
+			return;
+
+		default:
+			throw new errors.SubscriptionGrantError(`Unknown price id: ${priceID}`)
+	}
+}

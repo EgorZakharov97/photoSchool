@@ -9,9 +9,8 @@ const FileCourseSchema = new mongoose.Schema({
 		type: String,
 		required: false,
 	},
-	course: {
+	parent: {
 		type: mongoose.Schema.Types.ObjectID,
-		ref: "Course",
 		required: true
 	}
 });

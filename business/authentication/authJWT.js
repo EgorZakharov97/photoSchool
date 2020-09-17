@@ -1,5 +1,4 @@
 const User = require('../../models/User'),
-	logger = require('../logger/logger'),
 	JwtStrategy = require('passport-jwt').Strategy,
 	ExtractJwt = require('passport-jwt').ExtractJwt;
 

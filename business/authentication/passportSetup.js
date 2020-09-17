@@ -15,6 +15,5 @@ module.exports = (app) => {
 		done(null, userFromCookie);
 	});
 
-	require('./authGoogle')(passport);
 	require('./authJWT')(passport);
 };
