@@ -76,20 +76,25 @@ if(process.env.NODE_ENV === 'development'){
 		logger.info(`App ${process.pid} has started at port ${process.env.PORT}`)
 	});
 } else {
-	const pricateKey = fs.readFileSync(process.env.PATH_APP_PK, 'utf8');
-	const ca = fs.readFileSync(process.env.PATH_APP_CA, 'utf8');
-	const certificate = fs.readFileSync(process.env.PATH_APP_CERT, 'utf8');
-	const credentials = {
-		key: pricateKey,
-		cert: certificate,
-		ca: ca
-	};
+	// const pricateKey = fs.readFileSync(process.env.PATH_APP_PK, 'utf8');
+	// const ca = fs.readFileSync(process.env.PATH_APP_CA, 'utf8');
+	// const certificate = fs.readFileSync(process.env.PATH_APP_CERT, 'utf8');
+	// const credentials = {
+	// 	key: pricateKey,
+	// 	cert: certificate,
+	// 	ca: ca
+	// };
 
-	https.createServer(credentials, app).listen(process.env.SSL_PORT, () => {
+	const options = {
+		key: fs.readFileSync(process.env.PATH_TO_KEY),
+		cert: fs.readFileSync(process.env.PATH_TO_CERT)
+	}
+
+	https.createServer(options, app).listen(process.env.SSL_PORT, () => {
 		console.log(`App is listening on port ${process.env.SSL_PORT}`)
 	});
-	http.createServer((req, res) => {
-		res.writeHead(301, {"Location": "https://" + req.headers['host'] + req.url});
-		res.end();
-	}).listen(process.env.PORT)
+	// http.createServer((req, res) => {
+	// 	res.writeHead(301, {"Location": "https://" + req.headers['host'] + req.url});
+	// 	res.end();
+	// }).listen(process.env.PORT)
 }

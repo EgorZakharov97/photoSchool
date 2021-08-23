@@ -1,105 +1,110 @@
-# Authentication System
+# Photolite Academy
 
-This is a ready to use authentication system based on `Node.js`, `express` and `passport.js`.
+A website for a photo school named Photolite academy. This site includes a well-designed homepage and a user portal. On this site, you can see the next and passed workshops and buy access for the future events. When you buy a workshop, you will get access to the in-person activity as well as some resources and readings available on the user portal. The site uses local authentication as well as google oAuth2 and stripe API for payments.
 
-The app contains feature as follows:
-* User authentication via Google OAuth2.0
-* Local user registration/authentication
-* Support of user account transfer from Google auth to Local auth
-* Password email reset
-* Use session setup on Redis
-* Redis Cache
-* Automatic upload of anonymous user statistics to MongoDB
-* Custom Logger (save logs to file or send errors via e-mail in production mode)
-* Clustering (worker threads)
+---
 
-## Getting Started
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+![Preview screenshot](readme_files/Group%201.png)
 
-#### Prerequisites
-* #### `Node.js`
-* #### `Redis`
-* #### `MongoDB cluster`
+## Requirements
 
-#### Installing
-If you don't have `Node.js` installed, [go here](https://nodejs.org/en/download/) and download a suitable package.
+For development, you will only need Node.js and a node global package, Yarn, installed in your environement.
 
-If you do't have Redis installed, [go here](https://redis.io/topics/quickstart) and install Redis.<br/>
-Don't forget to launch a Redis server))
+### Node
+- #### Node installation on Windows
 
-If you don't have MongoDB installed, [go here](https://docs.mongodb.com/manual/installation/) and install MongoDB locally.<br/>
-You also can setup a **Free to use** online MongoDB cluster. You can do it on the [official website](https://www.mongodb.com/)<br/>
-I suggest using [Mongo Compass](https://www.mongodb.com/products/compass) as it is a very convenient tool to manage local and online storage.
+  Just go on [official Node.js website](https://nodejs.org/) and download the installer.
+Also, be sure to have `git` available in your PATH, `npm` might need it (You can find git [here](https://git-scm.com/)).
 
-Now you should be ready to clone the GitHub repository locally
+- #### Node installation on Ubuntu
 
-> git clone https://github.com/EgorZakharov97/node_authentication.git
+  You can install nodejs and npm easily with apt install, just run the following commands.
 
-Run the following command to install all dependencies before starting the application
-> npm install
+      $ sudo apt install nodejs
+      $ sudo apt install npm
 
-This app requires a `.env` file containing all environmental variables.
-You will need to construct this file using you own properties. The format is as follows:
+- #### Other Operating Systems
+  You can find more information about the installation on the [official Node.js website](https://nodejs.org/) and the [official NPM website](https://npmjs.org/).
 
-~~~
-PORT= # The port on which the application runs
-HOST= # Your network address
-ADDRESS= # Your HOST followed by PORT ))))
-DB_CONNECT= # Connection string for MongoDB
-NODE_ENV = # Application environment. Can be 'development' or 'production'
-SESSION_SECRET= # Session secret (usually a random string)
-REDIS_HOST= # String containing your Redis host
-REDIS_PORT= # The port on which your Redis server operates
-AUTH_GOOGLE_CLIENT= # Google client
-AUTH_GOOGLE_SECRET= # Google secret
-AUTH_GOOGLE_REDIRECT= # The link that Google will hit when a client is authenticated
-AUTH_LOCAL_USER_SECRET= # 13 character random string for local encryption of user password
-AUTH_LOCAL_RESET_KEY= # 32 character random string for local password reset
-EMAIL= # Email address from which emails will be sent to users to reset their password
-EMAIL_PASS= # Password for the email
-~~~
+If the installation was successful, you should be able to run the following command.
 
-## Available Scripts
+    $ node --version
+    v8.11.3
 
-In the project directory, you can run:
+    $ npm --version
+    6.1.0
 
-### `npm run start`
+If you need to update `npm`, you can make it using `npm`! Cool right? After running the following command, just open again the command line and be happy.
 
-Runs the app in the production mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    $ npm install npm -g
 
-### `npm run dev`
+###
+### Yarn installation
+  After installing node, this project will need yarn too, so just run the following command.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+      $ npm install -g yarn
 
-### `npm run single`
+---
 
-Runs the app in the as a single instance.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Install
 
-This app supports simple clustering. It means that the program will start a separate process for each core available on your machine.
-With this command, the app will create only one process. Use in case if your machine has only one core.
+    $ git clone https://github.com/YOUR_USERNAME/PROJECT_TITLE
+    $ cd PROJECT_TITLE
+    $ yarn install
 
-### `npm run single-dev`
+## Configure app
 
-Runs the app in the as a single instance in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+You will need to configure `.env` file in order to run the site. The sample is provided in in `.env.demo` file where you can see all the required environment variable fields in order to run the app in production mode. 
 
-This app supports simple clustering. It means that the program will start a separate process for each core available on your machine.
-With this command, the app will create only one process. Use in case if your machine has only one core.
+    NODE_ENV='production'
+    DB_CONNECT= url for mongodb connection
+    AUTH_GOOGLE_CLIENT= google client key
+    AUTH_GOOGLE_SECRET= google authentication secret
+    AUTH_GOOGLE_REDIRECT= redirect to google user authentication
+    SESSION_SECRET= session secret
+    HOST= tha base url of the site (there the thing is running)
 
-## Built With
-* [Node.js](https://nodejs.org/) - Server side JavaScript.
-* [express](https://expressjs.com/) - Web framework.
-* [MongoDB](https://www.mongodb.com/) - A general purpose, document-based, distributed database.
-* [Redis](https://redis.io/) - In-Memory data storage.
-* [Passport.js](http://www.passportjs.org/) - Simple, unobtrusive authentication for Node.js.
-* Other dependencies can be seen in `package.json` file.
+    PATH_TO_CERT= path to server.crt
+    PATH_TO_KEY= path to ssl certificate key
+    SSL_PORT= ssl certeficate port
+    PORT= default port
 
-## FAQs
-* Where can I get Google client and Google secret?
-    * You may consider going [here](https://developers.google.com/identity/protocols/oauth2) to find more information of how to setup OAuth for Google
+    STRIPE_SECRET= stripe secret key
+    STRIPE_PUBLIC= stripe public key
+    STRIPE_WH= url to stripe we hook response
 
-* Why am I getting an error while sending a password reset email?
-    * This may be a security issue. If you use google, consider going [here](https://devanswers.co/allow-less-secure-apps-access-gmail-account/) to allow less secure apps for your account. Or you may modify the app's code to setup a secure connection.
+## Running the project
+
+    $ npm run start
+        OR
+    $ yarn start
+
+## Stack
+
+*   Backend
+    *   Node.js
+    *   Express.js
+    *   MongoDB
+    *   Stripe.js
+*   Front end
+    *   ejs
+
+## File structure
+
+    .
+    ├── controller              # controller implementation
+    ├── models                  # Mongodb Database Models
+    ├── public                  # HTML, styles, js and assets for the client
+    ├── readme_files            # Files used in readme file
+    ├── routes                  # Router
+    ├── service                 # Fiels used throughout the project
+        ├── authentication      # Files responsible for user authentication
+        ├── email               # Adapter for e-mail sending library
+            ├── templates       # templates for eamils
+        ├── logger              # adapter for logging library
+        ├── middleware          # middleware
+        ├── tools               # other functions used throughout the project
+    ├── userFIles               # Folder that contains all files available to users after buying a workshop
+    ├── app.js                  # app entry point
+    └── README.md
+
